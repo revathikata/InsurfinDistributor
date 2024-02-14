@@ -1,0 +1,93 @@
+.flex {
+    display: flex;
+    margin-top: 20px;
+}
+
+.close {
+    margin-top: 14px;
+    margin-left: 48%;
+    cursor: pointer;
+    color: #0358A8;
+}
+
+.dialog {
+    width: 329px;
+}
+
+.error {
+    color: #C42728;
+    margin-left: 15px;
+}
+
+.add-new {
+    margin-top: 1px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 23px;
+    color: #041427;
+    margin-left: 5px;
+}
+
+.cross {
+    margin-left: 22%;
+    color: #0358A8;
+    margin-top: 1px;
+}
+
+.detected {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #7D848D;
+    margin-left: 34px;
+    margin-bottom: 1px;
+    margin-top: 15px;
+
+}
+
+.communication {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #7D848D;
+    margin-left: 34px;
+    margin-bottom: 1px;
+
+}
+
+.add-current {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #7D848D;
+    margin-left: 34px;
+}
+
+.re-btn {
+    width: 134px;
+    margin-left: 12px;
+    color: #005AAA;
+    border-radius: 12px;
+    box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+    background-color: #ffffff !important;
+    border: 1px solid #005AAA;
+    height: 52px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+
+}
+
+.yes-btn {
+    width: 134px;
+    margin-left: 13px;
+    background: #005AAA;
+    box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+    border-radius: 12px;
+    height: 52px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 5px;
+}

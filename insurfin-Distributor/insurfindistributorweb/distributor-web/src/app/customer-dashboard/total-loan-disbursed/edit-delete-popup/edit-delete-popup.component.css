@@ -1,0 +1,59 @@
+.morepopup {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.more-actions {
+    display: flex;
+    margin-top: 29px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #041427;
+}
+
+.editdeleteicons {
+    display: flex;
+    margin-left: 20px;
+    color: #041427;
+}
+.horizontal-line{
+    margin-left: -10px;
+    width: 336px;
+    margin-top: -10px;
+}
+
+.editdeleteicons img {
+    margin-top: -11px;
+    margin-left: -32px;
+}
+.icons-tags {
+    margin-left: 15px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    color: #041427;
+    cursor: pointer;
+
+}
+
+.top {
+    margin-top: 30px;
+}
+
+.bottomcrossicon {
+    margin-top: 32px;
+    margin-left: 59%;
+    color: #0358A8;
+}
+
+::ng-deep.mat-bottom-sheet-container {
+    min-width: 392px;
+    min-height: 306px;
+    margin-left: 109%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.bottomcrossicon {
+    cursor: pointer;
+}

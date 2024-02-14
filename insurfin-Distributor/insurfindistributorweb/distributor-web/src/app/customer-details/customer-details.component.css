@@ -1,0 +1,130 @@
+.customer-info {
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  color: #005AAA;
+  margin-top: 25px;
+  margin-left: 10px;
+    }
+    
+    
+    .verification {
+      font-size: 16px;
+        margin-left: 21px;
+        color: #C52727;
+        font-weight: 400;
+    } 
+  
+    .rightColoumn{
+      overflow-x: hidden;
+      overflow-y:auto;
+      height: 100vh;
+       background: linear-gradient(270deg, #EEF5FC 0%, #C3D9ED 100%);
+      }
+    
+    /* .small {
+      border: 1px solid rgb(227, 223, 223);
+      background-color: #E8E8E8;
+      width: 224px;
+      height: 224px;
+      margin: auto;
+      border-radius: 17px;
+      margin-top: 25px;
+    } */
+    .customer-success{
+      margin-left: 21%;
+    }
+    
+    .distrbtr-welcome {
+      margin: auto;
+      border: 1px solid grey;
+      border-radius: 10px;
+      height: 692px;
+      width: 393px;
+      margin-top: 5%;
+      margin-bottom: 5%;
+      background-color: #ffffff;
+    }
+    
+    .main {
+      overflow: hidden;
+    }
+    .box{
+      width: 345px;
+      margin-left: 14px;
+      height: 47px;
+      display: flex;
+      border: 1px solid #DDDDDD;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .email-verify{
+      margin-top: 13px;
+      padding-right: 97px;
+      padding-left: 17px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #7D848D;
+    }
+    .verify-email-complete{
+      margin-top: 14px;
+      color: #2791E0;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  
+  
+  /* //popup// */
+  
+    .continueBtn{
+      background: #005AAA;
+      box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+      border-radius: 12px;
+      font-size: 13px;
+      width: 100%;
+    }
+    .close-icon{
+      left: 45%;
+      position: relative;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+     
+      color: #0358A8;
+    }
+    .create-btn{
+      background: #005AAA;
+      box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+      border-radius: 12px;
+      width: 345px;
+      height: 48px;
+      margin-left: 15px;
+      margin-top: -12px;
+    }
+    .leftArrw {
+      padding: 20px;
+      cursor: pointer;
+  }
+  
+  .customer-dtls {
+      font-size: 16px;
+      font-weight: 700;
+      margin-left: 10PX;
+      color: #041427;
+  }
+  button.btn[disabled] {
+    background: #C8DCEE;
+    border: 1px solid #C8DCEE;
+  }
+/* .mat-mdc-dialog-container .mdc-dialog__surface {
+    border-radius: var(--mdc-dialog-container-shape, var(--mdc-shape-medium, 4px));
+    margin-left: 656px;
+} */
+.email-verified{
+  color: #2791E0;
+}
+.complete{
+color: black;
+}

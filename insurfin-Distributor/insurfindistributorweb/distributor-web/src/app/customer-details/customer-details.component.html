@@ -1,0 +1,51 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section/>
+            </div>
+            
+
+            <div class="col-lg-6 rightColoumn">
+                <div class="distrbtr-welcome">
+                    <mat-icon class="leftArrw" routerLink="/new-customer">keyboard_backspace</mat-icon><span class="customer-dtls ">Customer Details</span>
+
+
+                    <div class="customer-success">
+                        <img src="../../assets/customer-success-img.svg">
+                    </div>
+<!-- we have : Customer added successfully! ,Verification of email address is mandatory to proceed further.,
+                KYC Status - Complete KYC, Email Verification - Verify email  -->
+                    <div class="container">
+                        <h1 class="customer-info" *ngIf="!updateMessage === true">Customer information collected!</h1>
+                        <h1 class="customer-info" *ngIf="updateMessage === true">Customer Updated successfully!</h1>
+                        <p class="verification" *ngIf="!(emailverified == 'EMAIL_VERIFICATION_COMPLETE')">Verification of email address is mandatory to proceed further.</p>
+                        <div class="box">
+                            <div class="email-verify">
+                                <!-- <p>KYC Status</p> -->
+                                <p>Email Verification<span class="red-class">*</span></p>
+                            </div>
+                            <div class="verify-email-complete">
+                                <!-- <p (click)="completeKyc()" *ngIf="documentChecking === null">Complete KYC</p>
+                                <p *ngIf="documentChecking !== null" class="blackclass">Completed</p> -->
+                                <p class="email-verified" *ngIf="!(emailverified == 'EMAIL_VERIFICATION_COMPLETE')" (click)="emailVerification()">Verify email</p>
+                                <p *ngIf="emailverified == 'EMAIL_VERIFICATION_COMPLETE'" class="complete">Completed</p>
+                            </div>
+                        </div>  
+                        <div class="mt-5 mb-3">
+                            <button class="btn btn-primary create-btn" (click)="createProposal()" [disabled]="!(emailverified == 'EMAIL_VERIFICATION_COMPLETE')">Create Proposal</button>
+                        </div>
+                      
+                    </div>
+
+ <!------------------------------------------------------------------------------------------------------------>
+                
+            </div>
+        
+            </div>
+
+        </div>
+    </div>
+
+</div>

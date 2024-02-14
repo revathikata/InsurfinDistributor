@@ -1,0 +1,93 @@
+<div *ngIf="documentType==='sorting'" class="sorting">
+    <div class="container sort-flex">
+        <p class="sort-by">Sort By</p>
+        <mat-icon class="clear" (click)="clear()">clear</mat-icon>
+    </div>
+    <div class="mat-radio container">
+        <mat-radio-button  class="checkInp" color="primary" (click)="selectOption($event,'alphabetical')"></mat-radio-button>
+        <p class="alphabet">Alphabetical (A-Z)</p>
+    </div>
+    <div class="container">
+        <hr class="horizontal-line">
+    </div>
+    <div class=" due-date container">
+        <mat-radio-button class="checkInp" color="primary" (click)="selectOption($event,'dueDate')"></mat-radio-button>
+        <p class="alphabet">Due Date (Closest to Farthest)</p>
+    </div>
+   <div class="container">
+        <hr class="horizontal-line">
+    </div>
+     <div class="outstanding container">
+        <mat-radio-button class="checkInp" color="primary" (click)="selectOption($event,'outstandingEMI-HL')"></mat-radio-button>
+        <p class="alphabet">Outstanding EMIs (High to Low)</p>
+    </div>
+    <div class="container">
+        <hr class="horizontal-line">
+    </div>
+    <div class="loanamount container">
+        <mat-radio-button class="checkInp" color="primary" (click)="selectOption($event,'loanAmount-LowtoHigh')"></mat-radio-button>
+        <p class="alphabet">Loan Amount (Low to High)</p>
+    </div>
+    <div class="container">
+        <hr class="horizontal-line">
+    </div>
+    <div class="high-low container">
+        <mat-radio-button class="checkInp" color="primary" (click)="selectOption($event,'loanAmount-HightoLow')"></mat-radio-button>
+        <p class="alphabet">Loan Amount (High to Low)</p>
+    </div>
+</div>
+<!-- filters popup -->
+<div class="filtering" *ngIf="documentType==='filtering'">
+    <div class="filter-flex container">
+        <p class="filters">Filters</p>
+        <mat-icon class="cross-icon" (click)="clear()">clear</mat-icon>
+    </div>
+    <div class="container">
+        <p class="status">STATUS</p>
+    </div>
+    <div class="mat-checkbox-all container ">
+        <mat-checkbox class="checkInp" color="primary" (change)="selectAll($event)" [checked]="isSelected('All')"></mat-checkbox>
+        <p class="all-checkbox-btn"> All</p>
+    </div>
+    <div class="disbursed-loans container">
+        <mat-checkbox class="checkInp" color="primary" (change)="selectBox('Disbursed Loans')" [checked]="isSelected('Disbursed Loans')"></mat-checkbox>
+        <p class="all-radio-btn">Disbursed Loan</p>
+    </div>
+    <div class="loans-in-process container">
+        <mat-checkbox class="checkInp" color="primary" (change)="selectBox('Loans in Process')" [checked]="isSelected('Loans in Process')"></mat-checkbox>
+        <p class="all-radio-btn">Loan in Process</p>
+    </div>
+    <div class="delinquent-application container">
+        <mat-checkbox class="checkInp" color="primary" (change)="selectBox('Delinquent Applications')" [checked]="isSelected('Delinquent Applications')"></mat-checkbox>
+        <p class="all-checkbox-btn">Deliquent Applications</p>
+    </div>
+    <div class="rejected-loans container">
+        <mat-checkbox class="checkInp" color="primary" (change)="selectBox('Rejected Loans')" [checked]="isSelected('Rejected Loans')"></mat-checkbox>
+        <p class="all-radio-btn">Rejected Loans</p>
+    </div>
+    <div class="container">
+        <hr class="hr-line">
+    </div>
+    <div class="container">
+        <p class="loan-range">LOAN RANGE</p>
+    </div>
+    <div class="container">
+        <mat-slider (change)="PremiumAmountValue($event)" min="0" max="100000" step="50" discrete>
+            <input matSliderThumb [(ngModel)]="premiumAmountValue"
+            [ngModelOptions]="{standalone: true}" />
+        </mat-slider>
+    </div>
+    <span class="premiumamountstartvalue">₹{{"0"}}</span>
+    <span class="premiumamountendvalue">₹{{"1,00,000"}}</span>
+    <div class="input-wrapper">
+        <input type="text" class="form-control rupee" [(ngModel)]="premiumAmountValue" (input)="checkLimit()"
+        [readonly]="premiumAmountValue > 100000 ? !limitReached : limitReached" (input)="restrictToNumbers($event)" maxlength="6" #input>
+        <i class="fa-solid fa-indian-rupee-sign ind-rupee" [ngStyle]="{'color': input.value ? '#041427' : ''}"></i>
+    </div>
+    <small *ngIf="limitReached" class="error-message">Premium amount cannot exceed
+        ₹1,00,000</small>
+    <div class="clear-flex mb-3">
+            <button class="btn clear-btn" (click)="sorting()">SUBMIT</button>
+            <button class="btn apply-btn" (click)="clearAllFields()">CLEAR ALL</button>
+    </div>
+</div>

@@ -1,0 +1,131 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+
+            <div class="col-lg-6 rightColoumn">
+                <div class="distrbtr-welcome container">
+                    <mat-icon class="leftArrw" routerLink="/new-customer">keyboard_backspace</mat-icon><span class="propose-dtls ">Home</span>
+                    <div>
+                        <p class="propsl-stats">Proposal Status</p>
+                        <p class="john">{{viewData?.customerName}}</p>
+                    </div>
+                    <div class="stepper-flex">
+
+                        <div class="stepper-horizontal" id="stepper1">
+                            <!-- <div class="step done">
+                                <div class="step-section">
+                                    <div class="step-circle"  [style.background-color]="viewData?.documentUploaded === true
+                                    ? 'rgba(72, 177, 110, 1)' : '#255aab'"></div>
+                                    <div class="step-bar-bottom email"  [style.background-color]="viewData?.documentUploaded === true ? 'rgba(72, 177, 110, 1)' : '#255aab'"></div>
+                                </div>
+                                <div class="step1">
+                                    <div class="step-container">
+                                        <p class="date">{{viewData?.documentUploadedDate}}</p>
+                                        <p class="email-verify">KYC Verification</p>
+                                        <p class="user-email">{{viewData?.documentDisplayStatus}}</p>
+                                        <div class="remindbtn">
+                                            <button class="remind" (click)="KycReminderPopup('proposalKycStatusRemainder')">Remind Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="step editing">
+                                <div class="step-section">
+                                    <div class="step-circle" [style]="{'background-color': viewData?.registrationCompleted=== true
+                                    ? '#255AAB' : '#7D848D', 'border': viewData?.registrationCompleted=== true
+                                    ? '4px solid #255AAB' : '4px solid #255AAB'}">
+                                    <div class="step-circle2" [style]="{'border': viewData?.registrationCompleted=== true
+                                    ? '6px solid #255AAB' : '6px solid white'}"></div>
+                                    </div>
+                                    <div class="step-bar-bottom" [style.background-color]="viewData?.registrationCompleted === true ? '#255AAB' : '#7D848D'"></div>
+
+                                </div>
+                                <div class="step1">
+                                    <div class="step-container">
+                                        <p class="date">{{viewData?.registrationCompletedDate}}</p>
+                                        <p class="email-verify">Registration Successfull</p>
+                                        <p class="user-email">{{viewData?.registrationDisplayStatus}}</p>
+                                        <div class="remindbtn" *ngIf = "viewData?.registrationCompleted === false">
+                                            <button class="remind" (click)="RegisterSuccessfulPopup('proposalRegisterSuccessfulRemainder')">Remind Now</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="step">
+                                <div class="step-section">
+                                    <div class="step-circle" [style]="{'background-color': viewData?.proposalAccepted === true ? '#255AAB':'#7D848D', 'border': viewData?.proposalAccepted=== true ? '4px solid #255AAB' :'4px solid #255AAB'}">
+                                        <div class="step-circle2" [style]="{ 'border': viewData?.proposalAccepted=== true ? '6px solid #255AAB' :'6px solid white'}"></div></div>
+                                </div>
+                                <div class="step1">
+                                    <div class="step-container">
+                                        <p class="date">{{viewData?.proposalAcceptedDate}}</p>
+                                        <p class="email-verify">Proposal Acceptance</p>
+                                        <p class="user-email">{{viewData?.proposalDisplayStatus}}</p>
+                                        <div class="remindbtn">
+                                            <button class="remind" (click)="proposalAcceptance('proposalAcceptanceRemainder')">Remind Now</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- <div class="step">
+                                <div class="step-circle"></div>
+                                <div class="step1">
+                                    <div class="container">
+                                        <p class="date">14 Feb. 2023</p>
+                                        <p class="email-verify">Proposal Acceptance</p>
+                                        <p class="user-email">User has accepted the proposal link.</p>
+                                    </div>
+
+                                </div>
+
+                                <div class="step-bar-bottom"></div>
+                                <div class="step-bar-top"></div>
+                            </div>
+                            <div class="step">
+                                <div class="step-circle"></div>
+                                <div class="step1">
+                                    <div class="container">
+                                        <p class="date">14 Feb. 2023</p>
+                                        <p class="email-verify">Documentation Upload</p>
+                                        <p class="user-email">All documents have been uploaded</p>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="step-bar-bottom"></div>
+                                <div class="step-bar-top"></div>
+                            </div> -->
+
+                        </div>
+
+
+                    </div>
+                    <div class="mb-5 container">
+                        <button class="btn btn-primary next-btn" (click)="nextStep()" routerLink="/customer-dashboard">Back to Customers</button>
+                    </div>
+
+
+
+
+
+
+
+                </div>
+              
+            </div>
+        </div>
+    </div>
+</div>

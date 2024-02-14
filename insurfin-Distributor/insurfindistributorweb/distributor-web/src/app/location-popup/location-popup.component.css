@@ -1,0 +1,57 @@
+.access {
+    width: 247px;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: -0.40799999237060547px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+.allow-access {
+    width: 245px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: -0.07800000160932541px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btn {
+    /* width: 50%; */
+    outline: none;
+    box-shadow: none !important;
+}
+
+.allow-flex {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.dont {
+    width: 50%;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: -0.40799999237060547px;
+    text-align: center;
+    color: #007AFF;
+    cursor: pointer;
+    border-right: 1px solid black;
+
+}
+
+.dont-allow {
+    width: 50%;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: -0.40799999237060547px;
+    text-align: center;
+    color: #007AFF;
+    cursor: pointer;
+
+}

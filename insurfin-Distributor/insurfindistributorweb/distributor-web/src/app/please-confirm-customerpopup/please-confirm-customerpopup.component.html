@@ -1,0 +1,62 @@
+<div class="proposal" *ngIf="!dialogData.viewDataDelete">
+    <div *ngIf="pleaseconform">
+      <div class="row d-flex align-items-center p-3">
+        <div class="col-md-9 d-flex align-items-center">
+          <mat-icon class="error">error_outline</mat-icon>
+          <h1 class="please-confirm">Please Confirm</h1>
+        </div>
+        <div class="col-md-3">
+          <mat-icon mat-dialog-close class="closeicon">close</mat-icon>
+        </div>
+      </div>
+    <div mat-dialog-content class="delete-praposal">Are you sure you want to close and delete proposal <b>{{dialogData.proposalNumber}}</b></div>
+    <div mat-dialog-actions>
+      <button mat-dialog-close class="cancelbtn">Cancel</button>
+      <button class="btn yesbtn" (click)="sucesspopupmethod(dialogData)">Yes</button>    </div>
+    </div>
+    <div *ngIf="sucesspopup">
+      <div class="row d-flex align-items-center p-3">
+        <div class="col-md-9 d-flex align-items-center">
+          <mat-icon class="check-circle">check_circle_outline</mat-icon>
+          <h1 class="please-confirm">Success!</h1>
+        </div>
+        <div class="col-md-3">
+          <mat-icon mat-dialog-close class="closeicon">close</mat-icon>
+        </div>
+      </div>
+    <div mat-dialog-content class="belongingpraposal">Proposal <b>{{dialogData.proposalNumber}}</b> belonging to <b>{{dialogData.customerName}}</b> has been deleted successfully.</div>
+    </div>
+  </div>
+  <!-- customer delete -->
+  <div class="proposal" *ngIf="dialogData.viewDataDelete">
+    <div *ngIf="pleaseconform">
+      <div class="row d-flex align-items-center p-3">
+        <div class="col-md-9 d-flex align-items-center">
+          <mat-icon class="error">error_outline</mat-icon>
+          <h1 class="please-confirm">Please Confirm</h1>
+        </div>
+        <div class="col-md-3">
+          <mat-icon mat-dialog-close class="closeicon">close</mat-icon>
+        </div>
+      </div>
+    <div mat-dialog-content class="delete-praposal">Are you sure you want to remove <b>{{dialogData?.viewDataDelete.fullName}}</b>? This will also close any existing proposals</div>
+    <div mat-dialog-actions>
+      <p *ngIf="deleteError" class="text-danger">{{deleteError}}</p>
+      <button mat-dialog-close class="cancelbtn">Cancel</button>
+      <button class="btn yesbtn" (click)="deleteCustomer('customer')">Yes</button>
+      </div>
+    </div>  
+    <div *ngIf="sucesspopup">
+      <div class="row d-flex align-items-center p-3">
+        <div class="col-md-9 d-flex align-items-center">
+          <mat-icon class="check-circle">check_circle_outline</mat-icon>
+          <h1 class="please-confirm">Success!</h1>
+        </div>
+        <div class="col-md-3">
+          <mat-icon mat-dialog-close class="closeicon">close</mat-icon>
+        </div>
+      </div>
+    <div mat-dialog-content class="belongingpraposal">User profile <b>{{customerdetails?.customerName}}</b> has been deleted successfully.</div>
+    </div>
+  </div>
+  

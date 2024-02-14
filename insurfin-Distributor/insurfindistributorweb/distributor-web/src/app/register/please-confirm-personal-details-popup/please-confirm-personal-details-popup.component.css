@@ -1,0 +1,42 @@
+.error-outline{
+    color: #C42728;
+}
+.close-icon{
+    color: #0358A8;
+}
+.please-confirm{
+    font-size: 18px;
+    font-weight: 700;
+    color: #041427;
+}
+.personal-details{
+    font-size: 14px;
+    font-weight: 400;
+    color: #7D848D;
+}
+.cancel-btn{
+    width: 134px;
+    margin-left: 12px;
+    color: #005AAA;
+    border-radius: 12px;
+    box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+    background-color: #ffffff !important;
+    border: 1px solid #005AAA;
+    height: 52px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+}
+.yes-btn {
+    width: 134px;
+    /* margin-left: 13px; */
+    background: #C52727;
+    box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+    border-radius: 12px;
+    height: 52px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 5px;
+}

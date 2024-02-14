@@ -1,0 +1,28 @@
+<div class="main" *ngIf="type==='camera'">
+  <div class="upload">
+    <p class="uploadimage" (click)="uploadImage()">Upload image</p>
+    <mat-icon class="wrong1" (click)="closeSheet()">close</mat-icon>
+  </div>
+  <div class="takephoto">
+    <p class="photo" (click)="captur()" accept="image/png,image/jpeg">Take photo</p>
+  </div>
+  <hr>
+  <div class="mb-5 container">
+    <label class="upload-gallery" style="cursor: pointer;">
+      Upload from gallery
+      <input type="file" style="display:none;" (change)="profileUpload($event)" accept="image/png,image/jpeg">
+    </label>
+  </div>
+</div>
+
+
+
+<div class="main" *ngIf="type==='dotsmenu'">
+  <div class="upload">
+    <p class="uploadimage">More Actions</p>
+    <mat-icon class="wrong1" (click)="closeSheet()">close</mat-icon>
+  </div>
+  <div class="takephoto">
+    <p class="photo" (click)="resetpassword()">|** Forgot Password</p>
+  </div>
+</div>

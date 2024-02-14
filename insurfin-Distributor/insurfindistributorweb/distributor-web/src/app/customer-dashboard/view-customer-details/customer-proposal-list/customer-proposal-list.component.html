@@ -1,0 +1,157 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+            <div class="col-lg-6 rightColoumn">
+                <div class="distrbtr-welcome">
+                    <div class="morevert-flex">
+                        <mat-icon class="back-arrw" routerLink="/customer-dashboard">keyboard_backspace</mat-icon>
+                        <p class="pol-dtls">Customers</p>
+                        <mat-icon class="morevertclass" (click)="moreactionpopup()">more_vert</mat-icon>
+                        <!-- <mat-icon class="vert" (click)="bottompopup()">more_vert</mat-icon> -->
+                        <!-- <input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)"> -->
+                    </div>
+                    <div class="container">
+                        <div class="edit-customer-flex">
+                            <div>
+                                <img  src="../../assets/profile pic -img.png" class="distributor-profile">
+                            </div>
+                            <div class="anitha-flex">
+                                <p class="anitha-name">
+                                    {{customerProposalDetails?.proposalDetailsList?.proposal?.customerName}}</p>
+                                <p class="policy-gold">0 Policies | {{customerProposalDetails?.proposalDetailsList?.length}} Proposals</p>
+                                <!-- <p class="loan-disbursed">Loan disbursed successfully</p> -->
+                            </div>
+                            <div>
+                                <img class="phone-img" src="../../assets/phone-img.svg">
+                            </div>
+                        </div>
+                        <!-- <div class="hr-line">
+            <hr>
+        </div> -->
+
+                        <!-- <div class="edit-details container">
+                            <div>
+                                <p class="prpsl-dtls">POLICIES</p>
+                            </div>
+                            <div class="border" *ngFor="let proposal of customerProposalDetails?.proposalDetailsList">
+                                <div class="silverpolicy">
+                                    <p class="silver">{{proposal.policyProductName}}</p>
+                                    <img src="../../../assets/CaretRight.svg">
+                                </div>
+                                <div class="proposal-name">
+                                    <p class="Proposer-name">Insurer</p>
+                                    <p class="ani-name">{{proposal.insurerDetailsDto.insurerName}}</p>
+                                </div>
+                                <div class="proposal-name">
+                                    <p class="Proposer-name">Premium Amount (₹)</p>
+                                    <p class="ani-name">{{proposal.premiumAmount}}</p>
+                                </div>
+                                <div class="proposal-name">
+                                    <p class="Proposer-name">Policy Tenure</p>
+                                    <p class="ani-name">{{proposal.policyTenure}} years</p>
+                                </div>
+                            </div>
+
+                        </div> -->
+
+                        <p class="praposal">Proposals</p>
+
+                        <div class="mb-3">
+                            <mat-accordion *ngFor="let proposal of customerProposalDetails?.proposalDetailsList">
+                                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" >
+                                    <mat-expansion-panel-header >
+                                        <mat-panel-title>
+                                            <!-- <img src="../../assets/profile pic -img.png" class="distributor-profile"> -->
+                                        </mat-panel-title>
+                                        <mat-panel-description >
+                                            <div>
+                                                <div class="customer-flex">
+                                                    <div>
+                                                        <img src="../../assets/profile pic -img.png" class="distributor-profile">
+                                                    </div>
+                                                    <div class="section trash-flex">
+                                                        <div class="gf">
+                                                           <p class="anitha-name">{{proposal.customerName}}</p><br>
+                                                            <p class="gold-policy">{{proposal.policyProductName}}</p>
+                                                            <p class="cust-details">{{proposal.displayStatus}}</p>
+                                                        </div>
+                                                        <div class="delete-icon">
+                                                            <img src="../../../assets/Trash (1).svg" (click)="deleteCard(proposal)">
+                                                                
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="loans-flexs">
+                                                    <div class="loans">
+                                                        <span class="loan-span">Loan</span><span
+                                                            class="ten-lacs">{{proposal.premiumAmount}} Lac</span>
+                                                    </div>
+                                                    <div class="emi-flex">
+                                                        <span class="emis-outstnd">Days remaining</span><span
+                                                            class="five-num"> 36</span>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="emi-paid-flex">
+                            <span class="emis-paid">EMIs Paid</span><span class="three-num">
+                                3</span>
+                        </div> -->
+                                            </div>
+                                        </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                    <div>
+                                        <div>
+                                            <hr class="horizontal-line">
+                                        </div>
+                                        <div class="more-flex">
+                                            <div>
+                                                <p class="cust-props">Customer Proposal Number</p>
+                                                <p class="date">#{{proposal.proposalNumber}}</p>
+                                            </div>
+                                            <div>
+                                                <img src="../../../../assets/three-dots.svg" class="vert" >
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <p class="cust-props">Policy Date</p>
+                                            <p class="date">{{proposal.dateOfProposal | date: 'dd.MM.yyyy'}}</p>
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">Premium Amount (₹)</p>
+                                            <p class="date">₹{{proposal.premiumAmount}}</p>
+                                        </div>
+                                        <div class="groups">
+                                            <h5 class="documentations">Documenation</h5>
+                                        </div>
+                                        <div class="endingsteps">
+                                            <div class="nots">
+                                                <img src="../../assets/red alert img.svg">
+                                                <h6 class="incompletes">Incomplete</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="call-customer">
+                                        <div>
+                                            <button class="btn btn-primary call-cust"(click)="resendpopup(proposal)">Resend Link</button>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-outline-primary view-dtls"
+                                                (click)="viewProposalDetails(proposal)">View Details</button>
+                                        </div>
+                                    </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

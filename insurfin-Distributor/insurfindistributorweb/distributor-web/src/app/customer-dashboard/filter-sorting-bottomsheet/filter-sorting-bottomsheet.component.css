@@ -1,0 +1,223 @@
+
+
+.checkInp {
+    height: 16.5px;
+    width: 16.5px;
+    margin-top: 14px;
+
+}
+
+p.all-checkbox-btn {
+    display: inline-flex;
+    margin-left: 30px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #041427;
+}
+
+.clear {
+    margin-left: 69%;
+    color: #0358A8;
+    cursor: pointer;
+}
+
+.sort-flex {
+    display: flex;
+    margin-top: 20px;
+
+}
+
+.sort-by {
+    font-size: 18px;
+    font-weight: 700;
+    color: #041427;
+    margin-left: 11px;
+
+}
+
+.mat-radio {
+    display: flex;
+}
+
+.horizontal-line {
+    margin-top: 2px;
+    width: 332px;
+    margin-left: 4px;
+}
+
+.alphabet {
+    margin-left: 26px;
+    margin-top: 24px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #041427;
+
+}
+
+.due-date {
+    display: flex;
+    margin-top: -21px;
+}
+
+.outstanding {
+    display: flex;
+    margin-top: -21px;
+}
+
+.loanamount {
+    display: flex;
+    margin-top: -21px;
+}
+
+.high-low {
+    display: flex;
+    margin-top: -21px;
+}
+
+.filter-flex {
+    display: flex;
+}
+
+.filters {
+    color: #041427;
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 17px;
+    margin-left: 10px;
+
+}
+
+.cross-icon {
+    margin-left: 74%;
+    color: #0358A8;
+    cursor: pointer;
+    margin-top: 17px;
+}
+
+.status {
+    color: #7D848D;
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+.mat-radio-all {
+    display: flex;
+    margin-left: 3px;
+}
+
+.all-radio-btn {
+    margin-left: 30px;
+    margin-top: 24px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #041427;
+}
+
+.disbursed-loans {
+    display: flex;
+    margin-left: 3px;
+}
+
+.loans-in-process {
+    display: flex;
+    margin-left: 3px;
+}
+
+.deliquent-application {
+    display: flex;
+    margin-left: 3px;
+}
+
+.rejected-loans {
+    display: flex;
+    margin-left: 3px;
+}
+
+.hr-line {
+    margin-left: 6px;
+}
+
+.loan-range {
+    color: #7D848D;
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 12px;
+}
+
+mat-slider {
+    width: 319px;
+    color: #041427;
+}
+
+.premiumamountendvalue {
+    left: 73%;
+    position: relative;
+    bottom: 18px;
+}
+
+.premiumamountstartvalue {
+    position: relative;
+    top: -10px;
+    left: 20px;
+}
+
+.input-wrapper {
+    position: relative;
+    margin-left: 11px;
+}
+
+.input-wrapper .rupee {
+    padding-left: 1.7rem;
+    border-radius: 12px;
+    height: 42px;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.input-wrapper .ind-rupee {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #C6C6C6;
+    font-size: 16px;
+}
+
+.clear-flex {
+    display: flex;
+    margin-top: 40px;
+    justify-content: space-around;
+}
+
+.clear-btn {
+    width: 165px;
+    height: 52px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #005AAA;
+    border: 1px solid #005AAA;
+    border-radius: 12px;
+    background-color: #FFFFFF !important;
+}
+
+.apply-btn {
+    width: 165px;
+    height: 52px;
+    background-color: #005AAA;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFFFFF;
+    border-radius: 12px;
+}
+
+.error-message{
+    color: red;
+    margin-left: 18px;
+}
+
+::ng-deep.mat-bottom-sheet-container{
+    border-radius:24px 24px 0px 0px;
+    min-width: 393px;
+}

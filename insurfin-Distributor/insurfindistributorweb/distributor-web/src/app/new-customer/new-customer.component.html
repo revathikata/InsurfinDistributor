@@ -1,0 +1,1231 @@
+<div class="main">
+  <div class="welcome">
+    <div class="row">
+
+      <div class="col-lg-6 p-0">
+        <app-side-nav-section />
+      </div>
+
+
+
+      <div class="col-lg-6 rightColoumn" *ngIf="customerDetails">
+        <div class="flex">
+          <mat-icon class="backspace" (click)="goToPreviousTab()">keyboard_backspace</mat-icon>
+          <p class="home">Home</p>
+        </div>
+        <div class="distrbtr-welcome mat-disable">
+          <p class="add-new" *ngIf="proposal">Add Proposal</p>
+          <p class="add-new" *ngIf="!proposal"> {{isCustomerEdit ? 'Edit Customer' : 'Add New Customer'}}</p>
+          <mat-tab-group [(selectedIndex)]="selectedIndex" (selectedTabChange)="tabChanged($event)">
+
+            <mat-tab label="Customer info" class="label" >
+              <div class="container">
+                <p class="customer">Customer Information</p>
+                <form *ngIf="proposal">
+                  <div class="section">
+                    <label>Full name (name should be same as Aadhaar)<span>*</span></label>
+                    <!-- <mat-icon class="search" matPrefix>search</mat-icon> -->
+                    <div class="input-wrapper">
+                      <input type="search" placeholder="Search Customer" [(ngModel)]="searchFullName"
+                        name="searchFullName" (keyup)="searchByName($event)" class="form-control">
+                      <i class="fas fa-search"></i>
+
+                    </div>
+                    <div class="searchList">
+                      <ul *ngFor="let data of getallCustomerInformation" (click)="viewCustomerDetails(data)">
+                        <li class="cursor-pointer">
+                          <img src="../../assets/profile pic -img.png" class="distributor-profile"
+                           *ngIf="!data.userDocuments || data.userDocuments.length === 0">
+                          <ng-container *ngFor="let document of data.userDocuments">
+                            <img *ngIf="document.documentType === 'PHOTO'" 
+                                 [src]="document.s3Url" 
+                                 class="distributor-profile">
+                          </ng-container>
+                          <p class="fullname">{{data.fullName | titlecase}}</p>
+                          <p class="pan-data">{{data.panNumber}}</p>
+                        </li>
+                        <hr class="hr-line">
+                      </ul>
+                    </div>
+                    <div class="mb-3">
+                      <button class="btn btn-primary set-Btn" (click)="setUpCustomer()">Set Up a New Customer</button>
+                    </div>
+                  </div>
+                </form>
+                <form [formGroup]="customerInfoForm" *ngIf="!proposal">
+                  <div class="section">
+                    <!-- <button (click)="adar()">click</button> -->
+                    <label>Full name (name should be same as Aadhaar)<span>*</span></label>
+                    <input type="text" class="form-control" placeholder="Enter full name" formControlName="fullname">
+                    <small
+                      *ngIf="(customerInfoForm.controls['fullname'].touched && customerInfoForm.get('fullname')?.hasError('required'))"
+                      class="red-class">Please enter a valid name</small>
+                    <small
+                      *ngIf="(customerInfoForm.controls['fullname'].touched && customerInfoForm.get('fullname')?.hasError('pattern'))"
+                      class="red-class">Please enter a valid name</small>
+                  </div>
+                  <div class="section">
+                    <label>Date of birth<span>*</span></label>
+                    <input type="text" class="form-control" onkeydown="return false" placeholder="dd/mm/yyyy" formControlName="dob"
+                      (click)="openDialog()" maxlength="10"/>
+                    <small
+                      *ngIf="(customerInfoForm.controls['dob'].touched && customerInfoForm.get('dob')?.hasError('required'))"
+                      class="red-class">DOB is required</small>
+                  </div>
+                  <div class="section">
+                    <label>Gender</label>
+                    <ng-select class="statedropdown custom-ngselect" [items]="Gender" placeholder=" Select Gender"
+                      formControlName="gender" [clearable]="false" [searchable]="false">
+
+                    </ng-select>
+                    <small
+                      *ngIf="(customerInfoForm.controls['gender'].touched && customerInfoForm.get('gender')?.hasError('required'))"
+                      class="red-class">Gender is required</small>
+                  </div>
+                  <div class="section">
+                    <label>Marital status</label>
+                    <ng-select class="statedropdown custom-ngselect" [items]="maritalstatus" placeholder=" Choose marital status"
+                      formControlName="marital" [clearable]="false" [searchable]="false">
+
+                    </ng-select>
+                    <small
+                      *ngIf="(customerInfoForm.controls['marital'].touched && customerInfoForm.get('marital')?.hasError('required'))"
+                      class="red-class">Marital Status  is required</small>
+                  </div>
+                  <div class="section">
+                    <label>Phone number<span>*</span></label>
+                    <input type="tel" class="form-control" maxlength="10" formControlName="phnnum"
+                      placeholder="Enter phone number" (input)="restrictToNumbers($event)">
+                    <small
+                      *ngIf="(customerInfoForm.controls['phnnum'].touched && customerInfoForm.get('phnnum')?.hasError('required'))"
+                      class="red-class"> Phone Number is required</small>
+                    <small
+                      *ngIf="(customerInfoForm.controls['phnnum'].touched && customerInfoForm.get('phnnum')?.hasError('pattern'))"
+                      class="red-class">Enter valid Phone Number</small>
+                  </div>
+                  <div class="section">
+                    <label>Aadhaar number<span>*</span></label>
+                    <input class="form-control" formControlName="aadhaarnum" maxlength="14" placeholder="Enter aadhaar number" appAadhaarFormat>
+                    <small
+                      *ngIf="(customerInfoForm.controls['aadhaarnum'].touched && customerInfoForm.get('aadhaarnum')?.hasError('required'))"
+                      class="red-class">Aadhaar Number is Required</small>
+                    <small
+                      *ngIf="(customerInfoForm.controls['aadhaarnum'].touched && customerInfoForm.get('aadhaarnum')?.hasError('pattern'))"
+                      class="red-class">Enter a valid 12 digit Aadhaar Number</small>
+                  </div>
+                  <div class="section">
+                    <label>PAN<span>*</span></label>
+                    <input  class="form-control" formControlName="pancardnum"  (input)="onPanNum($event)" maxlength="10" placeholder="Enter PAN">
+                    <small
+                      *ngIf="(customerInfoForm.controls['pancardnum'].touched && customerInfoForm.get('pancardnum')?.hasError('required'))"
+                      class="red-class">PAN Number is required</small>
+                    <small
+                      *ngIf="(customerInfoForm.controls['pancardnum'].touched && customerInfoForm.get('pancardnum')?.hasError('pattern'))"
+                      class="red-class">Enter a valid PAN Number</small>
+                  </div>
+                  <div class="mt-5 mb-3">
+                    <p class="red-class" *ngIf="customerMessage">{{customerMessage}}</p>
+                    <button class="btn btn-primary cust-Btn" [disabled]="!customerInfoForm.valid"
+                      (click)="customerInfo()">Continue</button>
+                  </div>
+                </form>
+              </div>
+            </mat-tab>
+            <!-- <mat-tab label="Address" [disabled]="!customerInfoForm.valid">
+              <div class="container current-address" *ngIf="showCurrentAddress">
+                <div class="current-flex">
+                  <p class="customer">Current Address</p>
+                  <p class="remove-current" (click)="removeCurrent()">Remove</p>
+                </div>
+                <form [formGroup]="currentAddress">
+                  <div class="section">
+                    <label>Address line 1<span>*</span></label>
+                    <input type="text" class="form-control" formControlName="currentaddressline1"
+                      placeholder="Enter adress line 1">
+                    <small
+                      *ngIf="(currentAddress.controls['currentaddressline1'].touched && currentAddress.get('currentaddressline1')?.hasError('required'))"
+                      class="red-class"> Address line 1 is Required</small>
+                    <small
+                      *ngIf="(currentAddress.controls['currentaddressline1'].touched && currentAddress.get('currentaddressline1')?.hasError('pattern'))"
+                      class="red-class">Enter Valid Address Line 1</small>
+                  </div>
+                  <div class="section">
+                    <label>Address line 2<span>*</span></label>
+                    <input type="text" class="form-control" formControlName="currentaddressline2"
+                      placeholder="Enter adress line 2">
+                    <small
+                      *ngIf="(currentAddress.controls['currentaddressline2'].touched && currentAddress.get('currentaddressline2')?.hasError('required'))"
+                      class="red-class"> Address line 2 is Required</small>
+                    <small
+                      *ngIf="(currentAddress.controls['currentaddressline2'].touched && currentAddress.get('currentaddressline2')?.hasError('pattern'))"
+                      class="red-class">Enter Valid Address Line 2</small>
+                  </div>
+                  <div class="section">
+                    <label>City<span>*</span></label>
+                    <input type="text" class="form-control" formControlName="currentcity" placeholder="Enter city">
+                    <small
+                      *ngIf="(currentAddress.controls['currentcity'].touched && currentAddress.get('currentcity')?.hasError('required'))"
+                      class="red-class"> City is Required</small>
+                    <small
+                      *ngIf="(currentAddress.controls['currentcity'].touched && currentAddress.get('currentcity')?.hasError('pattern'))"
+                      class="red-class">Enter a Valid City</small>
+                  </div>
+                  <div class="section">
+                    <label>State<span>*</span></label>
+                    <ng-select class="statedropdown" [items]="stateName" bindLabel="stateName" bindValue="stateName"
+                      placeholder="Select State" formControlName="currentstate" [searchable]="true" [clearable]="true">
+                      <ng-option  *ngFor="let states of stateName">{{states}}</ng-option>
+                    </ng-select>
+                    <small
+                      *ngIf="(currentAddress.controls['currentstate'].touched && currentAddress.get('currentstate')?.hasError('required'))"
+                      class="red-class"> State is Required</small>
+                  </div>
+                  <div class="section">
+                    <label>Country</label>
+                    <input type="text" class="form-control" formControlName="currentcountry">
+                    <small
+                      *ngIf="(currentAddress.controls['currentcountry'].touched && currentAddress.get('currentcountry')?.hasError('required'))"
+                      class="red-class"> Country is Required</small>
+                  </div>
+                  <div class="section">
+                    <label>Pincode<span>*</span></label>
+                    <input type="text" class="form-control" formControlName="currentpincode" placeholder="Enter pincode"
+                      maxlength="6"  (input)="restrictToNumbers($event)">
+                    <small
+                      *ngIf="(currentAddress.controls['currentpincode'].touched && currentAddress.get('currentpincode')?.hasError('required'))"
+                      class="red-class"> Pincode is Required</small>
+                    <small
+                      *ngIf="(currentAddress.controls['currentpincode'].touched && currentAddress.get('currentpincode')?.hasError('pattern'))"
+                      class="red-class">Enter a Valid Pincode</small>
+                  </div>
+                </form>
+              </div>
+              <div class="container" *ngIf="caddress">
+                <p class="customer">Communication Address</p>
+                <form [formGroup]="communicationAddress">
+                  <div class="section">
+                    <label>Address line 1<span>*</span></label>
+                    <input type="text" class="form-control" formControlName="addressline1"
+                      placeholder="Enter adress line 1">
+                    <small
+                      *ngIf="(communicationAddress.controls['addressline1'].touched && communicationAddress.get('addressline1')?.hasError('required'))"
+                      class="red-class"> Address line 1 is Required</small>
+                    <small
+                      *ngIf="(communicationAddress.controls['addressline1'].touched && communicationAddress.get('addressline1')?.hasError('pattern'))"
+                      class="red-class">Enter Valid Address Line 1</small>
+                  </div>
+                  <div class="section">
+                    <label>Address line 2<span>*</span></label>
+                    <input type="text" class="form-control" formControlName="addressline2"
+                      placeholder="Enter adress line 2" [ngClass]="{
+                        'red-border': communicationAddress.get('addressline2')?.hasError('sameAddress')
+                      }">
+                    <small
+                      *ngIf="(communicationAddress.controls['addressline2'].touched && communicationAddress.get('addressline2')?.hasError('required'))"
+                      class="red-class"> Address line 2 is Required</small>
+                    <small
+                      *ngIf="(communicationAddress.controls['addressline2'].touched && communicationAddress.get('addressline2')?.hasError('pattern'))"
+                      class="red-class">Enter Valid Address Line 2</small>
+                      <span *ngIf="communicationAddress.get('addressline2')?.hasError('sameAddress')" class="red-class">
+                        Addresses cannot be the same.
+                      </span>
+                  </div>
+                  <div class="section">
+                    <label>City<span>*</span></label>
+                    <input type="text" class="form-control" formControlName="city" placeholder="Enter city">
+                    <small
+                      *ngIf="(communicationAddress.controls['city'].touched && communicationAddress.get('city')?.hasError('required'))"
+                      class="red-class"> City is Required</small>
+                    <small
+                      *ngIf="(communicationAddress.controls['city'].touched && communicationAddress.get('city')?.hasError('pattern'))"
+                      class="red-class">Enter a Valid City</small>
+                  </div>
+                  <div class="section">
+                    <label>State<span>*</span></label>
+                    <ng-select class="statedropdown" [items]="stateName" bindLabel="stateName" bindValue="stateName"
+                      placeholder="Select State" formControlName="state" [searchable]="true" [clearable]="true">
+                      <ng-option  *ngFor="let states of stateName">{{states}}</ng-option>
+                    </ng-select>
+                    <small
+                      *ngIf="(communicationAddress.controls['state'].touched && communicationAddress.get('state')?.hasError('required'))"
+                      class="red-class"> State is Required</small>
+                  </div>
+                  <div class="section">
+                    <label>Country</label>
+                    <input type="text" class="form-control" formControlName="country">
+                    <small
+                      *ngIf="(communicationAddress.controls['country'].touched && communicationAddress.get('country')?.hasError('required'))"
+                      class="red-class"> Country is Required</small>
+                  </div>
+                  <div class="section">
+                    <label>Pincode<span>*</span></label>
+                    <input type="text" class="form-control" formControlName="pincode" placeholder="Enter pincode"
+                      maxlength="6"  (input)="restrictToNumbers($event)">
+                    <small
+                      *ngIf="(communicationAddress.controls['pincode'].touched && communicationAddress.get('pincode')?.hasError('required'))"
+                      class="red-class"> Pincode is Required</small>
+                    <small
+                      *ngIf="(communicationAddress.controls['pincode'].touched && communicationAddress.get('pincode')?.hasError('pattern'))"
+                      class="red-class">Enter a Valid Pincode</small>
+                  </div>
+                  <p class="permentAdres" *ngIf="communicationBtn">Permanent address not the same as the current
+                    address? <span class="permentcolor" (click)="communicationAddressContinue()">Add permanent
+                      address</span></p>
+                  <div class="mt-5 mb-3">
+                    <button class="btn btn-primary cust-Btn" (click)="communicationAddressContinue()"
+                      *ngIf="communicationBtn" [disabled]="!communicationAddress.valid">Continue</button>
+                  </div>
+                </form>
+              </div>
+              <div class="container mt-5" *ngIf="paddress">
+                <p class="customer">Permanent Address</p>
+                <form [formGroup]="permanentAddress">
+                  <div class="section">
+                    <label>Address line 1 <span>*</span></label>
+                    <input type="text" class="form-control" formControlName="paddressline1"
+                      placeholder="Enter adress line 1">
+                    <small
+                      *ngIf="(permanentAddress.controls['paddressline1'].touched && permanentAddress.get('paddressline1')?.hasError('required'))"
+                      class="red-class">Address line 1 is Required</small>
+                    <small
+                      *ngIf="(permanentAddress.controls['paddressline1'].touched && permanentAddress.get('paddressline1')?.hasError('pattern'))"
+                      class="red-class">Enter Valid Address Line 1</small>
+                  </div>
+                  <div class="section">
+                    <label>Address line 2<span>*</span></label>
+                    <input type="text" class="form-control" formControlName="paddressline2"
+                      placeholder="Enter adress line 2" [ngClass]="{
+                        'red-border': permanentAddress.get('paddressline2')?.hasError('sameAddress')
+                      }">
+                    <small
+                      *ngIf="(permanentAddress.controls['paddressline2'].touched && permanentAddress.get('paddressline2')?.hasError('required'))"
+                      class="red-class"> Address line 2 is Required</small>
+                    <small
+                      *ngIf="(permanentAddress.controls['paddressline2'].touched && permanentAddress.get('paddressline2')?.hasError('pattern'))"
+                      class="red-class">Enter Valid Address Line 2</small>
+                      <span *ngIf="permanentAddress.get('paddressline2')?.hasError('sameAddress')" class="red-class">
+                        Addresses cannot be the same.
+                      </span>
+                  </div>
+                  <div class="section">
+                    <label>City<span>*</span></label>
+                    <input type="text" class="form-control" formControlName="pcity" placeholder="Enter city">
+                    <small
+                      *ngIf="(permanentAddress.controls['pcity'].touched && permanentAddress.get('pcity')?.hasError('required'))"
+                      class="red-class"> City is Required</small>
+                    <small
+                      *ngIf="(permanentAddress.controls['pcity'].touched && permanentAddress.get('pcity')?.hasError('pattern'))"
+                      class="red-class">Enter a Valid City</small>
+                  </div>
+                  <div class="section">
+                    <label>State<span>*</span></label>
+                    <ng-select class="statedropdown" [items]="stateName" bindLabel="stateName" bindValue="stateName"
+                      placeholder="Select State" formControlName="pstate" [searchable]="true" [clearable]="true">
+                      <ng-option  *ngFor="let states of stateName">{{states}}</ng-option>
+                    </ng-select>
+                    <small
+                      *ngIf="(permanentAddress.controls['pstate'].touched && permanentAddress.get('pstate')?.hasError('required'))"
+                      class="red-class"> State is Required</small>
+                  </div>
+                  <div class="section">
+                    <label>Country</label>
+                    <input type="text" class="form-control" formControlName="pcountry">
+                    <small
+                      *ngIf="(permanentAddress.controls['pcountry'].touched && permanentAddress.get('pcountry')?.hasError('required'))"
+                      class="red-class"> Country is Required</small>
+                  </div>
+                  <div class="section">
+                    <label>Pincode<span>*</span></label>
+                    <input type="text" class="form-control" formControlName="ppincode" placeholder="Enter pincode">
+                    <small
+                      *ngIf="(permanentAddress.controls['ppincode'].touched && permanentAddress.get('ppincode')?.hasError('required'))"
+                      class="red-class">Pincode is Required</small>
+                    <small
+                      *ngIf="(permanentAddress.controls['ppincode'].touched && permanentAddress.get('ppincode')?.hasError('pattern'))"
+                      class="red-class">Enter a Valid Pincode</small>
+                  </div>
+                  <div class="checkdiv d-flex">
+                    <input type="checkbox" class="form-check" (change)="checkValue($event)">
+                    <p class="sameCurrent">Permanent address is the same as current address</p>
+                  </div>
+                  <div class="mt-5 mb-3">
+                    <button class="btn btn-primary cust-Btn" (click)="permanentAddressContinue()"
+                    [disabled]="!permanentAddress.valid || !this.communicationAddress.valid">Continue</button>
+                  </div>
+                </form>
+              </div>
+            </mat-tab> -->
+            <mat-tab label="Employment" class="label" [disabled]="!permanentAddress.valid">
+              <div class="container" *ngIf="emailVerify">
+                <p class="customer">Employment Details</p>
+                <div class="d-flex">
+                  <div *ngIf="isSalary">
+                    <mat-radio-button [checked]="isSalaried" (change)="checkSalary()"></mat-radio-button><span
+                      class="salary">Salaried
+                      Employee</span>
+                  </div>
+                  <div *ngIf="isSelf" [ngClass]="isSelf ? 'isValid' :'' ">
+                    <mat-radio-button class="radio" [checked]="!isSalaried" (click)="checkSelf()"></mat-radio-button><span class="salary">Self
+                      Employed</span>
+                  </div>
+                </div>
+                <form [formGroup]="salaryEmploymentForm" *ngIf="salary">
+                  <div class="section">
+                    <label>Company name (as in salary slip)<span>*</span></label>
+                    <input type="text" class="form-control" (keyup)="checkEmailValidityWhileCompanyNameChange($event)" placeholder="Enter company name"
+                     formControlName="companyname">
+                    <small
+                      *ngIf="(salaryEmploymentForm.controls['companyname'].touched && salaryEmploymentForm.get('companyname')?.hasError('required'))"
+                      class="red-class">Company name is Required</small>
+                    <small
+                      *ngIf="(salaryEmploymentForm.controls['companyname'].touched && salaryEmploymentForm.get('companyname')?.hasError('pattern'))"
+                      class="red-class">Enter a Valid Company name</small>
+                  </div>
+                  <div class="section">
+                    <label>Primary email<span>*</span></label>
+                    <input type="text" class="form-control" (keyup)="checkEmailValidity($event)" placeholder="Enter company email" formControlName="pemail">
+                    <small
+                      *ngIf="(salaryEmploymentForm.controls['pemail'].touched && salaryEmploymentForm.get('pemail')?.hasError('required'))"
+                      class="yellow-class">Email ID Required</small>
+                    <small
+                      *ngIf="(salaryEmploymentForm.controls['pemail'].touched &&  !isSameCompany)"
+                      class="yellow-class">Ensure that the domain refers to the company above</small>
+                      <small class="red-class">{{employemnetError}}</small>
+                  </div>
+                  <div class="section">
+                    <label>Secondary email<span>*</span></label>
+                    <input type="text" class="form-control" placeholder="Enter personal email" formControlName="semail" [ngClass]="{
+                      'red-border': salaryEmploymentForm.get('semail')?.hasError('isEmail')
+                    }">
+                    <small
+                      *ngIf="(salaryEmploymentForm.controls['semail'].touched && salaryEmploymentForm.get('semail')?.hasError('required'))"
+                      class="yellow-class">Email ID Required</small>
+                    <small
+                      *ngIf="(salaryEmploymentForm.controls['semail'].touched && salaryEmploymentForm.get('semail')?.hasError('pattern'))"
+                      class="yellow-class">Invalid email ID</small>
+                      <span *ngIf="salaryEmploymentForm.get('semail')?.hasError('isEmail')" class="yellow-class">
+                        Primary and Secondary emails cannot be the same
+                      </span>
+                  </div>
+                  <div class="section">
+                    <label>Monthly income<span>*</span></label>
+                    <!-- <input type="text" class="form-control" formControlName="mincome"
+                        (keydown)="onKeyDown($event)"> -->
+                    <div class="input-wrapper">
+                      <input type="text" class="form-control rupee" formControlName="mincome" appCurrencyFormat #input>
+                      <i class="fa-solid fa-indian-rupee-sign ind-rupee"
+                        [ngStyle]="{'color': input.value ? '#041427' : ''}"></i>
+                    </div>
+                   <small *ngIf="salaryEmploymentForm.controls['mincome'].touched && 
+ (salaryEmploymentForm.get('mincome')?.hasError('required') || 
+ salaryEmploymentForm.get('mincome')?.hasError('minIncome'))" style="color: red;">
+ {{ salaryEmploymentForm.get('mincome')?.hasError('required') ? 'Monthly Income is Required' :
+ 'Monthly income cannot be lower than ₹20,000'}}
+
+ </small>
+                  </div>
+                  <div class="mt-5 mb-3">
+                    <button class="btn btn-primary cust-Btn" (click)="Salariedemployment()" 
+                      [disabled]="!salaryEmploymentForm.valid">Continue</button>
+                  </div>
+                </form>
+                <form [formGroup]="selfEmploymentForm" *ngIf="!salary">
+                  <div class="section">
+                    <label>Type of employment</label>
+                    <ng-select class="statedropdown" [items]="employee" placeholder="select type of employment"
+                      formControlName="temployement">
+
+                    </ng-select>
+
+                    <small
+                      *ngIf="(selfEmploymentForm.controls['temployement'].touched && selfEmploymentForm.get('temployement')?.hasError('required'))"
+                      class="red-class">Type of employment is Required</small>
+                  </div>
+                  <div class="section">
+                    <label>Primary email<span>*</span></label>
+                    <input type="text" class="form-control" placeholder="Enter company email" formControlName="pemail">
+                    <small
+                      *ngIf="(selfEmploymentForm.controls['pemail'].touched && selfEmploymentForm.get('pemail')?.hasError('required'))"
+                      class="yellow-class">Email ID Required</small>
+                    <small
+                      *ngIf="(selfEmploymentForm.controls['pemail'].touched && selfEmploymentForm.get('pemail')?.hasError('pattern'))"
+                      class="yellow-class">Invalid email ID</small>
+                      <small class="red-class">{{selfError}}</small>
+                  </div>
+                  <div class="section">
+                    <label>Secondary email<span>*</span></label>
+                    <input type="text" class="form-control" placeholder="Enter personal email" formControlName="semail" [ngClass]="{
+                      'red-border': selfEmploymentForm.get('semail')?.hasError('isSelfEmail')}">
+                    <small
+                      *ngIf="(selfEmploymentForm.controls['semail'].touched && selfEmploymentForm.get('semail')?.hasError('required'))"
+                      class="yellow-class">Email ID Required</small>
+                    <small
+                      *ngIf="(selfEmploymentForm.controls['semail'].touched && selfEmploymentForm.get('semail')?.hasError('pattern'))"
+                      class="yellow-class">Invalid email ID</small>
+                      <span *ngIf="selfEmploymentForm.get('semail')?.hasError('isSelfEmail')" class="yellow-class">
+                        Primary and Secondary emails cannot be the same
+                      </span>
+                  </div>
+                  <div class="section">
+                    <label>Annual Income (per annum)<span>*</span></label>
+                    <!-- <input type="text" class="form-control" formControlName="aincome" [(ngModel)]="rupees"
+                        (keydown)="onKeyDown($event)"> -->
+                    <div class="input-wrapper">
+                      <input type="text" class="form-control rupee" formControlName="aincome" #input appCurrencyFormat>
+                      <i class="fa-solid fa-indian-rupee-sign ind-rupee"
+                        [ngStyle]="{'color': input.value ? '#041427' : ''}"></i>
+                    </div>
+
+                    <small *ngIf="selfEmploymentForm.controls['aincome'].touched && 
+                     (selfEmploymentForm.get('aincome')?.hasError('required') || 
+                     selfEmploymentForm.get('aincome')?.hasError('minIncome'))" style="color: red;">
+                     {{ selfEmploymentForm.get('aincome')?.hasError('required') ? 'Annual Income is Required' :
+                     'Annual income cannot be lower than ₹3,00,000'}}
+                     </small>
+                    <p class="text-danger" *ngIf="employemnetError">{{employemnetError}}</p>
+                  </div>
+                  <div class="mt-5 mb-3">
+                    <button class="btn btn-primary cust-Btn" (click)="selfEmploymentt()"
+                      [disabled]="!selfEmploymentForm.valid">Continue</button>
+                  </div>
+                </form>
+              </div>
+             
+            </mat-tab>
+            <!-- <mat-tab label="KYC verification" class="label" [disabled]="!salaryEmploymentForm.valid && !selfEmploymentForm.valid">
+              <div class="kyc">
+                <p class="verify">KYC Verification</p>
+                <p class="skip" (click)="skipForNow()" *ngIf="isSkip">Skip for now</p>
+              </div>
+              <p class="your-kyc">Complete your KYC for smoother experience and quicker benefits. Only pdf, jpg and
+                png
+                allowed [Max: 10mb]</p>
+              <div class="hr">
+                <hr />
+              </div>
+              <form [formGroup]="salaryForm" *ngIf="salary">
+                <div class="adharinfo">
+                  <label class="kyc-label">Aadhaar info</label>
+                </div>
+                <div class="section fileupload"
+                  [ngClass]="imgname ? 'uploaded' : !aadharFront ? 'fileupload' : 'notupload'"
+                  (click)="onAadhaarFront()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadInp"
+                      placeholder="Upload Aadhaar front" (change)="AdharFrontFile($event)"
+                      formControlName="adharfrontimg" accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadInp" class="imguploadText" *ngIf="!imgname">Upload Aadhaar front</p>
+                      <p #input id="uploadInp" class="afteruploaded" *ngIf="imgname" [title]="imgname">{{ truncateFileName(imgname) }}</p>
+                      <img class="imgcls" *ngIf="imgname" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgname" src="../../assets/UploadImg.svg" alt="">
+                      <img class="imgcls" (click)="removeAadharFront($event)" src="../../assets/Trash.svg" *ngIf="imgname"
+                        alt="">
+                    </div>
+
+                  </label>
+                </div>
+                <div class="section fileupload"
+                  [ngClass]="imgback ? 'uploaded' : !aadharBack ? 'fileupload' : 'notupload'" (click)="onAadhaarBack()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadback"
+                      placeholder="Upload Aadhaar back" (change)="AdharBackFile($event)" formControlName="adharbackimg"
+                      accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadback" class="imguploadText" *ngIf="!imgback">Upload Aadhaar back</p>
+                      <p #input id="uploadback" class="afteruploaded" *ngIf="imgback" [title]="imgback">{{ truncateFileName(imgback) }}</p>
+                      <img class="imgcls" *ngIf="imgback" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgback" src="../../assets/UploadImg.svg" alt="">
+                      <img class="imgcls" (click)="removeAadharBack($event)" src="../../assets/Trash.svg" *ngIf="imgback"
+                        alt="">
+                    </div>
+
+                  </label>
+                </div>
+                <div class="hrr">
+                  <hr />
+                </div>
+                <div class="adharinfo">
+                  <label class="kyc-label">PAN info</label>
+                </div>
+                <div class="section fileupload" [ngClass]="imgbpan ? 'uploaded' : !panCard ? 'fileupload' : 'notupload'"
+                  (click)="onPanCard()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadpan"
+                      placeholder="Upload PAN Front" (change)="PanFrontFile($event)" formControlName="pancardimg"
+                      accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadpan" class="imguploadText" *ngIf="!imgbpan">Upload Pan front</p>
+                      <p #input id="uploadpan" class="afteruploaded" *ngIf="imgbpan" [title]="imgbpan">{{ truncateFileName(imgbpan) }}</p>
+                      <img class="imgcls" *ngIf="imgbpan" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgbpan" src="../../assets/UploadImg.svg" alt="">
+                      <img class="imgcls" (click)="removePan($event)" src="../../assets/Trash.svg" *ngIf="imgbpan" alt="">
+                    </div>
+
+                  </label>
+                </div>
+                <div class="hrr">
+                  <hr />
+                </div>
+
+                <div class="adharinfo">
+                  <label class="kyc-label">Bank details</label>
+                </div>
+                <div class="section fileupload"
+                  [ngClass]="imgbank1 ? 'uploaded' : !cancelCheque ? 'fileupload' : 'notupload'"
+                  (click)="onCancelCheque()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadbank1"
+                      placeholder="Upload bank Details" (change)="BankdetailsCheque($event)"
+                      formControlName="cancelchequeimg" accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadbank1" class="imguploadText" *ngIf="!imgbank1">Upload cancelled cheque</p>
+                      <p #input id="uploadbank1" class="afteruploaded" *ngIf="imgbank1" [title]="imgbank1">{{ truncateFileName(imgbank1) }}</p>
+                      <img class="imgcls" *ngIf="imgbank1" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgbank1" src="../../assets/UploadImg.svg" alt="">
+                      <img class="imgcls" (click)="removeCancelCheque($event)" src="../../assets/Trash.svg" *ngIf="imgbank1"
+                        alt="">
+                    </div>
+
+                  </label>
+                </div>
+                <div class="section fileupload"
+                  [ngClass]="imgbank2 ? 'uploaded' : !bankStatement ? 'fileupload' : 'notupload'"
+                  (click)="onBankStatement()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadbank2"
+                      placeholder="Upload PAN Front" (change)="BankdetailStatement($event)"
+                      formControlName="bankstatementimg" accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadbank2" class="imguploadText" *ngIf="!imgbank2">Upload bank statement </p>
+                      <p #input id="uploadbank2" class="afteruploaded" *ngIf="imgbank2" [title]="imgbank2">{{ truncateFileName(imgbank2) }}</p>
+                      <img class="imgcls" *ngIf="imgbank2" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgbank2" src="../../assets/UploadImg.svg" alt="">
+                      <img class="imgcls" (click)="removeBankStatement($event)" src="../../assets/Trash.svg" *ngIf="imgbank2"
+                        alt="">
+                    </div>
+
+                  </label>
+                </div>
+                <p class="email-address mt-5 ">Verification of email address is mandatory to proceed further.</p>
+                <p *ngIf="(uploadfileMessage && aadharbackUploaded && pancardUploaded)">internal server problem try again</p>
+                <div class="mb-3">
+                  <button class="btn btn-primary kyc-Btn" (click)="salaryContinue()" *ngIf="!showbtn"
+                    [disabled]="!salaryForm.valid">Continue</button>
+                  <button class="btn btn-primary kyc-Btn" (click)="salaryData()" *ngIf="showbtn"
+                    [disabled]="!(salaryForm.valid) && (imgname && imgback && imgbpan && imgbank1 && imgbank2 )===''">Continue</button>   
+                </div> 
+              </form>
+
+
+              <form [formGroup]="selfForm" *ngIf="!salary">
+                <div class="adharinfo">
+                  <label class="kyc-label">Aadhaar info</label>
+                </div>
+                <div class="section fileupload"
+                  [ngClass]="imgname ? 'uploaded' : !aadharFront ? 'fileupload' : 'notupload'"
+                  (click)="onAadhaarFront()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadInp"
+                      placeholder="Upload Aadhaar front" (change)="AdharFrontFile($event)"
+                      formControlName="adharfrontimg" accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadInp" class="imguploadText" *ngIf="!imgname">Upload Aadhaar front</p>
+                      <p #input id="uploadInp" class="afteruploaded" *ngIf="imgname" [title]="imgname">{{ imgname}}</p>
+                      <img class="imgcls" *ngIf="imgname" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgname" src="../../assets/UploadImg.svg" alt="">
+                      <img class="imgcls" (click)="removeAadharFront($event)" src="../../assets/Trash.svg" *ngIf="imgname"
+                        alt="">
+                    </div>
+
+                  </label>
+                </div>
+                <div class="section fileupload"
+                  [ngClass]="imgback ? 'uploaded' : !aadharBack ? 'fileupload' : 'notupload'" (click)="onAadhaarBack()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadback"
+                      placeholder="Upload Aadhaar back" (change)="AdharBackFile($event)" formControlName="adharbackimg"
+                      accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadback" class="imguploadText" *ngIf="!imgback">Upload Aadhaar Back</p>
+                      <p #input id="uploadback" class="afteruploaded" *ngIf="imgback" [title]="imgback">{{ imgback}}</p>
+                      <img class="imgcls" *ngIf="imgback" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgback" src="../../assets/UploadImg.svg" alt="">
+                      <img class="imgcls" (click)="removeAadharBack($event)" src="../../assets/Trash.svg" *ngIf="imgback"
+                        alt="">
+                    </div>
+
+                  </label>
+                </div>
+                <div class="hrr">
+                  <hr />
+                </div>
+                <div class="adharinfo">
+                  <label class="kyc-label">PAN info</label>
+                </div>
+                <div class="section fileupload" [ngClass]="imgbpan ? 'uploaded' : !panCard ? 'fileupload' : 'notupload'"
+                  (click)="onPanCard()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadpan"
+                      placeholder="Upload PAN Front" (change)="PanFrontFile($event)" formControlName="pancardimg"
+                      accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadpan" class="imguploadText" *ngIf="!imgbpan">Upload PAN Front</p>
+                      <p #input id="uploadpan" class="afteruploaded" *ngIf="imgbpan" [title]="imgbpan">{{ imgbpan}}</p>
+                      <img class="imgcls" *ngIf="imgbpan" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgbpan" src="../../assets/UploadImg.svg" alt="">
+                      <img class="imgcls" (click)="removePan($event)" src="../../assets/Trash.svg" *ngIf="imgbpan" alt="">
+                    </div>
+
+                  </label>
+                </div>
+                <div class="hrr">
+                  <hr />
+                </div>
+                <div class="adharinfo">
+                  <label class="kyc-label">Company documents</label>
+                </div>
+                <div class="section fileupload"
+                  [ngClass]="imgdocument1 ? 'uploaded' : !gstCertificate ? 'fileupload' : 'notupload'"
+                  (click)="onGst()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadocument1"
+                      placeholder="Upload bank Details" (change)="uploadGstCertificate($event)"
+                      formControlName="gstcertificateimg" accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadocument1" class="imguploadText" *ngIf="!imgdocument1">Upload GST certificate</p>
+                      <p #input id="uploadocument1" class="afteruploaded" *ngIf="imgdocument1" [title]="imgdocument1">{{imgdocument1}}</p>
+                      <img class="imgcls" *ngIf="imgdocument1" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgdocument1" src="../../assets/UploadImg.svg" alt="">
+                      <img class="imgcls" (click)="removeGst($event)" src="../../assets/Trash.svg" *ngIf="imgdocument1"
+                        alt="">
+                    </div>
+
+                  </label>
+                </div>
+                <div class="section fileupload"
+                  [ngClass]="imgdocument2 ? 'uploaded' : !incomeTax ? 'fileupload' : 'notupload'" (click)="onIncome()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadocuments2"
+                      placeholder="Upload PAN Front" (change)="uploadIncomeTax($event)" formControlName="incometaximg"
+                      accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadocuments2" class="imguploadText" *ngIf="!imgdocument2">Upload income tax return
+                      </p>
+                      <p #input id="uploadocuments2" class="afteruploaded" *ngIf="imgdocument2" [title]="imgdocument2">{{imgdocument2}}</p>
+                      <img class="imgcls" *ngIf="imgdocument2" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgdocument2" src="../../assets/UploadImg.svg" alt="">
+                      <img class="imgcls" (click)="removeIncome($event)" src="../../assets/Trash.svg" *ngIf="imgdocument2"
+                        alt="">
+                    </div>
+
+                  </label>
+                </div>
+                <div class="section fileupload"
+                  [ngClass]="imgdocument3 ? 'uploaded' : !incorporation ? 'fileupload' : 'notupload'"
+                  (click)="onIncorporation()">
+                  <label class="uploadlabel-Added">
+                    <input type="file" class="form-control uploadimg" #input id="uploadocuments2"
+                      placeholder="Upload PAN Front" (change)="uploadIncorporate($event)"
+                      formControlName="incorporationimg" accept="application/pdf,image/png,image/jpeg">
+                    <div class="inputimgName d-flex">
+                      <p for="uploadocuments3" class="imguploadText" *ngIf="!imgdocument3">Upload certificate of
+                        incorporation </p>
+                      <p #input id="uploadocuments3" class="afteruploaded" *ngIf="imgdocument3"[title]="imgdocument3">{{imgdocument3}}</p>
+                      <img class="imgcls" *ngIf="imgdocument3" src="../../assets/CheckCircle.svg">
+                      <img class="imgcls" *ngIf="!imgdocument3" src="../../assets/UploadImg.svg" alt="">
+                      <img class="imgcls" (click)="removeIncorporation($event)" src="../../assets/Trash.svg"
+                        *ngIf="imgdocument3" alt="">
+                    </div>
+
+                  </label>
+                </div>
+                <p class="email-address mt-5 ">Verification of email address is mandatory to proceed further.</p>
+                <p *ngIf="(uploadfileMessage && aadharbackUploaded && pancardUploaded)">internal server problem try again</p>
+                <div class="mb-3">
+                  <button class="btn btn-primary kyc-Btn" (click)="selfContinue()" [disabled]="!selfForm.valid" *ngIf="!showbtn"
+                    routerLink="/customer-details">Continue</button>
+                  <button class="btn btn-primary kyc-Btn" (click)="selfData()" *ngIf="showbtn"
+                    [disabled]="!(salaryForm.valid) && (imgname && imgback && imgbpan && imgdocument1 && imgdocument2 && imgdocument3 )===''">Continue</button>   
+                </div>
+              </form>
+            </mat-tab> -->
+          </mat-tab-group>
+        </div>
+
+      </div>
+
+
+      <div class="col-lg-6 rightColoumn" *ngIf="!customerDetails">
+        <div class="customerInfo mt-5 mb-5" *ngIf="!customerView">
+          <div class="row container cust-flex">
+            <div class="col-2">
+              <mat-icon class="backarrow" (click)="navigatepage()">keyboard_backspace</mat-icon>  
+            </div>
+            <div class="col-10">
+              <p class="customerstags">Add Customer</p>
+            </div>
+          </div>
+
+          <!-- <div class="details-flex container">
+            <img src="../../assets/profile pic -img.png" class="svg-img">
+            <div class="jane-details">
+              <p class="jane">{{selectedCustomerData.fullName}}</p>
+              <p class="pan-details" appPanMask [panMask]="selectedCustomerData.panNumber">{{selectedCustomerData.panNumber}}</p>
+            </div>
+            <p class="edit-details" (click)="navigateEditPage()">Edit Details</p>
+          </div> -->
+          <div class="row container selected-customer">
+            <div class="col-2">
+              <img src="../../assets/profile pic -img.png" class="svg-img">
+            </div>
+            <div class="col-6">
+              <p class="jane">{{customerDataInfo.fullName | titlecase}}</p>
+              <p class="pan-details" appPanMask [appMaskedNumber]="customerDataInfo.panNumber">{{customerDataInfo.panNumber}}</p>
+            </div>
+            <!-- <div class="col-4">
+              <p class="edit-details" (click)="navigateEditPage()" *ngIf="!selectedCustomerData.registrationCompleted === true">Edit Details</p>
+            </div> -->
+          </div>
+          <div class="customerdetails">
+            <div class="container sec-details">
+
+              <h2 class="cust-info">CUSTOMER INFORMATION</h2>
+              <p class="info">Full Name</p>
+              <p class="info-details">{{customerDataInfo.fullName | titlecase}}</p>
+              <p class="info">Date of Birth</p>
+              <p class="info-details">{{customerDataInfo.dateOfBirth}}</p>
+              <p class="info">Gender</p>
+              <p class="info-details">{{customerDataInfo.gender}}</p>
+              <p class="info">Phone Number</p>
+              <p class="info-details"><span class="code">+91</span>{{customerDataInfo.phoneNumber}}</p>
+              <p class="info">Aadhaar Number</p>
+              <p class="info-details" appPanMask [appMaskedNumber]="customerDataInfo.aadhaarNumber">{{customerDataInfo.aadharNumber}}</p>
+              <p class="info">PAN</p>
+              <p class="info-details" appPanMask [appMaskedNumber]="customerDataInfo.panNumber">{{customerDataInfo.panNumber}}</p>
+              <p class="info">Marital Status</p>
+              <p class="info-details">{{customerDataInfo.marital | titlecase}}</p>
+              
+
+              <hr class="section-hr">
+             
+              <!-- <div class="row">
+                <div class="col-6">
+                  <p class="cust-address">ADDRESS</p>
+                </div>
+                <div class="col-6">
+                  <p class="use-current">Use current location</p>
+                </div>
+              </div> -->
+              <!-- <div class="current-address-section"
+                *ngIf="selectedCustomerData.customerAddressDetails && selectedCustomerData.customerAddressDetails[0]">
+                <p class="info">Communication Address</p>
+                <p class="add-details">{{selectedCustomerData.customerAddressDetails ?
+                  selectedCustomerData.customerAddressDetails[0].addressLine1
+                  :''}},{{selectedCustomerData.customerAddressDetails[0].addressLine2}},{{selectedCustomerData.customerAddressDetails[0].city}},
+                </p>
+                <p class="address-details">{{selectedCustomerData.customerAddressDetails[0].state}} -
+                  {{selectedCustomerData.customerAddressDetails[0].pinCode}}</p>
+              </div> -->
+              <!-- <div class="current-address-section"
+                *ngIf="selectedCustomerData.customerAddressDetails && selectedCustomerData.customerAddressDetails[1]">
+                <p class="info">Permanent Address</p>
+                <p class="add-details">
+                  {{selectedCustomerData.customerAddressDetails[1].addressLine1}},{{selectedCustomerData.customerAddressDetails[1].addressLine2}},{{selectedCustomerData.customerAddressDetails[1].city}},
+                </p>
+                <p class="address-details">{{selectedCustomerData.customerAddressDetails[1].state}} -
+                  {{selectedCustomerData.customerAddressDetails[1].pinCode}}</p>
+              </div> -->
+              <!-- <hr class="section-hr"> -->
+
+              <div class="employement-details">
+                <h2 class="cust-info">EMPLOYMENT</h2>
+                <p class="info">Employment Type</p>
+                <p class="info-details" *ngIf="employeeDataInfo?.employmentType === 'SALARIEDEMPLOYEE'">Salaried Employee</p>
+                <p class="info-details" *ngIf="employeeDataInfo?.employmentType === 'SELFEMPLOYEE'">Self Employee</p>
+                <!-- <p class="info">{{ employeeDataInfo.employementDetails?.employmentType === 'SALARIEDEMPLOYEE' ? 'Company Name' : 'Type of employment' }}</p>
+                <p class="info-details">
+                  {{ employeeDataInfo.employementDetails?.employmentType === 'SALARIEDEMPLOYEE' ?
+                  employeeDataInfo.employementDetails?.salariedEmployeeDetails?.companyName :
+                  employeeDataInfo.employementDetails?.selfEmployeeDetails?.typeOfEmployement }}</p> -->
+                <div *ngIf="employeeDataInfo?.employmentType === 'SALARIEDEMPLOYEE'">
+                  <p class="info">Company Name</p>
+                  <p class="info-details">{{employeeDataInfo?.salariedEmployeeDetails?.companyName|titlecase}}</p>
+                </div>
+                <div *ngIf="employeeDataInfo?.employmentType === 'SELFEMPLOYEE'">
+                  <p class="info">Type of employment</p>
+                  <p class="info-details">{{employeeDataInfo?.selfEmployeeDetails?.typeOfEmployement|titlecase}}</p>
+                </div>
+
+                <p class="info">Primary Email</p>
+                <p class="info-details">
+                  {{ employeeDataInfo?.employmentType === 'SALARIEDEMPLOYEE' ?
+                  employeeDataInfo?.salariedEmployeeDetails?.primaryEmail :
+                  employeeDataInfo?.selfEmployeeDetails?.primaryEmail }}
+                </p>
+                    <!--  <span *ngIf="!emailVerification" class="pendingemailmsg">Pending</span></p> -->
+                <!-- <div *ngIf="!emailVerification" class="email-text">
+                  <mat-icon class="error">error_outline</mat-icon>
+                  <p class="verify-email mt-2">Please Verify Your Email</p>
+                </div> -->
+                <p class="info">Secondary Email</p>
+                <p class="info-details">
+                  {{ employeeDataInfo?.employmentType === 'SALARIEDEMPLOYEE' ?
+                  employeeDataInfo?.salariedEmployeeDetails?.secondaryEmail :
+                  employeeDataInfo?.selfEmployeeDetails?.secondaryEmail }}
+                </p>
+                <p class="info">{{ employeeDataInfo?.employmentType === 'SALARIEDEMPLOYEE' ? 'Monthly Income' : 'Annual Income' }}</p>
+                <p class="info-details">
+                  {{ employeeDataInfo?.employmentType === 'SALARIEDEMPLOYEE' ?
+                      '₹' + (employeeDataInfo?.salariedEmployeeDetails?.monthlyIncome | number) :
+                      '₹' + (employeeDataInfo?.selfEmployeeDetails?.annualIncome | number)}}
+                </p>
+                </div>
+              <!-- <hr class="section-hr">
+              <h2 class="cust-info">KYC DOCUMENTS</h2> -->
+
+                <!-- <div class="row">
+                  <div class="col-9">
+                    <p class="kyc-info">Aadhaar Front</p>
+                    <p class="kyc-info-details">{{imgname}} </p>
+                  </div>
+                  <div class="col-3">
+                    <img src="../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('aadhaarFront', aadharfrontUrl)">
+                  </div>
+                </div> -->
+                <!-- <div class="row">
+                  <div class="col-9">
+                    <p class="kyc-info">Aadhaar Back</p>
+                    <p class="kyc-info-details">{{imgback}}</p>
+                  </div>
+                  <div class="col-3">
+                    <img src="../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('aadhaarBack',aadharbackUrl)">
+                  </div>
+                </div> -->
+            
+                <!-- <div class="row">
+                  <div class="col-9">
+                    <p class="kyc-info">PAN Front</p>
+                    <p class="kyc-info-details">{{imgbpan}}</p>
+                  </div>
+                  <div class="col-3">
+                    <img src="../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('panFront', panUrl)">
+                  </div>
+                </div> -->
+
+              <!-- <div *ngIf="selectedCustomerData.employementDetails?.employmentType === 'SALARIEDEMPLOYEE'">
+                
+                <div class="row">
+                  <div class="col-9">
+                    <p class="kyc-info">Cancelled Cheque</p>
+                    <p class="kyc-info-details">{{imgbank1}}</p>
+                  </div>
+                  <div class="col-3">
+                    <img src="../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('cancelledCheque', bankChequeurl)">
+                  </div>
+                </div>
+
+                  <div class="row">
+                    <div class="col-9">
+                      <p class="kyc-info">Bank Statement</p>
+                      <p class="kyc-info-details">{{imgbank2}}</p>
+                    </div>
+                    <div class="col-3">
+                      <img src="../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('bankStatement', imgdocurl)">
+                    </div>
+                  </div>
+              </div> -->
+
+              <!-- <div *ngIf="selectedCustomerData.employementDetails?.employmentType === 'SELFEMPLOYEE'">
+                <div class="row">
+                  <div class="col-9">
+                    <p class="kyc-info">GST Certificate</p>
+                    <p class="kyc-info-details">{{imgdocument1}}</p>
+                  </div>
+                  <div class="col-3">
+                    <img src="../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('gst', gstdocurl)">
+                  </div>
+                </div>
+                  <div class="row">
+                    <div class="col-9">
+                      <p class="kyc-info">Income Tax Return</p>
+                      <p class="kyc-info-details">{{ imgdocument2}}</p>
+                    </div>
+                    <div class="col-3">
+                      <img src="../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('incometax', certUrl)">
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-9">
+                      <p class="of-incorporation">Certificate of Incorporation</p>
+                      <p class="kyc-info-details">{{ imgdocument3 }}</p>
+                    </div>
+                    <div class="col-3">
+                      <img src="../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('certificateincorporation', Itrdocurl)">
+                    </div>
+                  </div>
+              </div> -->
+
+              </div>
+                <div class="mt-5 mb-5 container">
+                  <!-- <div *ngIf="!emailVerification" class="email-text">
+                    <mat-icon class="error">error_outline</mat-icon>
+                    <p class="verify-email mt-2">Please Verify Your Email</p>
+                  </div> -->
+                  <button class="btn btn-primary customer-details-btn" (click)="createProposalContinue()" [disabled]="BtnDisable">Continue</button>
+                </div>
+              </div>
+            </div>
+           <!-- search view customer -->
+           <div class="customerInfo mt-5 mb-5" *ngIf="customerView">
+            <div class="row container cust-flex">
+              <div class="col-2">
+                <mat-icon class="backarrow" (click)="navigatepage()" *ngIf="!customerViewData">keyboard_backspace</mat-icon>
+                <mat-icon class="backarrow" (click)="navigateToAllcustomer()"  *ngIf="customerViewData">keyboard_backspace</mat-icon>
+              </div>
+              <div class="col-10" *ngIf="!customerViewData">
+                <p class="customerstags">Add Customer</p>
+              </div>
+            </div>
+            <!-- <div class="details-flex container">
+              <img src="../../assets/profile pic -img.png" class="svg-img">
+              <div class="jane-details">
+                <p class="jane">{{selectedCustomerData.fullName}}</p>
+                <p class="pan-details" appPanMask [panMask]="selectedCustomerData.panNumber">{{selectedCustomerData.panNumber}}</p>
+              </div>
+              <p class="edit-details" (click)="navigateEditPage()">Edit Details</p>
+            </div> -->
+            <div class="row container selected-customer">
+              <div class="col-2">
+                <img *ngIf="customerProfile == null" src="../../assets/profile pic -img.png"  class="svg-img">
+                <img  *ngIf="selectedCustomerData?.userDocuments?.s3Url !== null && customerProfile !== null" src="{{customerProfile}}"  class="svg-img">
+              </div>
+              <div class="col-5">
+                <p class="jane">{{selectedCustomerData.fullName | titlecase}}</p>
+                <p class="pan-details" appPanMask [appMaskedNumber]="selectedCustomerData.panNumber">{{selectedCustomerData.panNumber}}</p>
+              </div>
+              <div class="col-5">
+                <p class="edit-details" *ngIf="selectedCustomerData.customerOnBoardingStatus === 'EMAIL_VERIFICATION_PENDING' && customerViewData" (click)="navigateEditPage(selectedCustomerData)">Delete Customer</p>
+              </div>
+            </div>
+            <div class="customerdetails">
+              <div class="container sec-details">
+  
+                <h2 class="cust-info">CUSTOMER INFORMATION</h2>
+                <p class="info">Full Name</p>
+                <p class="info-details">{{selectedCustomerData.fullName | titlecase}}</p>
+                <p class="info">Date of Birth</p>
+                <p class="info-details">{{selectedCustomerData.dateOfBirth}}</p>
+                <p class="info">Gender</p>
+                <p class="info-details">{{selectedCustomerData.gender}}</p>
+                <p class="info">Phone Number</p>
+                <!-- <p class="info-details"><span class="code">+91</span>{{selectedCustomerData.phoneNumber}}</p> -->
+                <p class="code">+91 <span class="info-details"  appPanMask [appMaskedNumber]="selectedCustomerData.phoneNumber">{{selectedCustomerData.phoneNumber}}</span></p>
+                <p class="info">Aadhaar Number</p>
+                <p class="info-details" appPanMask [appMaskedNumber]="selectedCustomerData.aadhaarNumber">{{selectedCustomerData.aadhaarNumber}}</p>
+                <p class="info">PAN</p>
+                <p class="info-details" appPanMask [appMaskedNumber]="selectedCustomerData.panNumber">{{selectedCustomerData.panNumber}}</p>
+                <p class="info">Marital Status</p>
+                <p class="info-details">{{selectedCustomerData.maritalStatus | titlecase}}</p>
+                
+  
+                <hr class="section-hr">
+               
+                <div class="row">
+                  <div class="col-6">
+                    <p class="cust-address">ADDRESS</p>
+                  </div>
+                  <!-- <div class="col-6">
+                    <p class="use-current">Use current location</p>
+                  </div> -->
+                </div>
+                <!-- <div class="current-address-section"
+                  *ngIf="selectedCustomerData.customerAddressDetails && selectedCustomerData.customerAddressDetails[0]">
+                  <p class="info">Current Address</p>
+                  <p class="add-details">{{selectedCustomerData.customerAddressDetails ?
+                    selectedCustomerData.customerAddressDetails[0].addressLine1
+                    :''}},{{selectedCustomerData.customerAddressDetails[0].addressLine2}},{{selectedCustomerData.customerAddressDetails[0].city}},
+                  </p>
+                  <p class="address-details">{{selectedCustomerData.customerAddressDetails[0].state}} -
+                    {{selectedCustomerData.customerAddressDetails[0].pinCode}}</p>
+                </div> -->
+                
+                <div class="current-address-section">
+                  <div class="d-flex">
+                    <p class="info">Communication Address</p>
+                    <p class="pending-address" *ngIf="selectedCustomerData.customerAddressDetails == null"> Pending</p>
+                  </div>
+                  <p class="add-details" *ngIf="selectedCustomerData.customerAddressDetails && selectedCustomerData.customerAddressDetails[1]">{{selectedCustomerData.customerAddressDetails ?
+                    selectedCustomerData.customerAddressDetails[1].addressLine1
+                    :''}},{{selectedCustomerData.customerAddressDetails[1].addressLine2}},{{selectedCustomerData.customerAddressDetails[1].city}},
+                  </p>
+                  <p class="address-details" *ngIf="selectedCustomerData.customerAddressDetails && selectedCustomerData.customerAddressDetails[1]">{{selectedCustomerData.customerAddressDetails[1].state}} -
+                    {{selectedCustomerData.customerAddressDetails[1].pinCode}}</p>
+                   
+                </div>
+                <div class="current-address-section">
+                  <div class="d-flex">
+                    <p class="info">Permanent Address</p>
+                    <p class="pending-addrss" *ngIf="selectedCustomerData.customerAddressDetails == null"> Pending</p>
+                  </div>
+                  <p class="add-details" *ngIf="selectedCustomerData.customerAddressDetails && selectedCustomerData.customerAddressDetails[2]">
+                    {{selectedCustomerData.customerAddressDetails[2].addressLine1}},{{selectedCustomerData.customerAddressDetails[2].addressLine2}},{{selectedCustomerData.customerAddressDetails[2].city}},
+                  </p>
+                  <p class="address-details" *ngIf="selectedCustomerData.customerAddressDetails && selectedCustomerData.customerAddressDetails[2]">{{selectedCustomerData.customerAddressDetails[2].state}} -
+                    {{selectedCustomerData.customerAddressDetails[2].pinCode}}</p>
+                </div>
+             <hr class="section-hr">
+  
+                <div class="employement-details">
+                  <h2 class="cust-info">EMPLOYMENT</h2>
+                  <p class="info">Employment Type</p>
+                  <p class="info-details" *ngIf="selectedCustomerData.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE'">Salaried Employee</p>
+                  <p class="info-details" *ngIf="selectedCustomerData.employmentDetails?.employmentType === 'SELFEMPLOYEE'">Self Employee</p>
+                  <!-- <p class="info">{{ selectedCustomerData.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE' ? 'Company Name' : 'Type of employment' }}</p>
+                  <p class="info-details" *ngIf="selectedCustomerData.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE'"> {{selectedCustomerData.employmentDetails?.salariedEmployeeDetails?.companyName | titlecase}}</p>
+                  <p class="info-details" *ngIf="selectedCustomerData.employmentDetails?.employmentType === 'SELFEMPLOYEE'"> {{selectedCustomerData.employmentDetails?.salariedEmployeeDetails?.companyName | titlecase}}</p> -->
+                  <div *ngIf="selectedCustomerData.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE'">
+                     <p class="info">Company Name</p>
+                     <p class="info-details"> {{selectedCustomerData.employmentDetails?.salariedEmployeeDetails?.companyName | titlecase}}</p>
+                  </div>
+                  <div *ngIf="selectedCustomerData.employmentDetails?.employmentType === 'SELFEMPLOYEE'">
+                    <p class="info">Type of employment</p>
+                    <p class="info-details"> {{selectedCustomerData.employmentDetails?.selfEmployeeDetails?.typeOfEmployement | titlecase}}</p>
+                 </div>
+                  <p class="info">Primary Email</p>
+                  <div class="row">
+                    <div class="col-8">
+                      <p class="info-details" [ngClass]="{ 'info-details-not-verified': emailStatus === 'EMAIL_VERIFICATION_PENDING' }">
+                        {{ selectedCustomerData.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE' ?
+                           selectedCustomerData.employmentDetails?.salariedEmployeeDetails?.primaryEmail :
+                           selectedCustomerData.employmentDetails?.selfEmployeeDetails?.primaryEmail }}
+                        <span class="email-verified-Status" *ngIf="emailStatus === 'EMAIL_VERIFICATION_COMPLETE'"> | Verified</span>
+                        <span class="emailStatus" *ngIf="emailStatus === 'EMAIL_VERIFICATION_PENDING'"> | Not verified</span>  </p>
+                    </div>
+                    <div class="col-4">
+                        <b class="send-again" *ngIf="emailStatus === 'EMAIL_VERIFICATION_PENDING'" (click)="sendCustomerEmail()">Send again</b>
+                    </div>
+                  </div>
+                   
+                
+                  
+                  <p class="info">Secondary Email</p>
+                  <p class="info-details">
+                  {{ selectedCustomerData.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE' ?
+                  selectedCustomerData.employmentDetails?.salariedEmployeeDetails?.secondaryEmail :
+                  selectedCustomerData.employmentDetails?.selfEmployeeDetails?.secondaryEmail }}
+                  </p>
+                  <p class="info">{{ selectedCustomerData.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE' ? 'Monthly Income' : 'Annual Income' }}</p>
+                  <p class="info-details">
+                    {{ selectedCustomerData.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE' ?
+                        '₹' + (selectedCustomerData.employmentDetails?.salariedEmployeeDetails?.monthlyIncome | number) :
+                        '₹' + (selectedCustomerData.employmentDetails?.selfEmployeeDetails?.annualIncome | number)}}
+                  </p>
+                  
+                  </div>
+  <div>
+                <hr class="section-hr">
+                <h2 class="cust-info">KYC DOCUMENTS</h2>
+  
+                  <!-- <div class="row">
+                    <div class="col-9">
+                      <p class="kyc-info">Aadhaar Front</p>
+                      <p class="kyc-info-details">{{imgname}} </p>
+                    </div>
+                    <div class="col-3">
+                      <img src="../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('aadhaarFront', aadharfrontUrl)">
+                    </div>
+                  </div> -->
+                  <!-- <div class="row">
+                    <div class="col-9">
+                      <p class="kyc-info">Aadhaar Back</p>
+                      <p class="kyc-info-details">{{imgback}}</p>
+                    </div>
+                    <div class="col-3">
+                      <img src="../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('aadhaarBack',aadharbackUrl)">
+                    </div>
+                  </div> -->
+              
+                  <!-- <div class="row">
+                    <div class="col-9">
+                      <p class="kyc-info">PAN Front</p>
+                      <p class="kyc-info-details">{{imgbpan}}</p>
+                    </div>
+                    <div class="col-3">
+                      <img src="../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('panFront', panUrl)">
+                    </div>
+                  </div> -->
+  
+                <div *ngIf="selectedCustomerData.employmentDetails?.employmentType === 'SALARIEDEMPLOYEE'">
+                  
+                  <div class="row">
+                    <div class="col-9">
+                      <p class="kyc-info">Bank Statement</p>
+                      <p class="kyc-info-details" *ngIf = "selectedCustomerData.userDocuments !== null">{{imgbank1}}</p>
+                    </div>
+                    <div class="col-3">
+                      <img src="../../assets/Eye.svg" class="eye-show" *ngIf = "selectedCustomerData.userDocuments !== null"
+                      (click)="kycdocuments('cancelledCheque', imgdocurl)">
+                      <p class="pendingemailmsg" *ngIf = "selectedCustomerData.userDocuments == null">pending</p>
+                    </div>
+                  </div>
+  
+                    <!-- <div class="row">
+                      <div class="col-9">
+                        <p class="kyc-info">Bank Statement</p>
+                        <p class="kyc-info-details">{{imgbank2}}</p>
+                      </div>
+                      <div class="col-3">
+                        <img src="../../assets/Eye.svg" class="eye-show" (click)="kycdocuments('bankStatement', imgdocurl)">
+                      </div>
+                    </div> -->
+                </div>
+  
+                <div *ngIf="selectedCustomerData.employmentDetails?.employmentType === 'SELFEMPLOYEE'">
+                  <div class="row">
+                    <div class="col-9">
+                      <p class="kyc-info">GST Certificate</p>
+                      <p class="kyc-info-details" *ngIf = "selectedCustomerData.userDocuments !== null">{{imgdocument1}}</p>
+                    </div>
+                    <div class="col-3">
+                      <img src="../../assets/Eye.svg" class="eye-show"  *ngIf = "selectedCustomerData.userDocuments !== null"
+                       (click)="kycdocuments('gst', gstdocurl)">
+                      <p class="pendingemailmsg" *ngIf = "selectedCustomerData.userDocuments == null">pending</p>
+                    </div>
+                  </div>
+                    <div class="row">
+                      <div class="col-9">
+                        <p class="kyc-info">Income Tax Return</p>
+                        <p class="kyc-info-details" *ngIf = "selectedCustomerData.userDocuments !== null">{{ imgdocument2}}</p>
+                      </div>
+                      <div class="col-3">
+                        <img src="../../assets/Eye.svg" class="eye-show"  *ngIf = "selectedCustomerData.userDocuments !== null"
+                        (click)="kycdocuments('incometax', certUrl)">
+                        <p class="pendingemailmsg" *ngIf = "selectedCustomerData.userDocuments == null">pending</p>
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="col-9">
+                        <p class="of-incorporation">Certificate of Incorporation</p>
+                        <p class="kyc-info-details" *ngIf = "selectedCustomerData.userDocuments !== null">{{ imgdocument3 }}</p>
+                      </div>
+                      <div class="col-3">
+                        <img src="../../assets/Eye.svg" class="eye-show"  *ngIf = "selectedCustomerData.userDocuments !== null"
+                        (click)="kycdocuments('certificateincorporation', Itrdocurl)">
+                        <p class="pendingemailmsg" *ngIf = "selectedCustomerData.userDocuments == null">pending</p>
+                      </div>
+                    </div>
+                    </div>
+                </div>
+  
+                </div>
+                <div class="mt-5 mb-5 container">
+                  <button class="btn btn-primary customer-details-btn" [disabled]="emailStatus==='EMAIL_VERIFICATION_PENDING'" *ngIf="!customerViewData" (click)="navigateToCreateProposalPage()">Continue</button>
+                </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>

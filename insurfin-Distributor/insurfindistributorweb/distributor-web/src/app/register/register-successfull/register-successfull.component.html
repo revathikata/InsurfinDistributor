@@ -1,0 +1,55 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+            
+
+            <div class="col-lg-6 right-column" *ngIf="true">
+                <div class="distrbtr-welcome container">
+                    <!-- <mat-icon class="leftArrw">keyboard_backspace</mat-icon> -->
+                    <div class="register-success-img">
+                        <img *ngIf="onBoardingStatus == 'APPROVAL_PENDING'" src="../../../assets/register-pending-img.svg" width="250px" height="250px" >
+                        <img *ngIf="onBoardingStatus == 'APPROVAL_APPROVED'" src="../../../assets/register-approved-img.svg" width="250px" height="250px" >
+                        <img *ngIf="onBoardingStatus == 'APPROVAL_REJECTED'" src="../../../assets/register-reject-img.svg" width="250px" height="250px" >
+                    </div>
+
+                    <div class="container">
+                        <h1 class="application" *ngIf="onBoardingStatus == 'APPROVAL_PENDING'">Registration Succesful!</h1>
+                            <h1 class="congratulations" *ngIf="onBoardingStatus == 'APPROVAL_APPROVED'">Congratulations!</h1>
+                            <h1 class="congratulations" *ngIf="onBoardingStatus == 'APPROVAL_REJECTED'">Unsuccessful</h1>
+                        <p class="notify" *ngIf="onBoardingStatus == 'APPROVAL_PENDING'"> We will notify you about any change in application status within the next <b>
+                                24 hours.</b></p>
+                                
+                                <p class="for" *ngIf="onBoardingStatus == 'APPROVAL_APPROVED'">Your application for registering as an associate has been approved.</p>
+                                <p class="for" *ngIf="onBoardingStatus == 'APPROVAL_REJECTED'">Your application has been rejected due to the following reason:</p>
+                        <div class="approveBtn startReg d-flex" >
+                            <p class="apprvStats">Approval status</p>
+                            <!-- <p class="pendingReg">Pending</p> -->
+                            <p class="pendingReg" *ngIf="onBoardingStatus == 'APPROVAL_PENDING'"> Pending</p>
+                            <p class="approvedReg" *ngIf="onBoardingStatus == 'APPROVAL_APPROVED'"> Approved</p>
+                            <p class="RejectReg" *ngIf="onBoardingStatus == 'APPROVAL_REJECTED'"> Rejected</p>
+                                
+                        </div>
+                        <div *ngIf="onBoardingStatus == 'APPROVAL_REJECTED'">
+                            <div class="rejectedComment">
+                            <h4 class="mismatch mt-2">Error</h4>
+                            <p  class="pendingmsg" *ngIf="!(pendingmessage?.comment)">There are discrepancies in your registration. Please try again later.</p>
+                        <p class="pendingmsg" *ngIf="(pendingmessage?.comment)">{{pendingmessage?.comment}}</p>
+                    </div>
+                        <!-- <button class="btn btn-primary get mt-5" 
+                            (click)="editBtn()">Edit Details</button> -->
+                        </div>
+                            <div class="get-started mb-3" *ngIf="onBoardingStatus == 'APPROVAL_APPROVED'">
+                                <button class="btn btn-primary get" (click)="getStarted()">Get Started</button>
+                            </div>
+                    </div>
+                </div>
+               
+            </div>
+
+        </div>
+    </div>
+</div>

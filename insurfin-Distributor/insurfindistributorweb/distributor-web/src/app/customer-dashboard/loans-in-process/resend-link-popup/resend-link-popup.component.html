@@ -1,0 +1,18 @@
+<div class="popup">
+    <div class="resentlink">
+        <img src="../../../../assets/linkimg.svg">
+        <h5 class="praposal">Proposal Link</h5>
+        <mat-icon mat-dialog-close>close</mat-icon>
+        </div>
+       
+    <div class="link-content">
+        <span>Sharing related information here</span>
+        <p>{{resenLink}}</p>
+    </div>
+    <div class="resentlinkbtn">
+        <div *ngIf="isCopied" class="copied-message">
+            Link copied!
+        </div>
+    <button (click)="copyUrl()">Copy Link</button>
+</div>
+</div>

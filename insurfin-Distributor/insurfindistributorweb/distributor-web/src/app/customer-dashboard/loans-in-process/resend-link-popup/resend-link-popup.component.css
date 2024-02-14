@@ -1,0 +1,72 @@
+.popup{
+    height: 257px;
+    width: 329px;
+    left: 35px;
+    top: 297px;
+    border-radius: 24px;    
+}
+.resentlink{
+    display: flex;
+    margin-left: 22px;
+    margin-top: 36px;
+    
+}
+.resentlink img{
+    margin-bottom: 12px;
+}
+.praposal{
+    margin-left: 7px;
+font-size: 18px;
+font-weight: 700;
+color: #041427;
+}
+.mat-icon {
+    -webkit-user-select: none;
+    user-select: none;
+    background-repeat: no-repeat;
+    display: inline-block;
+    fill: currentColor;
+    height: 24px;
+    width: 24px;
+    overflow: hidden;
+    margin-left: 78px;
+    color: #0358A8;
+}
+.link-content p{
+    width: 200px;
+    color: 
+    #255AAB;
+font-size: 14px;
+font-weight: 400;
+margin-left: 28px;
+}
+.link-content span{
+    color: 
+    #7D848D;
+    margin-left: 28px;
+}
+.resentlinkbtn button{
+    height: 52px;
+width: 281px;
+left: 0px;
+top: 0px;
+border-radius: 12px;
+background-color: #005AAA;
+color:#FFFFFF;
+font-size: 16px;
+border: none;
+margin-left: 28px;
+margin-top: 35px;
+}
+.link-content{
+    margin-top: 30px;
+}
+::ng-deep.mat-mdc-dialog-container {
+    /* margin-left: 99%; */
+    margin-top: 20px;
+}
+.copied-message{
+    /* position: relative;
+    top: 33px; */
+    text-align: center;
+}

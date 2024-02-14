@@ -1,0 +1,64 @@
+<div class="morepopup" class="container">
+
+    <div class="more-actions">
+        <h1 class="more-actions">More Actions</h1>
+        <mat-icon class="bottomcrossicon" (click)="close()">close</mat-icon>
+    </div >
+    <div class="top container">
+        <!-- <div *ngIf="proposalViewList.innerDisplayStatus == 'Documents Pending'">
+        <div class="bottompopupicons" >
+            <img src="../../../../assets/UploadSimple.svg">
+            <p class="icons-ptags" (click)="uploadDocuments()">Upload documents</p>
+        </div>
+        <div class="horizontal-line">
+            <hr>
+        </div>
+        <div class="bottompopupicons">
+            <img src="../../../../assets/Bell.svg">
+            <p class="icons-ptags" (click)="opendialouge()">Remind now for Documentation</p>
+        </div>
+        <div class="horizontal-line">
+            <hr>
+        </div>
+    </div> -->
+        <div class="bottompopupicons" >
+            <img src="../../../../assets/linkimg.svg">
+            <p class="icons-ptags" (click)="resendLink()">Resend Link</p>
+        </div>
+        <div class="horizontal-line" >
+            <hr>
+        </div>
+        <div class="bottompopupicons" (click)="viewDetails()">
+            <img src="../../../../assets/AddressBook.svg">
+            <p class="icons-ptags">View details</p>
+        </div>
+        <!-- <div class="horizontal-line">
+            <hr>
+        </div>
+        <div class="bottompopupicons">
+            <img src="../../../../assets/phone-img.svg.svg">
+            <p class="icons-ptags">Call Customer</p>
+        </div> -->
+        <div class="horizontal-line">
+            <hr>
+        </div>
+        <!-- <div class="bottompopupicons">
+            <img src="../../../../assets/PencilSimple.svg">
+            <p class="icons-ptags">Edit Details</p>
+        </div>
+        <div class="horizontal-line">
+            <hr>
+        </div> -->
+        <div class="bottompopupicons" (click)="deleteproposal()">
+            <img src="../../../../assets/Trash.svg">
+            <p class="icons-ptags">Delete Proposal</p>
+        </div>
+        <!-- <div class="horizontal-line">
+            <hr>
+        </div>
+        <div class="bottompopupicons" (click)="deletecustomer()">
+            <img src="../../../../assets/Trash (1).svg">
+            <p class="icons-ptags delete" >Delete Customer</p>
+        </div> -->
+    </div>
+</div>

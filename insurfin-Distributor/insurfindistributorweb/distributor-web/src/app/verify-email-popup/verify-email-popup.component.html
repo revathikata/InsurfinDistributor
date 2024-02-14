@@ -1,0 +1,19 @@
+<div class="emailaddress">
+    <div class="main-flex">
+        <img src="../../assets/CircleWavy.svg" class="wavy">
+        <p class="verify">Verify Email</p>
+        <mat-icon  mat-dialog-close class="close">close</mat-icon>
+    </div>
+    <p class="please-check">Please check and confirm, verification link  sent to the customer's email ID -</p>
+    <div>
+        <div class="main-flex">
+            <p class="email">{{primaryEmail}}</p>
+            <!-- <img src="../../assets/PencilSimple.svg" class="edit" (click)="editEmail()"> -->
+            <p *ngIf="errorMsg">{{errorMsg}}</p>
+        </div>
+        <div class="btn-flex mb-3 mt-3">
+            <!-- <button class="btn edit-email-btn" (click)="editEmail()">Edit email</button> -->
+            <button class="btn send-again-btn" (click)="sendAgain()">Send again</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+
+            <div class="col-lg-6 rightcoloumn">
+                <div class="distrbtr-welcome mb-4">
+                    <div class="section1">
+                        <div class="container main-content" *ngIf="isValid">
+                            <div>
+                                <h1>Welcome!<span>👋</span></h1>
+                                <p class="your">Enter your email id to proceed</p>
+                            </div>
+
+                            <form [formGroup]="EmailValidation">
+                                <div class="section">
+                                    <label class="phn">Email</label>
+                                    <div class="input-wrapper">
+                                        <input type="email" class="form-control inpPhn" formControlName="email"
+                                            placeholder="Enter email"  (input)="clearErrorMessage()" #input>
+                                    </div>
+                                    <div>
+                                        <small style="color: red;" *ngIf="errorCodeMsg">{{errorCodeMsg}}</small>
+                                    </div>
+
+                                    <small
+                                        *ngIf="(EmailValidation.controls['email'].touched   && EmailValidation.get('email')?.hasError('required'))"
+                                        style="color: red;">Email is required</small>
+                                    <small
+                                        *ngIf="(EmailValidation.controls['email'].touched   && EmailValidation.get('email')?.hasError('pattern'))"
+                                        style="color: red;">Enter a Valid Email</small>
+
+                                </div>
+                               <div>
+                                <div>
+                                    <button  class="btn btn-primary btn1" 
+                                        [disabled]="!EmailValidation.valid" (click)="emailContinue()">Continue</button>
+                                </div>
+                                <div>
+                                </div>
+                               </div>
+                            </form>
+
+                        </div>
+
+                        <div class="container verify-otp-page " *ngIf="!isValid">
+
+                            <mat-icon class="leftArrw"
+                                (click)="navigationtoMobileNumber()">keyboard_backspace</mat-icon>
+
+                            <p class="verify">Verify email</p>
+                            <div class="edit">
+                                <p class="otp-mb">We sent the OTP to <b>{{userEmail}}</b></p>
+                                <!-- <img class="pencil" src="../../assets/PencilSimple.svg"
+                                    (click)="showInitialAuthSection()"> -->
+                            </div>
+
+                            <p class="the-code">The code will expire in 15 minutes</p>
+                            <p class="code">Didn't get the code? <span (click)="sendAgain()"
+                                    [ngClass]="{'disabled': isDisabled, 'sendColor': !isDisabled}">Send again <span  *ngIf="this.isDisabled">in
+                                        <b>{{minutes}}:{{seconds|number:'2.0'}}</b></span></span></p>
+                            <div class="otpclss mt-5">
+                                <ngx-otp-input [config]="otpInputConfig" (otpChange)="handleOtp($event)"
+                                    (fill)="handleFill($event)">
+                                </ngx-otp-input>
+                            </div>
+                            <div>
+                                <small class="errorMessage">{{OtpErrorCodeMsg}}</small>
+                            </div>
+                            <button class="btn btn-primary btn2"  [disabled]="!otpfill"
+                                (click)="EmailOtpValid()">Continue</button>
+                            
+                        </div>
+                    </div>
+                   
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

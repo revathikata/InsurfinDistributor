@@ -1,0 +1,551 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+
+            <div class="col-lg-6 rightColoumn">
+                <div class="customer-welcome">
+                    <div *ngIf="delinquentApplications">
+                        <div class="toolbar container">
+                            <div class="home">
+                                <mat-icon class="backspace" routerLink="/distributor-dashboard">keyboard_backspace</mat-icon>
+                                <p class="my-home">Home</p>
+                            </div>
+                            <div>
+                                <p class="d-applications">Delinquent Applications </p>
+                            </div>
+                            <div>
+                                <div class="dropdown">
+                                    <ng-select class="loansinprocess" [items]="dropdown" [clearable]="false" [searchable]="false"
+                                        placeholder="This week" (change)="onDropdownChange()"
+                                        [(ngModel)]="selectedOption" bindLabel="" bindValue="">
+                                        <ng-template ng-option-tmp let-item="item">{{item}}
+                                            <span *ngIf="selectedOption === item" class="checkmark"><mat-icon class="maticonclass">check_circle</mat-icon></span>
+                                        </ng-template>
+                                    </ng-select>
+                                </div>
+                                <div *ngIf="selectedOption === 'Custom'" class="daterangec">
+                                    <!-- at-label>Enter a date range</mat-label> -->
+                                    <p class="datetag">{{ getFormattedDateRange() }}</p>
+                                    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                                        <input matStartDate formControlName="start" placeholder="Start date"
+                                            (dateInput)="formatDateEvent($event.target.value, 'start')" />
+    
+                                        <input matEndDate formControlName="end" placeholder="End date"
+                                            (dateInput)="formatDateEvent($event.target.value, 'end')" />
+    
+                                    </mat-date-range-input>
+    
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    
+                                    <!-- <p class="datetag">{{ getFormattedDateRange() }}</p> -->
+                                    <mat-date-range-picker #picker>
+    
+                                        <mat-date-range-picker-actions>
+                                            <span matDateRangePickerApply><mat-icon class="relayicon"
+                                                    (click)="reset()">replay</mat-icon></span>
+                                            <button mat-button matDateRangePickerCancel class="cancel"
+                                                (click)="reset()">Cancel</button>
+                                            <button class="apply" matDateRangePickerApply>Apply</button>
+                                        </mat-date-range-picker-actions>
+    
+                                    </mat-date-range-picker>
+    
+                                    <!-- Custom date picker component -->
+    
+                                </div>
+                                <div class="calenderimg">
+                                    <img src="../../assets/calender.svg">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cards-section">
+                            <div class="row cards cards-flex">
+                                <div class="col-9">
+                                    <p  class="policy-dtls">Single EMI outstanding</p>
+                                    <p  class="policydtls-num">{{singleEmiStatus.length}}</p>
+                                </div>
+                                <div class="col-3">
+                                    <img src="../../assets/CaretRight.svg" class="right-arrow" (click)="singleEmi()">
+                                </div>
+                            </div>
+                            <div class="row cards cards-flex">
+                                <div class="col-9">
+                                    <p class="policy-dtls">Double EMI outstanding</p>
+                                    <p class="policydtls-num">{{doubleEmiStatus.length}}</p>
+                                </div>
+                                <div class="col-3">
+                                    <img src="../../assets/CaretRight.svg" class="right-arrow" (click)="doubleEmi()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="total-loans">
+                            <div class="cards cards-flex" (click)="policyCancellation()">
+                                <p class="policy-dtls">Policy cancellation initiated</p>
+                                <div class="arrow-flex">
+                                    <p class="policydtls-num">00</p>
+                                    <img src="../../assets/CaretRight.svg" class="right-arrow">
+                                </div>
+                            </div>
+                            <div class="cards  cards-flex" (click)="policyCancelledByInsurer()">
+                                <p class="policy-dtls">Policy cancelled by insurer</p>
+                                <div class="arrow-flex">
+                                    <p class="policydtls-num">00</p>
+                                    <img src="../../assets/CaretRight.svg" class="right-arrow">
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="policy-cancellation">
+                            <div class="row cards-policy-cancel card-policy-flex">
+                                <div class="col-10">
+                                    <p  class="policy-initiated">Policy cancellation initiated</p>
+                                    <p  class="policy-cancellation-num">{{policyCancelInitiate.length}}</p>
+                                </div>
+                                <div class="col-2">
+                                    <img src="../../assets/CaretRight.svg" class="policycancel-right-arrow" (click)="policyCancellation()">
+                                </div>
+                            </div>
+                            <div class="row cards-policy-cancel card-policy-flex">
+                                <div class="col-10">
+                                    <p class="policy-initiated">Policy cancelled by insurer</p>
+                                    <p class="policy-cancellation-num">{{policyCancelInsurer.length}}</p>
+                                </div>
+                                <div class="col-2">
+                                    <img src="../../assets/CaretRight.svg" class="policycancel-right-arrow" (click)="policyCancelledByInsurer()">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <p class="all-app">All {{deliquentData.length}} delinquent applications</p>
+                        </div>
+                        <div class="container scroll">
+                            <div class="mb-3">
+                                <mat-accordion>
+                                    <mat-expansion-panel *ngFor="let data of deliquentData; let i=index" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                                <div>
+                                                    <div class="customer-flex">
+                                                        <div>
+                                                            <img src="../../../assets/profile pic -img.png" class="distributor-profile">
+                                                        </div>
+                                                        <div class="section">
+                                                            <p class="customer-name">{{data.customerName}}</p>
+                                                            <p class="gold-policy">{{data.policyProductName}}</p>
+                                                            <p class="double-emi" [ngStyle]="{'color':data?.displayStatus ==='Double EMI outstanding'? '#C52727':'#E59510'}">{{data.displayStatus}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="loans-flex">
+                                                        <div class="loans">
+                                                            <span class="loan-span">Loan</span><span class="ten-lacs"> ₹ {{(+data.loanAmount||0).toLocaleString('en-IN')}}
+                                                                </span>
+                                                        </div>
+                                                        <div class="emi-flex">
+                                                            <span class="emis-outstnd">Due on</span><span
+                                                                class="five-num"> {{data.emisDueDate}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="emis-flex">
+                                                        <div class="loans">
+                                                            <span class="loan-span">EMIs Paid</span>
+                                                            <span class="five-num" *ngIf="data.emisOutstanding == null"> 0</span>
+                                                            <span class="five-num" *ngIf="data.emisOutstanding !== null"> {{data.emisOutstanding}}</span>
+                                                        </div>
+                                                        <div class="emi-flex">
+                                                            <span class="emis-outstnd">Emis Outstanding:</span>
+                                                            <span class="five-num" *ngIf="data.emisOutstanding == null"> 0</span>
+                                                            <span class="five-num" *ngIf="data.emisOutstanding !== null"> {{data.emisPaid}}</span>
+                                                        </div>
+                                                    </div>
+                                                  
+                                                </div>
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <div>
+                                            <div>
+                                                <hr class="horizontal-line">
+                                            </div>
+                                            <div class="more-flex">
+                                                <div>
+                                                    <p class="cust-props">Customer Proposal Number</p>
+                                                    <p class="date">{{data.proposalNumber}}</p>
+                                                </div>
+                                                <img src="../../assets/three-dots.svg" class="vert" mat-raised-button (click)="openBottomSheet()">
+                                            </div>
+                                            <div>
+                                                <p class="cust-props">Policy Date</p>
+                                                <p class="date">{{data.policyCreatedDate}}</p>
+                                            </div>
+                                            <div>
+                                                <p class="cust-props">Premium Amount (₹)</p>
+                                                <p class="date">₹{{(+data.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                            </div>
+                                            <div>
+                                                <p class="cust-props">EMI Amount (₹)</p>
+                                                <p class="date">₹{{(+data.emiAmount||0).toLocaleString('en-IN')}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="call-customer">
+                                            <div>
+                                                <button class="btn btn-primary call-cust" *ngIf="data.displayStatus === 'Single EMI outstanding' || data.displayStatus === 'Double EMI outstanding'" (click)="remindNow(data)">Remind Now</button>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-primary call-cust" *ngIf="data.displayStatus === 'Policy cancellation initiated' || data.displayStatus === 'Policy cancelled'">Call Customer</button>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-outline-primary view-dtls" (click)="viewProposalDetails(data)">View Details</button>
+                                            </div>
+                                        </div>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                            </div>
+                        </div>
+                    </div>
+                   <!-- single Emi outstanding section -->
+                    <div *ngIf="singleEmiOutstanding" class="container">
+                        <div class="key-flex">
+                            <mat-icon class="key-backspace" (click)="singleEmibackspace()">keyboard_backspace</mat-icon>
+                            <p class="de-applications">Delinquent Applications </p>
+                        </div>
+
+                        <div>
+                            <p class="single">Single EMI Outstanding</p>
+                        </div>
+                          
+                        <div>
+                            <p class="showing">Showing {{singleEmiStatus.length}} results</p>
+                        </div>
+
+                        <div class="mb-3 proposal-scrolling">
+                            <mat-accordion *ngFor="let singleEmi of singleEmiStatus; let i=index">
+                                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            <div>
+                                                <div class="customer-flex">
+                                                    <div>
+                                                        <img src="../../../assets/profile pic -img.png" class="distributor-profile">
+                                                    </div>
+                                                    <div class="section">
+                                                        <p class="customer-name">{{singleEmi.customerName}}</p>
+                                                        <p class="gold-policy">{{singleEmi.policyProductName}}</p>
+                                                        <p class="single-emi">{{singleEmi.displayStatus}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="loans-flex">
+                                                    <div class="loans">
+                                                        <span class="loan-span">Loan</span><span class="ten-lacs">₹ {{(+singleEmi.loanAmount||0).toLocaleString('en-IN')}}
+                                                            </span>
+                                                    </div>
+                                                    <div class="emi-flex">
+                                                        <span class="emis-outstnd">Due on</span><span
+                                                            class="five-num"> {{singleEmi.emisDueDate}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="emis-flex">
+                                                    <div class="loans">
+                                                        <span class="loan-span">EMIs Paid</span>
+                                                        <span class="five-num" *ngIf="singleEmi.emisOutstanding == null"> 0</span>
+                                                        <span class="five-num" *ngIf="singleEmi.emisOutstanding !== null"> {{singleEmi.emisOutstanding}}</span>
+                                                    </div>
+                                                    <div class="emi-flex">
+                                                        <span class="emis-outstnd">Emis Outstanding:</span>
+                                                        <span class="five-num" *ngIf="singleEmi.emisOutstanding == null"> 0</span>
+                                                        <span class="five-num" *ngIf="singleEmi.emisOutstanding !== null"> {{singleEmi.emisPaid}}</span>
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+                                        </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                    <div>
+                                        <div>
+                                            <hr class="horizontal-line">
+                                        </div>
+                                        <div class="more-flex">
+                                            <div>
+                                                <p class="cust-props">Customer Proposal Number</p>
+                                                <p class="date">{{singleEmi.proposalNumber}}</p>
+                                            </div>
+                                            <img src="../../assets/three-dots.svg" class="vert" mat-raised-button (click)="openBottomSheet()">
+
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">Policy Date</p>
+                                            <p class="date">{{singleEmi.policyCreatedDate}}</p>
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">Premium Amount (₹)</p>
+                                            <p class="date">₹{{(+singleEmi.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">EMI Amount (₹)</p>
+                                            <p class="date">₹{{(+singleEmi.emiAmount||0).toLocaleString('en-IN')}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="call-customer">
+                                        <div>
+                                            <button class="btn btn-primary call-cust" (click)="remindNow(singleEmi)">Remind Now</button>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-outline-primary view-dtls"  (click)="viewProposalDetails(singleEmi)">View Details</button>
+                                        </div>
+                                    </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </div>
+                    </div>
+             <!-- double Emi outStanding section -->
+                    <div *ngIf="doubleEmiOutstanding" class="container">
+                        <div class="key-flex">
+                            <mat-icon class="key-backspace" (click)="doubleEmibackspace()">keyboard_backspace</mat-icon>
+                            <p class="de-applications">Delinquent Applications </p>
+                        </div>
+
+                        <div>
+                            <p class="single">Double EMI Outstanding</p>
+                        </div>
+                          
+                        <div>
+                            <p class="showing">Showing {{doubleEmiStatus.length}} results</p>
+                        </div>
+
+                        <div class="mb-3 proposal-scrolling">
+                            <mat-accordion *ngFor="let doubleEmi of doubleEmiStatus; let i=index">
+                                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            <div>
+                                                <div class="customer-flex">
+                                                    <div>
+                                                        <img src="../../../assets/profile pic -img.png" class="distributor-profile">
+                                                    </div>
+                                                    <div class="section">
+                                                        <p class="customer-name">{{doubleEmi.customerName}}</p>
+                                                        <p class="gold-policy">{{doubleEmi.policyProductName}}</p>
+                                                        <p class="double-emi">{{doubleEmi.displayStatus}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="loans-flex">
+                                                    <div class="loans">
+                                                        <span class="loan-span">Loan</span><span class="ten-lacs">₹ {{(+doubleEmi.loanAmount||0).toLocaleString('en-IN')}}
+                                                            </span>
+                                                    </div>
+                                                    <div class="emi-flex">
+                                                        <span class="emis-outstnd">Due on</span><span
+                                                            class="five-num"> {{doubleEmi.emisDueDate}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="emis-flex">
+                                                    <div class="loans">
+                                                        <span class="loan-span">EMIs Paid</span>
+                                                        <span class="five-num" *ngIf="doubleEmi.emisOutstanding == null"> 0</span>
+                                                        <span class="five-num" *ngIf="doubleEmi.emisOutstanding !== null"> {{doubleEmi.emisOutstanding}}</span>
+                                                    </div>
+                                                    <div class="emi-flex">
+                                                        <span class="emis-outstnd">Emis Outstanding:</span>
+                                                        <span class="five-num" *ngIf="doubleEmi.emisOutstanding == null"> 0</span>
+                                                        <span class="five-num" *ngIf="doubleEmi.emisOutstanding !== null"> {{doubleEmi.emisPaid}}</span>
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+                                        </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                    <div>
+                                        <div>
+                                            <hr class="horizontal-line">
+                                        </div>
+                                        <div class="more-flex">
+                                            <div>
+                                                <p class="cust-props">Customer Proposal Number</p>
+                                                <p class="date">{{doubleEmi.proposalNumber}}</p>
+                                            </div>
+                                            <img src="../../assets/three-dots.svg" class="vert" mat-raised-button (click)="openBottomSheet()">
+
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">Policy Date</p>
+                                            <p class="date">{{doubleEmi.policyCreatedDate}}</p>
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">Premium Amount (₹)</p>
+                                            <p class="date">₹{{(+doubleEmi.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">EMI Amount (₹)</p>
+                                            <p class="date">₹{{(+doubleEmi.emiAmount||0).toLocaleString('en-IN')}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="call-customer">
+                                        <div>
+                                            <button class="btn btn-primary call-cust" (click)="remindNow(doubleEmi)">Remind Now</button>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-outline-primary view-dtls" (click)="viewProposalDetails(doubleEmi)">View Details</button>
+                                        </div>
+                                    </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </div>
+
+                    </div>
+            <!-- policy Cancellation Initiated section -->
+                    <div *ngIf="policyCancellationInitiated" class="container">
+                        <div class="key-flex">
+                            <mat-icon class="key-backspace" (click)="policycancelledbackspace()">keyboard_backspace</mat-icon>
+                            <p class="de-applications">Delinquent Applications </p>
+                        </div>
+
+                        <div>
+                            <p class="single">Policy Cancellation Initiated</p>
+                        </div>
+                          
+                        <div>
+                            <p class="showing">Showing {{policyCancelInitiate.length}} results</p>
+                        </div>
+
+                         <div class="mb-3 proposal-scrolling">
+                            <mat-accordion *ngFor="let policyInitiate of policyCancelInitiate">
+                                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            <div>
+                                                <div class="customer-flex">
+                                                    <div>
+                                                        <img src="../../../assets/profile pic -img.png" class="delinquent-distributor-profile">
+                                                    </div>
+                                                    <div class="customer-info">
+                                                        <p class="customer-name">{{policyInitiate.customerName}}</p>
+                                                        <p class="gold-policy">{{policyInitiate.policyProductName}}</p>
+                                                        <p class="single-emi">{{policyInitiate.displayStatus}}</p>
+                                                    </div>
+                                                </div>
+                                                    <div class="loan">
+                                                        <span class="loan-span">Loan</span><span class="ten-lacs">₹ {{(+policyInitiate.loanAmount||0).toLocaleString('en-IN')}}
+                                                            </span>
+                                                    </div>
+                                            </div>
+                                        </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                    <div>
+                                        <div>
+                                            <hr class="horizontal-line">
+                                        </div>
+
+                                            <div>
+                                                <p class="cust-props">Customer Proposal Number</p>
+                                                <p class="date">{{policyInitiate.proposalNumber}}</p>
+                                            </div>
+                                           
+                                        <div>
+                                            <p class="cust-props">Policy Date</p>
+                                            <p class="date">{{policyInitiate.policyCreatedDate}}</p>
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">Premium Amount (₹)</p>
+                                            <p class="date">₹{{(+policyInitiate.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="call-customer">
+                                        <div>
+                                            <button class="btn btn-primary call-cust">Call Customer</button>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-outline-primary view-dtls" (click)="viewProposalDetails(policyInitiate)">View Details</button>
+                                        </div>
+                                    </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </div>
+                    </div>
+            <!-- policy Cancelled Insurer section-->
+                    <div *ngIf="policyCancelledInsurer" class="container">
+                        <div class="key-flex">
+                            <mat-icon class="key-backspace" (click)="policyinsurerbackspace()">keyboard_backspace</mat-icon>
+                            <p class="de-applications">Delinquent Applications </p>
+                        </div>
+
+                        <div>
+                            <p class="single">Policy Cancelled by Insurer</p>
+                        </div>
+                          
+                        <div>
+                            <p class="showing">Showing {{policyCancelInsurer.length}} results</p>
+                        </div>
+
+                        <div class="mb-3 proposal-scrolling">
+                            <mat-accordion *ngFor="let policyCancel of policyCancelInsurer; let i=index">
+                                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            <div>
+                                                <div class="customer-flex">
+                                                    <div>
+                                                        <img src="../../../assets/profile pic -img.png" class="delinquent-distributor-profile">
+                                                    </div>
+                                                    <div class="customer-info">
+                                                        <p class="customer-name">{{policyCancel.customerName}}</p>
+                                                        <p class="gold-policy">{{policyCancel.policyProductName}}</p>
+                                                        <p class="single-emi">{{policyCancel.displayStatus}}</p>
+                                                    </div>
+                                                </div>
+                                                    <div class="loan">
+                                                        <span class="loan-span">Loan</span><span class="ten-lacs">₹ {{(+policyCancel.loanAmount||0).toLocaleString('en-IN')}}
+                                                            </span>
+                                                    </div>
+                                            </div>
+                                        </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                    <div>
+                                        <div>
+                                            <hr class="horizontal-line">
+                                        </div>
+
+                                            <div>
+                                                <p class="cust-props">Customer Proposal Number</p>
+                                                <p class="date">{{policyCancel.proposalNumber}}</p>
+                                            </div>
+                                           
+                                        <div>
+                                            <p class="cust-props">Policy Date</p>
+                                            <p class="date">{{policyCancel.policyCreatedDate}}</p>
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">Premium Amount (₹)</p>
+                                            <p class="date">₹{{(+policyCancel.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="call-customer">
+                                        <div>
+                                            <button class="btn btn-primary call-cust">Call Customer</button>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-outline-primary view-dtls" (click)="viewProposalDetails(policyCancel)">View Details</button>
+                                        </div>
+                                    </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </div>
+                    </div>
+
+                </div>
+             
+            </div>
+        </div>
+    </div>
+</div>

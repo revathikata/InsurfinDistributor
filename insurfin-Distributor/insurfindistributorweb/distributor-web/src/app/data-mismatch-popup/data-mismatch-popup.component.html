@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-3">
+            <p class="head"><img src="../../assets/WarningCircle (1).svg"> <b>Data Mismatch</b></p>
+            <mat-icon class="matIcon" (click)="OnCloseICon()">close</mat-icon>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <p class="content">{{dialogData.errorMsg}}</p>
+    </div>
+    <div class="row mt-2">
+        <button class="close-button" (click)="OnCloseICon()">close</button>
+    </div>
+</div>

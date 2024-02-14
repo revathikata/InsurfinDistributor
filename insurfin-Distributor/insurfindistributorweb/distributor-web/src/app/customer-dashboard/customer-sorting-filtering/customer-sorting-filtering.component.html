@@ -1,0 +1,77 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+
+ 
+            <div class="col-lg-6 rightColoumn">
+                <div class="distrbtr-welcome">
+                    <div *ngIf="customerSorting">
+
+                       <div class="row toolbar container">
+                        <div class="col-3">
+                            <mat-icon class="menu" (click)="sidebar()">menu</mat-icon>  
+                        </div>
+                        <div class="col-7">
+                            <p class="my-home">All customers</p>
+                        </div>
+                        <!-- <div class="col-2">
+                            <mat-icon class="notifications" (click)="notificationPage()">notifications_none</mat-icon>
+                        </div> -->
+                       </div>
+
+                        <div class="row container sort-filter-flex mt-4">
+                            <div class="col-6">
+                                <p class="customers">Customers</p>
+                            </div>
+                            <div class="col-3">
+                                <div (click)="openBottomSheet('sort')">
+                                    <img src="../../assets/arrow-down.svg" class="sort-img">
+                                    <span class="sort">Sort</span>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div (click)="openBottomSheet('filter')">
+                                    <img src="../../assets/Sliders.svg" class="slider-img">
+                                    <span class="sort">Filter</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-wrapper container">
+                            <input type="search" placeholder="Search by customer name" class="form-control search"[(ngModel)]="searchText" >
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="customer-list scroll" >
+                            <div class="searchList">
+                                    <ul *ngFor="let data of customerSearch ">
+                                        <li class="cursor-pointer">
+                                            <div class="row">
+                                            <div class="col-2">
+                                                <img src="../../assets/profile pic -img.png" class="distributor-profile"
+                                                 *ngIf="!data.userDocuments || data.userDocuments.length === 0">
+                                                <ng-container *ngFor="let document of data.userDocuments">
+                                                    <img *ngIf="document.documentType === 'PHOTO'" 
+                                                         [src]="document.s3Url" 
+                                                         class="distributor-profile">
+                                                  </ng-container>
+                                            </div>
+                                            <div class="col-7"><p class="fullname">{{data.fullName}}</p>
+                                            <p class="emailPending" *ngIf="data.emailLinkVerified === false">Email Verification Pending</p>
+                                            <p class="regPending" *ngIf="data.emailLinkVerified === true && data?.registrationCompleted === false">Registration Pending</p>
+                                            <p class="regCompleted" *ngIf="data.emailLinkVerified === true &&  data?.registrationCompleted === true">Registration Completed</p>
+                                        </div> 
+                                            <div class="col-3"><img (click)="arrowClick(data.uuid)" src="../../../assets/CaretRight.svg"></div>
+                                        </div>
+                                          </li>
+                                      <hr class="hr-line">
+                                    </ul>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

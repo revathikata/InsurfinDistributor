@@ -1,0 +1,185 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+            <div class="col-lg-6 rightColoumn">
+                <div class="customer-welcome">
+                    <!-- we have : menu, home , notifications, Summary -->
+                    <div class="toolbar">
+                        <div class="menu-home container">
+                            <mat-icon class="menu" (click)="openMenu()">menu</mat-icon>
+                            <p class="my-home">Profile</p>
+                            <img class="dots" src="../../assets/dots-three-img.svg"
+                                (click)="openBottomSheet('dotsmenu')">
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="details">
+                        </div>
+
+                        <div class="flex container">
+                            <div>
+                                <img class="distributor-profile" src="{{distributorProfilePic}}" >
+                            </div>
+                            <div class="content">
+                                <b class="john">{{distributorData.distributorName}}</b>
+                                <p class="graycolor" [appMaskedNumber]="distributorData.panNumber" appPanMask>
+                                    {{distributorData.panNumber}}</p>
+                            </div>
+                            <div class="camera">
+                                <img src="../../../../assets/Camera.svg" (click)="openBottomSheet('camera')">
+                            </div>
+
+                        </div>
+                        <div class=" container margin-dtls">
+                            <div class="praposal">
+                                <h4>GENERAL DETAILS</h4>
+                            </div>
+                            <div class="group1">
+                                <h5>Full Name</h5>
+                                <h6 class="bold">{{distributorData.distributorName}}</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>Date of Birth</h5>
+                                <h6 class="bold">{{distributorData.dateOfBirth}}</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>Gender</h5>
+                                <h6 class="bold">{{distributorData.gender}}</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>Phone Number</h5>
+                                <h6 class="bold"><span>+91</span>{{distributorData.phoneNumber}}</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>Email Address</h5>
+                                <h6 class="bold">{{distributorData.email}}</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>Aadhaar Number</h5>
+                                <h6 class="bold" [appMaskedNumber]="distributorData.aadhaarNumber" appPanMask>
+                                    {{distributorData.aadhaarNumber}}</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>PAN</h5>
+                                <h6 class="bold" [appMaskedNumber]="distributorData.panNumber" appPanMask>
+                                    {{distributorData.panNumber}}</h6>
+                            </div>
+                            <div>
+                                <hr>
+                            </div>
+
+
+                            <mat-accordion>
+                                <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                            <!-- <p class="address">ADDRESS & GST info</p>
+                                <p class="editdetails" (click)="navigateToRegister()">Edit Details</p> -->
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <p class="address">ADDRESS & GST info</p>
+                                                </div>
+                                                <div class="col-6">
+                                                    <!-- <p class="editdetails" (click)="navigateToRegister()">Edit Details
+                                                    </p> -->
+
+                                                </div>
+                                            </div>
+                                        </mat-panel-title>
+                                    </mat-expansion-panel-header>
+
+                                    <div class="section">
+                                        <p class="distributor-address">Communication Address</p>
+                                        <p class="address-info">{{distributorData.address?.[0]?.addressLine1}},
+                                            {{distributorData.address?.[0]?.addressLine2}},
+                                            {{distributorData.address?.[0]?.city}},{{distributorData.address?.[0]?.state}}
+                                            - {{distributorData.address?.[0]?.pinCode}}</p>
+                                    </div>
+
+                                    <div class="section">
+                                        <p class="distributor-address">GST Number (if applicable)</p>
+                                        <p class="address-info">{{ distributorData?.address?.[0]?.gstNumber !== null ?
+                                            distributorData?.address?.[0]?.gstNumber : 'not provided' }}</p>
+                                    </div>
+
+                                    <div class="section">
+                                        <p class="distributor-address">Permanent Address</p>
+                                        <p class="address-info">{{distributorData.address?.[1]?.addressLine1}},
+                                            {{distributorData.address?.[1]?.addressLine2}},
+                                            {{distributorData.address?.[1]?.city}},{{distributorData.address?.[1]?.state}}
+                                            - {{distributorData.address?.[1]?.pinCode}}</p>
+                                    </div>
+
+                                </mat-expansion-panel>
+                            </mat-accordion>
+
+                            <!-- <div>
+                                <hr>
+                            </div> -->
+
+
+
+                            <!-- <mat-accordion>
+                                <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                            <p class="kyc-documents">KYC DOCUMENTS</p>
+                                        </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div class="row kyc-flex">
+                                        <div class="col-10">
+                                            <p class="kyc-info">Aadhaar Front</p>
+                                            <p class="kyc-info-details">{{distributorAadharFront}}</p>
+                                        </div>
+                                        <div class="col-2">
+                                            <img src="../../../../assets/Eye.svg" class="eye-show"
+                                                (click)="kycDocuments('distributorAadharFront' , distributorAadharFrontUrl)">
+                                        </div>
+                                    </div>
+                                    <div class="row  kyc-flex">
+                                        <div class="col-10">
+                                            <p class="kyc-info">Aadhaar Back</p>
+                                            <p class="kyc-info-details">{{distributorAadharBack}}</p>
+                                        </div>
+                                        <div class="col-2">
+                                            <img src="../../../../assets/Eye.svg" class="eye-show"
+                                                (click)="kycDocuments('distributorAadharBack' , distributorAadharBackUrl)">
+                                        </div>
+                                    </div>
+                                    <div class="row  kyc-flex">
+                                        <div class="col-10">
+                                            <p class="kyc-info">PAN Front</p>
+                                            <p class="kyc-info-details">{{distributorPanFront}}</p>
+                                        </div>
+                                        <div class="col-2">
+                                            <img src="../../../../assets/Eye.svg" class="eye-show"
+                                                (click)="kycDocuments('distributorPanFront' , distributorPanFrontUrl)">
+                                        </div>
+                                    </div>
+                                    <div class="row  kyc-flex">
+                                        <div class="col-10">
+                                            <p class="kyc-info">Cancelled Cheque</p>
+                                            <p class="kyc-info-details">{{distributorCancelledCheque}}</p>
+                                        </div>
+                                        <div class="col-2">
+                                            <img src="../../../../assets/Eye.svg" class="eye-show"
+                                                (click)="kycDocuments('distributorCancelledCheque' , distributorCancelledChequeUrl)">
+                                        </div>
+                                    </div>
+
+                                </mat-expansion-panel>
+                            </mat-accordion> -->
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

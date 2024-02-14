@@ -1,0 +1,138 @@
+.emailaddress {
+  width: 329px;
+}
+
+.main-flex {
+  display: flex;
+}
+
+.verify {
+  margin-left: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23px;
+  color: #041427;
+  margin-top: 28px;
+}
+
+.wavy {
+  margin-top: 15px;
+  margin-left: 20px;
+}
+
+.close {
+  margin-top: 28px;
+  color: #0358A8;
+  margin-left: 125px;
+}
+
+.please-check {
+  margin-top: 20px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #7D848D;
+  margin-left: 27px;
+}
+
+.email {
+  margin-left: 27px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  color: #0358A8;
+  margin-top: -11px;
+}
+
+.edit {
+  margin-top: -21px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+label {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #7D848D;
+  margin-left: 10px;
+}
+
+.inp-email {
+  background: #FFFFFF;
+  border: 1px solid #7D848D;
+  border-radius: 12px;
+  outline: none;
+  box-shadow: none !important;
+  width: 281px;
+  height: 44px;
+}
+
+.section {
+  margin-top: 15px;
+  margin-left: 22px;
+}
+
+.cancel-btn {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 21px;
+  text-align: center;
+  color: #005AAA;
+  border: 1px solid #005AAA;
+  box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+  border-radius: 12px;
+  width: 134px;
+  height: 48px;
+  background-color: #FFFFFF;
+  margin-left: 22px;
+  margin-top: 10px;
+}
+
+.sendlink-btn {
+  margin-left: 10px;
+  margin-top: 10px;
+  background: #005AAA;
+  box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+  border-radius: 12px;
+  width: 134px;
+  height: 48px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 21px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.btn-flex {
+  display: flex;
+}
+
+.red-class {
+  color: red;
+}
+
+.edit-email-btn {
+  width: 134px;
+  height: 52px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #005AAA;
+  background-color: #FFFFFF !important;
+  border: 1px solid #005AAA;
+  border-radius: 12px;
+}
+.send-again-btn{
+  width: 290px;
+  height: 52px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #FFFFFF;
+  background-color: #005AAA !important;
+  border-radius: 12px;
+}
+
+.btn-flex{
+  display: flex;
+  justify-content: space-evenly;
+}

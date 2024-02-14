@@ -1,0 +1,67 @@
+.error {
+    color: #C42728;
+    position: absolute;
+}
+
+::ng-deep.mdc-dialog--open .mdc-dialog__container {
+    width: 344px;
+}
+
+.please-confirm {
+    margin-left: 35px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #041427;
+    margin-top: 10px;
+}
+.delete-praposal{
+    color: #7D848D;
+    font-size: 14px;
+    font-weight: 400;
+    width: 304px;
+    margin-top: -30px;
+}
+.yesbtn{
+    margin-left: 54%;
+    background-color: #C52727;
+    width: 134px;
+    height: 52px;
+    border-radius: 12px;
+    margin-top: -60px;
+    margin-bottom: 10px;
+    color: #FFFFFF!important;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+}
+.cancelbtn{
+    width: 134px;
+    margin-top: -11px;
+    border: 1px solid #005AAA; 
+    height: 52px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    color: #005AAA !important;
+    background-color: white !important;
+    font-size: 16px;
+    font-weight: 700;
+    /* color: #005AAA;  */
+}
+
+.closeicon{
+    color: #0358A8;
+    cursor: pointer;
+}
+.belongingpraposal{
+    width: 363px;
+    margin-top: -30px;
+}
+.check-circle{
+    position: absolute;
+    color: #48B16E;
+}
+::ng-deep.mdc-dialog__surface {
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+}

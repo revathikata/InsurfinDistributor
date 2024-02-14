@@ -1,0 +1,259 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+
+            <div class="col-lg-6 rightColoumn">
+                <div class="customer-welcome" *ngIf="loansRejected">
+                    <div class="toolbar container">
+                        <div class="home">
+                            <mat-icon class="backspace"
+                                routerLink="/distributor-dashboard">keyboard_backspace</mat-icon>
+                            <p class="my-home">Home</p>
+                        </div>
+                        <div class="loans-rejected-flex">
+                            <div>
+                                <p class="d-applications">Loans Rejected</p>
+                            </div>
+                            <div>
+                                <ng-select class="loansdata" [items]="dropdown" [clearable]="false" [searchable]="false"
+                                    (change)="onDropdownChange()" [(ngModel)]="selectedOption" bindLabel=""
+                                    bindValue="">
+                                    <ng-template ng-option-tmp let-item="item">{{item}}
+                                        <span *ngIf="selectedOption === item" class="checkmark"><mat-icon
+                                                class="maticonclass">check_circle</mat-icon></span>
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                            <div *ngIf="selectedOption === 'Custom'" class="daterange">
+                                <!-- at-label>Enter a date range</mat-label> -->
+                                <p class="datetags">{{ getFormattedDateRange() }}</p>
+                                <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                                    <input matStartDate formControlName="start" placeholder="Start date"
+                                        (dateInput)="formatDateEvent($event.target.value, 'start')" />
+
+                                    <input matEndDate formControlName="end" placeholder="End date"
+                                        (dateInput)="formatDateEvent($event.target.value, 'end')" />
+
+                                </mat-date-range-input>
+
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+
+                                <!-- <p class="datetags">{{ getFormattedDateRange() }}</p> -->
+                                <mat-date-range-picker #picker>
+
+                                    <mat-date-range-picker-actions>
+                                        <span matDateRangePickerApply><mat-icon class="relayicon" (click)="reset()">replay</mat-icon></span>
+                                        <button mat-button matDateRangePickerCancel class="cancel" (click)="reset()">Cancel</button>
+                                        <button class="apply" matDateRangePickerApply>Apply</button>
+                                    </mat-date-range-picker-actions>
+
+                                </mat-date-range-picker>
+
+                                <!-- Custom date picker component -->
+
+                            </div>
+
+
+
+
+                            <!-- <div *ngIf="selectedOption !== 'Custom'" class="result">
+
+                                {{ startDate + ' - ' + endDate }}
+
+                            </div> -->
+                        </div>
+                        <div class="calenderimg1">
+                            <img src="../../assets/calender.svg">
+                        </div>
+                        <div class="datetag-flex">
+                            <p class="amounttext1">Amount: ₹ {{ loansRejectedTotal | number }} /-</p>
+                        </div>
+                    </div>
+                    <!-- <div>
+                        <p class="all-reject">All {{getTotalcount()}} rejected loans</p>
+                    </div>  -->
+                    <div class="mb-3 scroll">
+                        <mat-accordion *ngFor="let proposal of filteredCustomerList; let i=index">
+                            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                        <div class="customer-profile">
+                                            <div class="customer-flex">
+                                                <div>
+                                                    <img src="../../assets/profile pic -img.png" class="distributor-profile">
+                                                </div>
+                                                <div class="section">
+                                                    <p class="customer-name">{{proposal.customerName}}</p>
+                                                    <p class="gold-policy">{{proposal.policyProductName}}</p>
+                                                    <p class="loan-disbursed">{{proposal.displayStatus}} </p>
+                                                    <!-- <p class="double-emi">Loan rejected</p> -->
+                                                </div>
+                                            </div>
+                                            <div class="loans-flex">
+                                                <div class="loans">
+                                                    <span class="loan-span">Loan</span><span class="ten-lacs">₹ {{proposal?.premiumAmount}}
+                                                        </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div>
+                                    <div>
+                                        <hr class="horizontal-line">
+                                    </div>
+                                    <div>
+                                        <p class="cust-props">Customer Proposal Number</p>
+                                        <p class="date">{{proposal?.proposalNumber}}</p>
+                                    </div>
+
+                                    <div>
+                                        <p class="cust-props">Policy Date</p>
+                                        <p class="date">{{proposal?.displayDate | date:'dd.MM.yyyy'}}</p>
+                                    </div>
+                                    <div>
+                                        <p class="cust-props">Premium Amount (₹)</p>
+                                        <p class="date">₹{{proposal?.premiumAmount}}</p>
+                                    </div>
+                                </div>
+                                <div class="call-customer">
+                                    <div>
+                                        <button class="btn btn-primary call-cust">Call Customer</button>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-outline-primary view-dtls"
+                                            (click)="viewProposalDetails(proposal)">View Details</button>
+                                    </div>
+                                </div>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+                </div>
+
+                <div class="customer-welcome" *ngIf="rejectedDetails" id="rejectView">
+                    <div class="morevert-flex">
+                        <mat-icon class="back-arrw" (click)="backSpace()">keyboard_backspace</mat-icon>
+                        <p class="pol-dtls">Rejected Policy Details</p>
+                        <mat-icon class="vert">more_vert</mat-icon>
+                        <!-- <input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)"> -->
+                    </div>
+                    <div class="container">
+                        <div class="edit-customer-flex">
+                            <div>
+                                <img class="edit-customer" src="../../assets/profile pic -img.png" class="distributor-profile">
+                            </div>
+                            <div class="anitha-flex">
+                                <p class="anitha-name">-----</p>
+                                <p class="policy-gold">------------</p>
+                                <p class="loan-disbursed">-------------</p>
+                            </div>
+                            <div>
+                                <img class="phone-img" src="../../assets/phone-img.svg">
+                            </div>
+                        </div>
+                        <div class="edit-proposal container">
+                            <div>
+                                <p class="prpsl-dtls">PROPOSAL DETAILS</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Proposer Name</p>
+                                <p class="ani-name">-----------</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Proposal Number</p>
+                                <p class="ani-name">----------</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Proposer Aadhaar</p>
+                                <p class="ani-name">--------</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Proposer PAN</p>
+                                <p class="ani-name">-----------</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">EMIs Outstanding</p>
+                                <p class="ani-name">-------</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">EMIs Paid</p>
+                                <p class="ani-name">-----</p>
+                            </div>
+                            <div>
+                                <hr>
+                            </div>
+                            <div>
+                                <p class="prpsl-dtls">INSURER DETAILS</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Insurer</p>
+                                <p class="ani-name">---------------------</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Phone Number</p>
+                                <p class="ani-name">+91 -------------</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Address</p>
+                                <p class="address-name">------------------------------------</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Date</p>
+                                <p class="ani-name">-------------------</p>
+                            </div>
+                            <div>
+                                <hr>
+                            </div>
+                            <div>
+                                <p class="prpsl-dtls">POLICY DETAILS</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Policy Product Name</p>
+                                <p class="ani-name">------------</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Premium Amount (₹)</p>
+                                <p class="ani-name">₹xxxxxx</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Policy Tenure</p>
+                                <p class="ani-name">0 years</p>
+                            </div>
+                            <div>
+                                <hr>
+                            </div>
+                            <div>
+                                <p class="prpsl-dtls">PROPOSAL STATUS</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Proposal Status</p>
+                                <p class="ani-name loan-successfully">------------</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Documenation</p>
+                                <div class="pdf-error">
+                                    <mat-icon class="error-outline">error_outline</mat-icon>
+                                    <p class="ani-name pdf">Policy PDF not uploaded</p>
+                                    <p class="upload-now">Upload Now</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

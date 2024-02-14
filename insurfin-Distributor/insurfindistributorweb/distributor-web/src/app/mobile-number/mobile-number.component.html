@@ -1,0 +1,133 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+
+            <div class="col-lg-6 rightcoloumn">
+                <div class="distrbtr-welcome mb-4">
+                    <div class="section1" *ngIf="!mobileVerifiedpage">
+                        <div class="container main-content" *ngIf="isValid">
+                            <mat-icon *ngIf='isValid' class="leftArrw" (click)="navigateBackArrow()">keyboard_backspace</mat-icon>
+                            <div>
+                                <h1>Welcome!<span>👋</span></h1>
+                                <p class="your">Enter your phone number to proceed</p>
+                            </div>
+
+                            <form [formGroup]="loginForm">
+                                <div class="section" *ngIf="userSignUp">
+                                    <label class="phn">Name</label>
+                                    <div class="input-wrapper">
+                                        <input type="tel" class="form-control inpPhn dist-name" required formControlName="name"
+                                            placeholder="Enter Name">
+                                    </div>
+                                    <small
+                                        *ngIf="loginForm.controls['name'].touched && loginForm.get('name')?.hasError('required')"
+                                        style="color: red;">Name is required</small>
+                                    <small
+                                        *ngIf="loginForm.controls['name'].touched && loginForm.get('name')?.hasError('pattern')"
+                                        style="color: red;">Enter Valid Name</small>
+                                </div>
+                                <div class="section">
+                                    <label class="phn">Phone number</label>
+                                    <div class="input-wrapper">
+                                        <input type="tel" class="form-control inpPhn numberField" formControlName="phnnum"
+                                            placeholder="Enter phone number" (input)="clearErrorMessage()" #input
+                                            maxlength="10">
+                                        <span>{{ input.value && isNumber(input.value) ? '+91 ' : '' }}</span>
+                                    </div>
+                                    <div>
+                                    </div>
+
+                                    <small
+                                        *ngIf="(loginForm.controls['phnnum'].touched   && loginForm.get('phnnum')?.hasError('required'))"
+                                        style="color: red;">Phone Number is required</small>
+                                    <small
+                                        *ngIf="(loginForm.controls['phnnum'].touched   && loginForm.get('phnnum')?.hasError('pattern'))"
+                                        style="color: red;">Enter a Valid 10 digit number</small>
+
+                                </div>
+                                <small style="color: red;" *ngIf="errorMessage">{{errorMessage}}</small>
+                                <div>
+                                    <div>
+                                        <button *ngIf="userSignUp" class="btn btn-primary btn1" (click)="SignUp()"
+                                            [disabled]="!loginForm.valid || BtnDisable">Continue</button>
+                                    </div>
+                                    <div>
+                                        <button *ngIf="!userSignUp" class="btn btn-primary btn1" (click)="contnw()"
+                                            [disabled]="!isPhnnumValid() || BtnDisable">Continue</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+
+                        <div class="container verify-otp-page " *ngIf="!isValid">
+
+                            <mat-icon class="leftArrw1"
+                                (click)="navigationtoMobileNumber()">keyboard_backspace</mat-icon>
+
+                            <p class="verify">Verify phone number</p>
+                            <div class="edit">
+                                <p class="otp-mb">We sent the OTP to <b>+91
+                                        {{this.loginForm.controls['phnnum'].value}}</b></p>
+                                <img class="pencil" src="../../assets/PencilSimple.svg"
+                                    (click)="showInitialAuthSection()">
+                            </div>
+
+                            <p class="the-code">The code will expire in 15 minutes</p>
+                            <p class="code">Didn't get the code? <span (click)="sendAgain()"
+                                    [ngClass]="{'disabled': isDisabled, 'sendColor': !isDisabled}">Send again <span *ngIf="this.isDisabled">in
+                                        <b>{{minutes}}:{{seconds|number:'2.0'}}</b></span></span></p>
+
+
+                            <div class="otpclss mt-5">
+                                <ngx-otp-input [config]="otpInputConfig" (otpChange)="handleOtp($event)"
+                                    (fill)="handleFill($event)">
+                                </ngx-otp-input>
+                                <small class="otpMsgClass mt-3" *ngIf="optSendMessage">{{optSendMessage}}</small>
+
+
+                            </div>
+
+                            <div>
+                                <small class="errorMessage" *ngIf="errorMessage">{{errorMessage}}</small>
+                                <!-- <small class="errorMessage" *ngIf="message"> {{message}}</small> -->
+                            </div>
+
+                            <button class="btn btn-primary btn2" (click)="loginbtn()" [disabled]="!otpfill || BtnDisable"
+                                *ngIf="!userSignUp">Continue</button>
+                            <button class="btn btn-primary btn2" (click)="verifiedPage()" [disabled]="!otpfill || BtnDisable"
+                                *ngIf="userSignUp">Continue</button>
+                        </div>
+                    </div>
+                    <!-- verified mobile number page -->
+                    <div class="container otp-content" *ngIf="mobileVerifiedpage">
+                        <div class="verifyMobile">
+                            <div>
+                                <img class="phn-num-verified-img" src="../../assets/phn-num-verified.svg">
+                            </div>
+                            <div class="container">
+                                <p class="phone-number">Phone number verified</p>
+                                <p class="verify-email-address">Please enter and verify your email address
+                                    to proceed ahead</p>
+                            </div>
+                            <div class="container">
+                                <button class="btn btn-primary btn2" (click)="signUpPage()">Continue adding email
+                                    address</button>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

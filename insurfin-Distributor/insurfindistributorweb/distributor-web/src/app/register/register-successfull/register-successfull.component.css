@@ -1,0 +1,154 @@
+.application {
+  margin-top: 15%;
+  color: #0C477B;
+  font-weight: 700;
+  font-size: 40px;
+  margin-left: 25px;
+  width: 224px;
+  line-height: 48px;
+  letter-spacing: -0.02em;
+}
+
+.right-column {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
+  background: linear-gradient(270deg, #EEF5FC 0%, #C3D9ED 100%);
+}
+
+.notify {
+  font-size: 16px;
+  height: 42px;
+  width: 345px;
+  color: #7D848D;
+  margin-left: 24px;
+  margin-top: 10%;
+
+}
+
+.mismatch {
+  color: #041427;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0em;
+  margin-left: 12px;
+  margin-bottom: 0px;
+
+}
+
+.pendingmsg {
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0em;
+  color: #7D848D;
+  margin-left: 12px;
+}
+
+.startReg {
+  background: #FFFFFF;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+  width: 345px;
+  height: 48px;
+  padding: 15px 10px 0px 10px;
+  margin-top: 21px;
+  margin-bottom: 15%;
+}
+
+.apprvStats {
+  width: 80%;
+  font-size: 16px;
+  font-weight: 400;
+  color: #7D848D;
+}
+
+.pendingReg {
+  color: #E59510;
+  font-size: 16px;
+  font-weight: 700;
+  padding-right: 10px;
+}
+
+.approvedReg {
+  color: #48B16E;
+  font-size: 16px;
+  font-weight: 700;
+}
+.RejectReg {
+  color: red;
+  font-size: 16px;
+  font-weight: 700;
+}
+.stats {
+  width: 71%;
+  font-size: 16px;
+  font-weight: 400;
+  color: #7D848D;
+}
+
+/* .small {
+  background: #E8E8E8;
+  width: 294px;
+  height: 294px;
+  border-radius: 12px;
+  margin-top: 29px;
+} */
+
+.register-success-img{
+  margin-left: 18%;
+  margin-top: 5%;
+}
+
+.leftArrw {
+  padding: 20px;
+}
+
+.distrbtr-welcome {
+  margin: auto;
+  border: 1px solid grey;
+  border-radius: 10px;
+  width: 393px;
+  height: 692px;
+  margin-top: 5%;
+  background: linear-gradient(180deg, #EEF6FD -13.97%, #EDF4FB 113.2%);
+  margin-bottom: 20px;
+}
+
+.main {
+  overflow: hidden;
+}
+
+.for {
+  font-weight: 400;
+  font-size: 16px;
+  color: #7D848D;
+  margin-left: 0px;
+  margin-top: 10%;
+}
+
+.rejectedComment {
+  margin-left: -7px;
+  margin-top: -44px;
+}
+
+.congratulations {
+  margin-top: 10%;
+  color: #0C477B;
+  font-weight: 700;
+  font-size: 40px;
+}
+
+.get-started {
+  margin-top: 8%;
+}
+
+.get {
+  height: 42px;
+  width: 345px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #005AAA;
+  margin-bottom: 15px;
+}

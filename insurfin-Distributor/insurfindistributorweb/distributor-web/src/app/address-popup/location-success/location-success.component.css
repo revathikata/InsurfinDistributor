@@ -1,0 +1,49 @@
+.success-dialog {
+    width: 329px;
+}
+.flex {
+    display: flex;
+    margin-top: 20px;
+}
+
+.circle {
+    margin-left: 18px;
+}
+
+.success {
+    margin-top: 14px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 23px;
+    color: #041427;
+    margin-left: 5px;
+
+}
+
+.close {
+    margin-top: 14px;
+    margin-left: 48%;
+    cursor: pointer;
+    color: #0358A8;
+}
+
+.detect {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #7D848D;
+    width: 276px;
+    margin-left: 34px;
+
+}
+.cont-btn {
+    width: 281px;
+    background: #005AAA;
+    box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+    border-radius: 12px;
+    height: 46px;
+    margin-top: 25px;
+    margin-bottom: 30px;
+    margin-left: 12px;
+}

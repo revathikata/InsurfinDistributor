@@ -1,0 +1,706 @@
+.main {
+  overflow: hidden;
+}
+
+.rightColoumn {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
+  background: linear-gradient(270deg, #EEF5FC 0%, #C3D9ED 100%);
+}
+
+.register {
+  color: #005AAA;
+  margin-bottom: 12px;
+  font-weight: 700;
+  font-size: 32px;
+  margin-left: 4px;
+}
+
+.leftArrw {
+  color: #041427;
+  cursor: pointer;
+}
+
+.otp-meassage {
+  color: red;
+  font-size: 12px;
+  font-weight: 400;
+
+}
+
+.distrbtr-welcome label {
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  color: #7D848D;
+}
+
+.distrbtr-welcome input {
+  font-size: 16px;
+  font-weight: 400;
+  /* color: #C6C6C6; */
+  border-radius: 12px;
+  border-color: #C6C6C6;
+}
+
+.section {
+  margin-top: 5px;
+}
+
+.persn-head {
+  color: #041427;
+  font-size: 18px;
+  font-weight: 700;
+
+}
+
+.gst-info {
+  color: #005AAA;
+}
+
+.persnlBtn {
+  background: #005AAA;
+  box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+  border-radius: 12px;
+  font-size: 13px;
+  width: 100%;
+  height: 42px;
+  margin-bottom: 30px;
+  font-size: 16px;
+  font-weight: 700;
+
+}
+
+.continueBtn {
+  background: #005AAA;
+  box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  width: 100%;
+  margin-bottom: 30px;
+  height: 42px;
+}
+
+.distrbtr-welcome {
+  width: 350px;
+  margin: auto;
+  margin-top: 43px;
+}
+
+.permentcolor {
+  color: #005AAA;
+  cursor: pointer;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+
+}
+
+.permentAdres {
+  margin-top: 25px;
+  color: #8B8F9C !important;
+  font-weight: 400;
+  font-size: 11px
+}
+
+.sameCurrent {
+  font-size: 13px;
+  color: #8B8F9C !important;
+  font-weight: 400;
+}
+
+.form-check {
+  margin-right: 10px;
+  padding: 5px;
+}
+
+.checkdiv {
+  margin-top: 20px;
+}
+
+::ng-deep.distrbtr-welcome .mat-mdc-tab .mdc-tab__content {
+  width: 30px;
+  padding: 5px;
+  font-weight: 700;
+
+}
+
+::ng-deep.distrbtr-welcome .mat-mdc-tab.mdc-tab {
+  height: 48px;
+  flex-grow: 0;
+  width: 83px;
+  font-size: 10px;
+}
+
+::ng-deep.distrbtr-welcome .mat-mdc-tab.mdc-tab {
+  height: 32px;
+}
+
+::ng-deep.distrbtr-welcome .mat-mdc-tab-body-wrapper {
+  background-color: white;
+  border-radius: 17px;
+  margin-top: 20px;
+  padding: 10px;
+  margin-bottom: 35px;
+  overflow-y: auto;
+  height: 500px;
+}
+
+.uploadimg {
+  display: none;
+}
+
+.fileupload {
+  border: 2px dotted;
+  border-radius: 5px;
+  height: 35px;
+  padding-left: 10px;
+}
+
+.uploadlabel-Added {
+  width: 100%;
+}
+
+.imgcls {
+  margin-bottom: 10px;
+  margin-left: -2px;
+
+}
+
+.imguploadText {
+  width: 85%;
+}
+
+.afteruploaded {
+  width: 85%;
+  font-size: 10px;
+  content-visibility: auto;
+}
+
+.input {
+  width: 200px;
+}
+
+.imgDiv {
+  width: 131px;
+  height: 131px;
+  background: #E8E8E8;
+  border-radius: 12px;
+  margin: auto;
+}
+
+.preview {
+  width: 131px;
+  height: 131px;
+  border-radius: 12px;
+}
+
+.doneBtn {
+  background: #005AAA;
+  box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+  border-radius: 12px;
+  width: 100%;
+  height: 42px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 21px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+:host ::ng-deep.otpclss .ngx-otp-input {
+  background: rgba(237, 244, 251, 0.5);
+  border: 1px solid #005AAA !important;
+  border-radius: 12px !important;
+  width: 47px !important;
+  height: 47px !important;
+  margin-right: -4px;
+}
+
+.p-text {
+  color: #7D848D;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.get-code {
+  color: #7D848D;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.send-text {
+  color: #2791E0;
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+
+}
+
+.emailSuccess .mat-mdc-dialog-container .mdc-dialog__surface {
+  box-shadow: 0px 0px 10px rgba(77, 127, 174, 0.2);
+  border-radius: 24px;
+  padding: 10px 20px;
+}
+
+.emailVerifyBtn {
+  background: #005AAA;
+  box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+  border-radius: 12px;
+  font-size: 16px;
+  width: 100%;
+  font-weight: 700;
+  height: 42px;
+  margin-top: 82%;
+
+}
+
+/* ::ng-deep .email-section .mat-mdc-tab-body-wrapper {
+  background: linear-gradient(180deg, #EEF6FD -13.97%, #EDF4FB 113.2%)
+} */
+
+.mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label,
+.mat-mdc-tab-link:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label {
+  color: #005AAA;
+}
+
+.text {
+  color: #2791E0;
+  font-weight: 700;
+  size: 16px;
+  margin-bottom: 1px;
+  margin-left: 5px;
+}
+
+.imguploadText {
+  color: #0358A8;
+  font-size: 14px;
+}
+
+.upload {
+  color: #2791E0;
+  margin-bottom: 1px;
+  margin-left: 5px;
+}
+
+.textForm {
+  font-weight: 400;
+  font-size: 14px;
+  color: #7D848D;
+  margin-left: 10px;
+
+}
+
+::ng-deep .mat-expansion-indicator::after {
+  color: #0358A8;
+}
+
+button.btn[disabled] {
+  background: #C8DCEE;
+  border: 1px solid #C8DCEE;
+}
+
+.Aadhr:disabled {
+  background-color: white;
+}
+
+.upload {
+  font-size: 16px;
+  margin-top: 4px;
+  color: #005AAA;
+  font-weight: 700;
+}
+
+.select {
+  font-size: 15px;
+  color: #C6C6C6;
+  border-radius: 12px;
+  outline: none;
+  box-shadow: none !important;
+
+}
+
+.select.ng-touched.ng-invalid {
+  border: 1.5px solid red;
+}
+
+.select.ng-untouched {
+  border: 1.5px solid #C6C6C6;
+}
+
+.errorss {
+  color: red;
+}
+
+.select.ng-valid {
+  border: 1.5px solid #C6C6C6;
+}
+
+.select:focus {
+  border: 1.5px solid #005AAA;
+}
+
+small {
+  margin-left: 5px;
+}
+
+input.ng-touched.ng-invalid {
+  border: 1.5px solid red;
+}
+
+input.ng-untouched {
+  border: 1.5px solid #7D848D;
+}
+
+input.ng-valid {
+  border: 1.5px solid #7D848D;
+}
+
+input:focus {
+  border: 1.5px solid #005AAA;
+}
+
+.form-control {
+  outline: none;
+  box-shadow: none !important;
+}
+
+.current {
+  font-size: 18px;
+  font-weight: 700;
+  color: #041427;
+}
+
+.distrbtr-welcome input::placeholder {
+  font-size: 16px;
+  font-weight: 400;
+  color: #C6C6C6;
+}
+
+/* ::ng-deep.ng-select.stateSelect {
+  border:0px;
+  min-height: 0px;
+  background-color: white;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), -4px -4px 8px rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  height: 38px;
+  padding: 10px;
+} */
+/* ::ng-deep.stateSelect .ng-dropdown-panel .ng-dropdown-panel-items .ng-option{
+  padding: 5px;
+  font-size: 13px;
+  } */
+/* ::ng-deep.stateSelect .ng-dropdown-panel .ng-dropdown-panel-items .ng-option:hover{
+      background-color: #b9c1c9;
+      } */
+.ng-select.statedropdown::ng-deep .ng-arrow {
+  display: none;
+}
+
+.ng-select.statedropdown::ng-deep .ng-arrow-wrapper {
+  width: 27px;
+  background-image: url('/assets/CaretDownarrow.svg');
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  margin-top: -5px;
+}
+
+.ng-select-opened.statedropdown ::ng-deep .ng-arrow-wrapper {
+  background-image: url('/assets/Caretuparrow.svg');
+}
+
+::ng-deep.ng-select.statedropdown .ng-has-value .ng-placeholder {
+  display: none;
+}
+
+::ng-deep.statedropdown .ng-dropdown-panel .ng-dropdown-panel-items {
+  width: 100%;
+  border: 1px solid #005AAA;
+  height: 95px;
+  border-radius: 0px 0px 10px 10px;
+  background: white;
+  position: relative;
+  left: -10px;
+  top: 5px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+::ng-deep.statedropdown.ng-select {
+  border: #C6C6C6 1.5px solid;
+  height: 40px !important;
+  border-radius: 12px;
+  padding: 10px;
+  background: white;
+}
+
+.aadhar {
+  font-size: 18px;
+  font-weight: 700;
+  column-rule: #041427;
+}
+
+.pan {
+  font-size: 18px;
+  font-weight: 700;
+  column-rule: #041427;
+}
+
+.bank {
+  font-size: 18px;
+  font-weight: 700;
+  color: #041427;
+  margin-left: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 25px;
+  background: #4D7FAE;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 25px;
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+.uploaded {
+  border: 2px dotted green;
+  overflow: hidden;
+}
+
+.notupload {
+  border: 2px dotted red;
+}
+
+.upload-img {
+  margin-top: -13px;
+  cursor: pointer;
+
+}
+
+.take-pic {
+  width: 131px;
+  height: 131px;
+  border-radius: 12px;
+}
+
+.trash-img {
+  margin-top: -18px;
+  cursor: pointer;
+}
+
+.your-picture {
+  color: #2791E0;
+  margin-left: 5px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+
+}
+
+.remove {
+  font-size: 16px;
+  color: #2791E0;
+  font-weight: 700;
+  margin-top: -5px;
+  margin-left: 5px;
+  cursor: pointer;
+
+}
+
+.webcam {
+  margin-top: 20px;
+}
+
+.check-circle {
+  /* margin-left: -10px; */
+  margin-bottom: 10px;
+}
+
+.error {
+  color: #C42728;
+  width: 24px;
+  height: 24px;
+  margin-top: 13.5px;
+  margin-left: 10px;
+}
+
+::ng-deep.ng-select.statedropdown.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  font-size: 14px;
+  font-weight: 400;
+  color: #7D848D;
+}
+
+::ng-deep.custom-ngselect .ng-dropdown-panel .ng-dropdown-panel-items {
+  padding: 0;
+}
+
+::ng-deep.custom-ngselect .ng-option {
+  border-top: 1px solid #ddd;
+  padding: 5px 0;
+  margin: 0 10px;
+}
+
+.ng-select ::ng-deep .ng-placeholder {
+  color: #C6C6C6;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.valid-email {
+  background-image: url('../../assets/tickimg.svg');
+  background-repeat: no-repeat;
+  background-position: 94%;
+
+}
+
+.account-invalid {
+  color: red;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper input[type="tel"] {
+  padding-left: 38px;
+  /* adjust the padding to make room for the icon */
+}
+
+.input-wrapper span {
+  position: absolute;
+  top: 50%;
+  left: 0.5rem;
+  transform: translateY(-50%);
+  color: #7D848D;
+  font-size: 16px;
+}
+
+.phnnum-inp {
+  color: #7D848D;
+}
+
+.red-border {
+  border: 1.5px solid red;
+}
+
+.disableGender {
+  background-color: #e9ecef;
+}
+
+.description {
+  color: var(--Secondary-Text, #8B8F9C);
+  text-align: center;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.successmail {
+  color: #48B16E;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-left: 2px;
+  /* margin-top: -15px; */
+}
+
+.successpan {
+  color: #48B16E;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 5px;
+}
+
+.verifymail {
+  color: #2791E0;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.verify-aadhar {
+  color: #C8DCEE;
+  cursor: pointer;
+}
+
+.account-verified {
+  color: #48B16E;
+  margin-top: 5px;
+}
+
+.green-text {
+  color: green;
+}
+
+.red-text {
+  color: red;
+}
+
+.text-danger {
+  color: red;
+}
+
+.genderbackground {
+  background-color: #e9ecef;
+}
+
+.errorpan {
+  color: red;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 5px;
+}
+
+/* .gender-background{
+background-color: #e9ecef;
+  } */
+.diableClass {
+  background-color: #e9ecef;
+}
+
+.statebackground {
+  background-color: #e9ecef;
+
+}
+
+.mismatchedData {
+  color: #C52727;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.panWarning{
+  color: orange;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.aadhar-proceed{
+  color: #8B8F9C;
+  text-align: center;
+  font-size: 9px;
+  font-weight: 400;
+  margin-bottom: -1px;
+}

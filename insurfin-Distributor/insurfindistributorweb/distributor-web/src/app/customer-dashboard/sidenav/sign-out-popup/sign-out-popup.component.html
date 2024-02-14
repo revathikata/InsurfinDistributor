@@ -1,0 +1,24 @@
+<div class="dialog-box container">
+  <!-- <div class="header-flex">
+    <mat-icon class="error">error_outline</mat-icon>
+    <p class="please-confirm">Please Confirm</p>
+    <mat-icon class="close-icon" (click)="closePopup()">close</mat-icon>
+  </div> -->
+  <div class="row container mt-4">
+    <div class="col-2">
+      <mat-icon class="error">error_outline</mat-icon>
+    </div>
+    <div class="col-8">
+      <p class="please-confirm">Please Confirm</p>
+    </div>
+    <div class="col-2">
+      <mat-icon class="close-icon" (click)="closePopup()">close</mat-icon>
+    </div>
+  </div>
+
+  <div class="sign-out">Are you sure you want sign out?</div>
+  <div class="btn-flex mt-4 mb-4">
+    <button mat-dialog-close class="cancel">Cancel</button>
+    <button mat-dialog-close class="btn btn-primary yes" (click)="signOut()">Yes</button>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="emailaddress">
+    <div class="row emailaddress">
+        <div class="col-2">
+            <img src="../../../assets/success-checkcircle.svg" class="wavy">
+        </div>
+        <div class="col-8">
+            <p class="verify">Success</p>
+        </div>
+        <div class="col-2">
+            <mat-icon  mat-dialog-close class="close">close</mat-icon>
+        </div>
+    </div>
+    <div class="container">
+        <p class="please-check">Customer email verification link sent successfully.</p>
+    </div>
+    <div class="container mb-3" *ngIf="dialogData == 'verifyEmail'">
+        <button class="btn btn-primary continue-btn" (click)="navigateToCustomerDetails()">Continue</button>
+    </div>
+</div>

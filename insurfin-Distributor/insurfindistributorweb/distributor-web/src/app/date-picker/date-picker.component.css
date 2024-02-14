@@ -1,0 +1,56 @@
+.demo-inline-calendar-card{
+    width: 300px;
+}
+.calenderbtn{
+    margin-left: 130px;
+    display: flex;
+    justify-content: space-evenly;
+    border: none;
+    background-color: whitesmoke;
+    margin-top: -50px;
+}
+.bluebtn{
+    border: none;
+    background-color: white;
+    color: #005AAA;
+    padding: 23px;
+    margin-top: -40px;
+ 
+    
+}
+.whitebtn{
+    border: none;
+    background-color: white;
+    padding: 23px; 
+    margin-top: -40px;
+}
+
+
+
+.mat-mdc-card {
+    position: relative;
+    border-radius: var(--mdc-elevated-card-container-shape, var(--mdc-shape-medium, 4px));
+    background-color: var(--mdc-elevated-card-container-color, transparent);
+    border-width: 0;
+    border-style: solid;
+    border-color: var(--mdc-elevated-card-container-color, transparent);
+    position: fixed;
+    margin-top: -112px;
+    margin-left: 172px;
+}
+.mat-calendar-body-cell-content {
+    top: -43%;
+}
+
+.mat-mdc-card[_ngcontent-vlu-c147] {
+    position: relative;
+    border-radius: var(--mdc-elevated-card-container-shape, var(--mdc-shape-medium, 4px));
+    background-color: var(--mdc-elevated-card-container-color, transparent);
+    border-width: 0;
+    border-style: solid;
+    border-color: var(--mdc-elevated-card-container-color, transparent);
+    position: fixed;
+    margin-top: -100px;
+    margin-left: 190px;
+    height: 360px;
+}

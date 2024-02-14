@@ -1,0 +1,73 @@
+.main {
+    width: 393px;
+    height: 293px;
+}
+
+.upload {
+    display: flex;
+}
+
+.upload-gallery {
+    font-weight: 400;
+    font-size: 16px;
+    margin-left: 10px;
+    color: #041427;
+}
+
+.uploadimage {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    color: #041427;
+    margin-top: 32px;
+    margin-left: 18px;
+}
+
+.photo {
+    font-weight: 400;
+    font-size: 16px;
+    margin-top: 16px;
+    margin-left: 20px;
+    cursor: pointer;
+    color: #041427;
+}
+
+.gallery {
+    font-weight: 400;
+    font-size: 16px;
+    margin-left: 11px;
+    color: #041427;
+}
+
+hr {
+    width: 347px;
+    margin-left: 11px;
+}
+
+
+
+.wrong1 {
+    margin-left: 190px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.mat-icon {
+    margin-left: 190px;
+    margin-top: 32px;
+    color: #0358A8;
+}
+
+.gallery2 {
+
+    margin-left: 34px;
+    cursor: pointer;
+}
+
+.gallery1 {
+    margin-bottom: -38px;
+}
+::ng-deep.mat-bottom-sheet-container{
+    border-radius:24px 24px 0px 0px;
+    min-width: 393px;
+}

@@ -1,0 +1,67 @@
+<div class="confirm-dialog" *ngIf="dialogData.showConfirmation">
+    <div class="container flex row">
+        <div class="col-2">
+            <mat-icon class="error-outline">error_outline</mat-icon>
+        </div>
+        <div class="col-8">
+            <p class="add-new">Existing customer</p>
+        </div>
+        <div class="col-2">
+            <mat-icon  mat-dialog-close class="cross-icon">close</mat-icon>
+        </div>
+    </div>
+    <p class="are-you">{{ dialogData.message }}</p>
+    <div class="container mt-4 mb-4">
+        <button class="cancel-btn" mat-dialog-close (click)="onClose()">Cancel</button>
+        <button class="btn btn-primary yes-btn" mat-dialog-close="yes" (click)="proposalFlow()">Yes</button>
+    </div>
+</div>
+
+
+<div class="confirm-dialog" *ngIf="dialogData.noConfirmation">
+    <div class="container flex">
+        <mat-icon class="error-outline">error_outline</mat-icon>
+        <p class="add-new">Invalid Data</p>
+        <mat-icon  mat-dialog-close class="cross-icon">close</mat-icon>
+    </div>
+    <p class="are-you">{{ dialogData.message }}</p>
+    <div class="container mt-4 mb-4">
+        <button class="call-btn" mat-dialog-close (click)="navigateToBtn()">Ok</button>
+    </div>
+</div>
+
+<div class="confirm-dialog" *ngIf="dialogData.showDistributor">
+    <div class="container flex">
+        <mat-icon class="error-outline">error_outline</mat-icon>
+        <p class="add-new">Already Existing</p>
+        <mat-icon  mat-dialog-close class="cross-icon">close</mat-icon>
+    </div>
+    <p class="are-you">{{ dialogData.message }}</p>
+    <div class="container mt-4 mb-4">
+        <button class="call-btn" mat-dialog-close>Cancel</button>
+    </div>
+</div>
+
+<div class="confirm-dialog" *ngIf="dialogData.incompleteDetails">
+    <div class="container flex">
+        <mat-icon class="error-outline">error_outline</mat-icon>
+        <p class="add-new">incomplete ?</p>
+        <mat-icon  mat-dialog-close class="cross-icon">close</mat-icon>
+    </div>
+    <p class="are-you">{{ dialogData.message }}</p>
+    <div class="container mt-4 mb-4">
+        <button class="call-btn" mat-dialog-close>Continue</button>
+    </div>
+</div>
+
+<div class="confirm-dialog" *ngIf="dialogData.verificationPending">
+    <div class="container flex">
+        <mat-icon class="error-outline">error_outline</mat-icon>
+        <p class="add-new">Action Required</p>
+        <mat-icon  mat-dialog-close class="cross-icon">close</mat-icon>
+    </div>
+    <p class="are-you">{{ dialogData.message }} through the link sent to your Email!</p>
+    <div class="container mt-4 mb-4">
+        <button class="call-btn" mat-dialog-close>Continue</button>
+    </div>
+</div>

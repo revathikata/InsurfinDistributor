@@ -1,0 +1,35 @@
+.d-flex{
+  display: flex;
+}
+.success{
+  margin-top: 17px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #041427;
+  margin-left: 5px;
+}
+.close-icon{
+  margin-top: 17px;
+    color: #0358A8;
+    margin-left: 130px;
+}
+.your-email{
+  margin-left: 17px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #7D848D;
+  margin-top: 10px;
+
+}
+.continueBtn{
+  background: #005AAA;
+  box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+  border-radius: 12px;
+  font-weight: 700;
+font-size: 16px;
+text-align: center;
+color: #FFFFFF;
+width: 100%;
+height: 42px;
+
+}

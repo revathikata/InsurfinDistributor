@@ -1,0 +1,45 @@
+::ng-deep.mat-bottom-sheet-container-large {
+    min-width: 393px;
+    height: 180px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    margin-left: 83%;
+    overflow-x: hidden;
+}
+
+.more-actions-flex {
+    display: flex;
+}
+
+.more-action {
+    color: #041427;
+    font-size: 18px;
+    font-weight: 700;
+    margin-left: 3px;
+    margin-top: 22px;
+}
+
+.close {
+    margin-top: 17px;
+    margin-left: 57%;
+    color: #0358A8;
+    cursor: pointer;
+}
+
+.phone-img {
+    margin-top: 26px;
+}
+
+.phone-flex {
+    display: flex;
+    cursor: pointer;
+}
+
+.call-customer {
+    margin-left: 13px;
+    margin-top: 29px;
+    color: #041427;
+    font-size: 16px;
+    font-weight: 400;
+
+}

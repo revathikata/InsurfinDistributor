@@ -1,0 +1,37 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+
+            
+
+            <div class="col-lg-6 rightColoumn" >
+                <div class="distrbtr-welcome container">
+                    <mat-icon class="leftArrw" (click)="navigateToProposalDetails()">keyboard_backspace</mat-icon><span class="propose-dtls" (click)="navigateToDashBoard()">Home</span>
+
+                    <div class="">
+                        <img src="../../assets/proposal-successful-img.svg" class="proposal-img">
+                    </div>
+
+                    <div class="container">
+                        
+                        <p class="propsl-success">Proposal created successfully!</p>
+                        <p class="proposal-status">We’ve also notified the customer about their proposal status.</p>
+                     
+                        <div class="mb-5">
+                            <button class="btn btn-primary view-status-btn" routerLink="/proposal-status">View Status</button>
+                        </div>
+                 
+                    </div>
+
+
+
+
+                </div>
+           
+            </div>
+        </div>
+    </div>
+</div>

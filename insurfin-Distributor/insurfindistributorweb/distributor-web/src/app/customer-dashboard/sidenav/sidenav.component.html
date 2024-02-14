@@ -1,0 +1,36 @@
+<div class="side">
+    <div class="mainbar">
+        <div class="crossicon">
+            <mat-icon class="close" mat-dialog-close>close</mat-icon>
+        </div>
+        <div class="menu">
+            <h1>Menu</h1>
+        </div>
+        <div class="top">
+            <div class="homeicon">
+                <img src="../../../assets/Vector (1).svg">
+                <p class="para" (click)="home()">Home</p>
+            </div>
+            <div class="homeicon">
+                <img src="../../../assets/UsersThree.svg">
+                <p class="para" (click)="allCustomers()">All customers</p>
+            </div>
+            <div class="homeicon">
+                <img src="../../../assets/User.svg">
+                <p class="para" (click)="profile()">Profile</p>
+            </div>
+            <div class="homeicon">
+                <img src="../../../assets/SignOut.svg">
+                <p class="para" (click)="signout()">Sign out</p>
+            </div>
+        </div>
+        <div class="add-proposal container mb-3">
+            <img src="../../assets/Plus.svg" class="plus-img">
+            <p class="add-new" routerLink="/new-customer" mat-dialog-close>Add New Proposal</p>
+        </div>
+        <div class="insurfin">
+            <img src="../../../assets/insurfin img.svg">
+        </div>
+    </div>
+
+</div>

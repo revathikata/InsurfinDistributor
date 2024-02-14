@@ -1,0 +1,219 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+
+            <div class="col-lg-6 rightColoumn">
+                <div class="customer-welcome">
+                    <div *ngIf="verify" class="container">
+                        <div class="display">
+                            <mat-icon class="back-arrow" routerLink="/distributor-dashboard">keyboard_backspace</mat-icon>
+                            <h4 class="home">Home</h4>
+                        </div>
+                        <div class="notification">
+                            <h3 class="notif">Notifications</h3>
+                            <mat-icon matBadge="0" matBadgeColor="warn" class="icon"></mat-icon>
+                            <p class="marks" (click)="markAsRead()">Mark all as read</p>
+                        </div>
+                        <div class="main">
+                            <div class="yarrow1container">
+                                    <div class="dot" *ngIf="getNotification"></div>
+                                    <img src="../../assets/profile pic -img.png" class="distributor-profile">
+                              
+                                <p class="ptag">Proposal accepted by <b>----- </b> 
+                                    Proposal no.: ------ </p>
+                            </div>
+                            <div class="flex-c">
+                                <p>0hrago</p>
+                                <i class="fa-sharp fa-solid fa-chevron-right iconsclass" (click)="exponantial()"></i>
+
+                            </div>
+                            <hr>
+
+                            <div class="yarrow1container">
+                                <div class="dot" *ngIf="getNotification"></div>
+                                    <img src="../../assets/profile pic -img.png" class="distributor-profile">
+                                <p class="ptag"><b>------</b> modified their details.
+                                    Proposal no.: -----</p>
+                            </div>
+                            <div class="flex-c">
+                                <p>0hrago</p>
+                                <i class="fa-sharp fa-solid fa-chevron-right iconsclass" (click)="exponantial()"></i>
+                            </div>
+                            <hr>
+                            <div class="yarrow1container">
+                                <div class="dot" *ngIf="getNotification"></div>
+                                <img src="../../assets/profile pic -img.png" class="distributor-profile">
+                                <p class="ptag">New customer - <b>------</b> successfully added.</p>
+                            </div>
+                            <div class="flex-c">
+                                <p>0 hrsago</p>
+                                <i class="fa-sharp fa-solid fa-chevron-right iconsclass" (click)="exponantial()"></i>
+                            </div>
+                            <hr>
+                            <div class="yarrow1container">
+                                <div class="dot" *ngIf="getNotification"></div>
+                                <img src="../../assets/Bell.svg" class="bellimg">
+                                <p class="ptags">--------</p>
+                            </div>
+                            <div class="flex-c">
+                                <p>0hrago</p>
+                                <i class="fa-sharp fa-solid fa-chevron-right iconsclass" (click)="exponantial()"></i>
+                            </div>
+                            <hr>
+                            <div class="yarrow1container">
+                                <img src="../../assets/profile pic -img.png" class="distributor-profile">
+                                <p class="ptags">Lender rejected loan towards <b>----- </b> on uncertain reasons.</p>
+                            </div>
+                            <div class="flex-c">
+                                <p>0hrago</p>
+                                <i class="fa-sharp fa-solid fa-chevron-right iconsclass" (click)="exponantial()"></i>
+                            </div>
+                            <hr>
+                            <div class="yarrow1container">
+                                <img src="../../assets/profile pic -img.png" class="distributor-profile">
+                                <p class="ptags">Policy upload pending for  ----- , upload soon!</p>
+                            </div>
+                            <div class="flex-c">
+                                <p>0hrago</p>
+                                <i class="fa-sharp fa-solid fa-chevron-right iconsclass" (click)="exponantial()"></i>
+                            </div>
+                            <hr>
+                            <div class="yarrow1container">
+                                <img src="../../assets/profile pic -img.png" class="distributor-profile">
+                                <p class="ptags"><b>------</b> made the first downpayment towards proposal</p>
+                            </div>
+                            <div class="flex-c">
+                                <p>0hrago</p>
+                                <i class="fa-sharp fa-solid fa-chevron-right iconsclass" (click)="exponantial()"></i>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="yarrow1container">
+                            <img src="../../assets/Bell.svg" class="bellimg">
+                            <p class="ptags"><b> ------ </b>- Distributor registered successfully!</p>
+                        </div>
+                        <div class="flex-c">
+                            <p>0hrago</p>
+                            <i class="fa-sharp fa-solid fa-chevron-right iconsclass" (click)="exponantial()"></i>
+                        </div>
+
+                    </div>
+
+                    <div *ngIf="!verify" class="container">
+                        <div class="details">
+                            <!-- <i class="fa-solid fa-arrow-left"></i> -->
+                            <mat-icon class="back-arrow" (click)="backspacearrow()">keyboard_backspace</mat-icon>
+                            <h4 class="home">Notification</h4>
+                            <div class="elipsis">
+                                <!-- <i class="fa-solid fa-ellipsis-vertical"></i> -->
+                                <mat-icon>more_vert</mat-icon>
+                            </div>
+                        </div>
+
+                        <div class="flex">
+                            <div class="img">
+                                <img src="../../assets/profile pic -img.png" class="distributor-profile">
+                            </div>
+                            <div class="content">
+                                <b>------</b>
+                                <p class="graycolor">-------</p>
+                                <p class="greencolor">--------</p>
+                            </div>
+                            <div class="phone">
+                                <img src="../../assets/PhoneOutgoing.svg">
+                            </div>
+
+                        </div>
+                        <div class="margin-dtls">
+                            <div class="praposal">
+                                <h4>PROPOSER DETAILS</h4>
+                            </div>
+                            <div class="group1">
+                                <h5>Proposer Name</h5>
+                                <h6 class="bold">------</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>Proposal Number</h5>
+                                <h6 class="bold">-------</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>Proposer Aadhaar</h5>
+                                <h6 class="bold">--------</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>Proposer PAN</h5>
+                                <h6 class="bold">--------</h6>
+                            </div>
+                            <div>
+                                <hr>
+                            </div>
+                            <div class="praposal">
+                                <h4>INSURER DETAILS</h4>
+                            </div>
+                            <div class="group1">
+                                <h5>Insurer</h5>
+                                <h6 class="bold">--------</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>Phone Number</h5>
+                                <h6 class="bold"><span>+91</span> -------</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>Address</h5>
+                                <h6 class="bolds">-------</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>Date</h5>
+                                <h6 class="bold">-------</h6>
+                            </div>
+                            <hr>
+                            <div class="praposal">
+                                <h4>POLICY DETAILS</h4>
+                            </div>
+                            <div class="group1">
+                                <h5>Policy Product Name</h5>
+                                <h6 class="bold">-------</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>Premium Amount (₹)</h5>
+                                <h6 class="bold">₹xxxxxx</h6>
+                            </div>
+                            <div class="group1">
+                                <h5>Policy Tenure</h5>
+                                <h6 class="bold">-------</h6>
+                            </div>
+
+                            <hr>
+                            <div class="praposal">
+                                <h4>PROPOSAL STATUS</h4>
+                            </div>
+                            <div class="group1">
+                                <h5>Proposal Status</h5>
+                                <h6 class="tageclr">-------</h6>
+                            </div>
+
+                            <div class="group1">
+                                <h5>Documenation</h5>
+                            </div>
+                            <div class="endingstep">
+                                <div class="not">
+                                    <img src="../../assets/red alert img.svg">
+                                    <h6>Incomplete</h6>
+                                </div>
+                                <div class="remind">
+                                    <h5>Remind now</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

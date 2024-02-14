@@ -1,0 +1,511 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+            <div class="col-lg-6 rightColoumn">
+                <div class="distrbtr-welcome">
+                    <div *ngIf="sharedService.policyDetailsUploaded">
+                        <div class="toolbar container">
+                            <div class="home">
+                                <mat-icon class="backspace"
+                                    routerLink="/distributor-dashboard">keyboard_backspace</mat-icon>
+                                <p class="my-home">Home</p>
+                            </div>
+                            <div class="date-flex">
+                                <div>
+                                    <p class="d-applications">Total Loans Disbursed</p>
+                                    <p class="amount">Amount: ₹ {{ loanDisbursedTotal.toLocaleString('en-IN') }} /-</p>
+                                </div>
+                                <div class="dropdown">
+                                    <ng-select class="totaldisbursed" [items]="dropdown" [clearable]="false"
+                                        [searchable]="false" placeholder="This week" (change)="onDropdownChange()"
+                                        [(ngModel)]="selectedOption" bindLabel="" bindValue="">
+                                        <ng-template ng-option-tmp let-item="item">{{item}}
+                                            <span *ngIf="selectedOption === item" class="checkmark"><mat-icon
+                                                    class="maticonclass">check_circle</mat-icon></span>
+                                        </ng-template>
+                                    </ng-select>
+                                </div>
+                                <div *ngIf="selectedOption === 'Custom'" class="daterangec">
+                                    <p class="datetag">{{ getFormattedDateRange() }}</p>
+                                    <!-- at-label>Enter a date range</mat-label> -->
+
+                                    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                                        <input matStartDate formControlName="start" placeholder="Start date"
+                                            (dateInput)="formatDateEvent($event.target.value, 'start')" />
+
+                                        <input matEndDate formControlName="end" placeholder="End date"
+                                            (dateInput)="formatDateEvent($event.target.value, 'end')" />
+
+                                    </mat-date-range-input>
+
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+
+                                    <!-- <p class="datetag">{{ getFormattedDateRange() }}</p> -->
+                                    <mat-date-range-picker #picker>
+
+                                        <mat-date-range-picker-actions>
+                                            <span matDateRangePickerApply><mat-icon class="relayicon"
+                                                    (click)="reset()">replay</mat-icon></span>
+                                            <button mat-button matDateRangePickerCancel class="cancel"
+                                                (click)="reset()">Cancel</button>
+                                            <button class="apply" matDateRangePickerApply>Apply</button>
+                                        </mat-date-range-picker-actions>
+
+                                    </mat-date-range-picker>
+
+                                    <!-- Custom date picker component -->
+
+                                </div>
+
+                                <!-- <p class="amounttext">Amount: ₹ {{dashboardData?.amount ? (dashboardData?.amount | number) : 0}} /-</p> -->
+                            </div>
+                            <div class="calenderimg">
+                                <img src="../../assets/calender.svg">
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="cards-section">
+                                <div class="row cards cards-flex">
+                                    <div class="col-9">
+                                        <p class="policy-dtls">Policy details uploaded</p>
+                                        <p class="policydtls-num">{{getCountByFeild('POLICY_UPLOADED')}}</p>
+                                    </div>
+                                    <div class="col-3">
+                                        <img src="../../assets/CaretRight.svg" (click)="policyDetails()"
+                                            class="right-arrow">
+                                    </div>
+                                </div>
+                                <div class="row cards cards-flex">
+                                    <div class="col-9">
+                                        <p class="policy-dtls">Policy detail not uploaded</p>
+                                        <p class="policydtls-num">{{getCountByFeild('POLICY_NOT_UPLOADED')}}</p>
+                                    </div>
+                                    <div class="col-3">
+                                        <img src="../../assets/CaretRight.svg" (click)="detailsNotUploaded()"
+                                            class="right-arrow">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="all-loans">All {{getTotalcount()}} loans disbursed </p>
+                            </div>
+                            <div class="all-loans-scroll">
+                                <div class="mb-3 mt-3">
+                                    <mat-accordion *ngFor="let proposal of filteredCustomerList; let i=index">
+                                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                            (closed)="panelOpenState = false">
+                                            <mat-expansion-panel-header ngFor="let name of proposer">
+
+                                                <mat-panel-description>
+                                                    <div class="customer-profile">
+                                                        <div class="customer-flex">
+                                                            <div>
+                                                                <img src="../../assets/profile pic -img.png"
+                                                                    class="distributor-profile">
+                                                            </div>
+                                                            <div class="section">
+                                                                <p class="customer-name">{{proposal.customerName}}</p>
+                                                                <p class="gold-policy">{{proposal.policyProductName}}
+                                                                </p>
+                                                                <p class="loan-success">{{proposal.displayStatus}} </p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="loans-flex">
+                                                            <div class="loans">
+                                                                <span class="loan-span">Loan</span><span
+                                                                    class="ten-lacs"> ₹ {{(+proposal.premiumAmount || 0).toLocaleString('en-IN')}}</span>
+                                                            </div>
+                                                            <div class="emi-flexx" *ngIf = "proposal.innerDisplayStatus === 'Policy uploaded'">
+                                                                <span class="emis-outstnd">EMIs Outstanding</span>&nbsp;
+                                                                <span class="five-num">{{proposal.emisOutstanding === null?'0' : proposal.emisOutstanding}}</span>
+                                                            </div>
+                                                            <div class="emi-flex" *ngIf = "proposal.innerDisplayStatus === 'Policy details not uploaded'">
+                                                                <span class="emis-outstnd">Upload due in</span>
+                                                                <span class="five-num"> {{proposal.policyUploadDate === null?'0' : proposal.policyUploadDate}}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="policy-flex mt-3">
+                                                            <div class="emi-paid-flex">
+                                                                <span class="emis-paid">EMIs Paid</span>
+                                                                <span class="three-num">
+                                                                    {{ proposal.emisPaid === null ? '0' : proposal.emisPaid }}
+                                                                  </span>
+                                                            </div>
+                                                            <div class="uploaded" *ngIf = "proposal.innerDisplayStatus === 'Policy uploaded'">
+                                                                <p class="emis-paid">Policy Uploaded</p>
+                                                            </div>
+                                                            <div class="uploaded" *ngIf = "proposal.innerDisplayStatus === 'Policy details not uploaded'">
+                                                                <span class="emis-paid">EMIs Outstanding</span>&nbsp;
+                                                                <span class="five-num">0</span>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </mat-panel-description>
+                                            </mat-expansion-panel-header>
+                                            <div>
+                                                <div>
+                                                    <hr class="horizontal-line">
+                                                </div>
+                                                <div>
+                                                    <p class="cust-props">Customer Proposal Number</p>
+                                                    <p class="date">{{proposal?.proposalNumber}}</p>
+                                                </div>
+                                                <div>
+                                                    <p class="cust-props">Policy Date</p>
+                                                    <p class="date">{{proposal?.displayDate}}</p>
+                                                </div>
+                                                <div>
+                                                    <p class="cust-props">Premium Amount (₹)</p>
+                                                    <p class="date">₹{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                                </div>
+                                                <div>
+                                                    <p class="cust-props">Loan Amount (₹)</p>
+                                                    <p class="date">₹{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="call-customer" *ngIf="proposal.innerDisplayStatus == 'Policy uploaded'">
+                                                <div>
+                                                    <button class="btn btn-primary call-cust">Call Customer</button>
+                                                </div>
+                                                <div>
+                                                    <button class="btn btn-outline-primary view-dtls"
+                                                        (click)="viewProposalDetails(proposal)">View Details</button>
+                                                </div>
+                                            </div>
+                                            <div class="call-customer" *ngIf="proposal.innerDisplayStatus == 'Policy details not uploaded'">
+                                                <div>
+                                                    <button class="btn btn-primary call-cust"
+                                                        (click)="openFileExplorer(proposal)">Upload Policy</button>
+                                                    <input type="file" #fileInput style="display: none;"
+                                                        (change)="onFileSelected($event)">
+                                                </div>
+                                                <div>
+                                                    <button class="btn btn-outline-primary view-dtls"
+                                                        (click)="viewProposalDetails(proposal)">View Details</button>
+                                                </div>
+                                            </div>
+                                        </mat-expansion-panel>
+                                    </mat-accordion>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="sharedService.policy">
+                        <div>
+                            <mat-icon class="leftArrw" (click)="backSpace()">keyboard_backspace</mat-icon>
+                            <p class="total-disbursed">Total Loans Disbursed</p>
+                            <p class="upload-policy">Uploaded Policy Details </p>
+                            <p class="show-results">Showing {{getCountByFeild('POLICY_UPLOADED')}} results</p>
+                        </div>
+                        <div class="mb-3" style="overflow-y: scroll;
+                        height: 520px;">
+                            <mat-accordion *ngFor="let proposal of policyUpload; let i=index">
+                                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            <div class="customer-profile">
+                                                <div class="customer-flex">
+                                                    <div>
+                                                        <img src="../../assets/profile pic -img.png"
+                                                            class="distributor-profile">
+                                                    </div>
+                                                    <div class="section">
+                                                        <p class="customer-name">{{proposal.customerName}}</p>
+                                                        <p class="gold-policy">{{proposal.policyProductName}}</p>
+                                                        <p class="loan-success">{{proposal.displayStatus}} </p>
+                                                    </div>
+                                                </div>
+                                                <div class="loans-flex">
+                                                    <div class="loans">
+                                                        <span class="loan-span">Loan</span><span class="ten-lacs">
+                                                            ₹{{ (proposal.premiumAmount === null ? 0 : +proposal.premiumAmount).toLocaleString('en-IN') }}
+                                                          </span>
+                                                    </div>
+                                                    <div class="emi-flexx">
+                                                        <span class="emis-outstnd">EMIs Outstanding</span><span
+                                                            class="five-num">  {{proposal.emisOutstanding === null?'0' : proposal.emisOutstanding}}</span>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="emi-paid-flex">
+                                                    <span class="emis-paid">EMIs Paid</span><span class="three-num">
+                                                        3</span>
+                                                </div> -->
+                                                <div class="policy-flex mt-3">
+                                                    <div class="emi-paid-flex">
+                                                        <span class="emis-paid">EMIs Paid</span><span class="three-num">
+                                                            {{proposal.emisPaid === null?'0' : proposal.emisPaid}}
+                                                        </span>
+                                                    </div>
+                                                    <div class="uploaded">
+                                                        <p class="emis-paid">Policy Uploaded</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                    <div>
+                                        <div>
+                                            <hr class="horizontal-line">
+                                        </div>
+                                        <div class="more-flex">
+                                            <div>
+                                                <p class="cust-props">Customer Proposal Number</p>
+                                                <p class="date">{{proposal?.proposalNumber}}</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">Policy Date</p>
+                                            <p class="date">{{proposal?.displayDate}}</p>
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">Premium Amount (₹)</p>
+                                            <p class="date">₹{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">Loan Amount (₹)</p>
+                                            <p class="date">₹{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="call-customer">
+                                        <div>
+                                            <button class="btn btn-primary call-cust" (click)="callCustomer()">Call
+                                                Customer</button>
+                                            <a href="tel:+1234567890"></a>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-outline-primary view-dtls"
+                                                (click)="viewProposalDetails(proposal)">View Details</button>
+                                        </div>
+                                    </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </div>
+
+
+                    </div>
+
+                    <div *ngIf="sharedService.detailsNotUpload">
+                        <div>
+                            <mat-icon class="leftArrw" (click)="arrowBackSpace()">keyboard_backspace</mat-icon>
+                            <p class="total-disbursed">Total Loans Disbursed</p>
+                            <p class="upload-policy">Policy Details Not Uploaded</p>
+                            <p class="show-results">Showing {{getCountByFeild('POLICY_NOT_UPLOADED')}} results</p>
+                        </div>
+                        <div class="policy-dtls-not-uploaded-scroll">
+                            <div class="mb-3">
+                                <mat-accordion *ngFor="let proposal of policyDetailsNotUpload; let i=index">
+                                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                        (closed)="panelOpenState = false">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-description>
+                                                <div class="customer-profile">
+                                                    <div class="customer-flex">
+                                                        <div>
+                                                            <img src="../../assets/profile pic -img.png"
+                                                                class="distributor-profile">
+                                                        </div>
+                                                        <div class="section">
+                                                            <p class="customer-name">{{proposal.customerName}}</p>
+                                                            <p class="gold-policy">{{proposal.policyProductName}}</p>
+                                                            <p class="loan-success">{{proposal.displayStatus}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="loans-flex">
+                                                        <div class="loans">
+                                                            <span class="loan-span">Loan</span><span class="ten-lacs">
+                                                                ₹{{proposal.premiumAmount === null?'0' : proposal.premiumAmount}}</span>
+                                                        </div>
+                                                        <div class="emi-flex" *ngIf = "proposal.innerDisplayStatus === 'Policy details not uploaded'">
+                                                            <span class="emis-outstnd">Upload due in</span>
+                                                            <span class="five-num">{{proposal.policyUploadDate === null?'0' : proposal.policyUploadDate}}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="policy-flex mt-3">
+                                                        <div class="emi-paid-flex">
+                                                            <span class="emis-paid">EMIs Paid</span>
+                                                            <span class="three-num"> {{proposal.emisPaid === null?'0' : proposal.emisPaid}}</span>
+                                                        </div>
+                                                        <div class="uploaded" *ngIf = "proposal.innerDisplayStatus === 'Policy details not uploaded'">
+                                                            <span class="emis-paid">EMIs Outstanding</span>&nbsp;
+                                                            <span class="five-num">{{proposal.emisOutstanding === null?'0' : proposal.emisOutstanding}}</span>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- <div class="policy-amount">
+                                            <span class="loan-span">Loan</span><span class="ten-lacs">₹{{proposal?.premiumAmount}}</span>
+                                        </div> -->
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <div>
+                                            <div>
+                                                <hr class="horizontal-line">
+                                            </div>
+                                            <div class="more-flex">
+                                                <div>
+                                                    <p class="cust-props">Customer Proposal Number</p>
+                                                    <p class="date">{{proposal?.proposalNumber}}</p>
+                                                </div>
+                                                <img src="../../assets/three-dots.svg" class="vert" mat-raised-button
+                                                    (click)="openBottomSheet()">
+                                            </div>
+                                            <div>
+                                                <p class="cust-props">Policy Date</p>
+                                                <p class="date">{{proposal?.displayDate}}</p>
+                                            </div>
+                                            <div>
+                                                <p class="cust-props">Premium Amount (₹)</p>
+                                                <p class="date">₹{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                            </div>
+                                            <div>
+                                                <p class="cust-props">Loan Amount (₹)</p>
+                                                <p class="date">₹{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="call-customer">
+                                            <div>
+                                                <button class="btn btn-primary call-cust"
+                                                    (click)="openFileExplorer(proposal)">Upload Policy</button>
+                                                <input type="file" #fileInput style="display: none;"
+                                                    (change)="onFileSelected($event)">
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-outline-primary view-dtls"
+                                                    (click)="viewProposalDetails(proposal)">View Details</button>
+                                            </div>
+                                        </div>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div *ngIf="notUploadedCustomer">
+                <div class="morevert-flex">
+                    <mat-icon class="back-arrw"(click)="keyBoard()">keyboard_backspace</mat-icon>
+                    <p class="pol-dtls">Uploaded Policy Details</p>
+                    <img src="../../../assets/three-dots.svg"  class="vert" (click)="openFileExplorer()">
+                    <input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)">
+                </div>
+                <div class="container">
+                    <div class="edit-customer-flex">
+                        <div>
+                            <img class="edit-customer " src="../../assets/profile pic -img.png" class="distributor-profile">
+                        </div>
+                        <div class="anitha-flex">
+                            <p class="anitha-name">-----</p>
+                            <p class="policy-gold">------</p>
+                            <p class="loan-disbursed">------</p>
+                        </div>
+                        <div>
+                            <img class="phone-img" src="../../assets/phone-img.svg">
+                        </div>
+                    </div>
+                    <div class="edit-proposal container">
+                        <div>
+                             <p class="prpsl-dtls">PROPOSAL DETAILS</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">Proposer Name</p>
+                            <p class="ani-name">-----</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">Proposal Number</p>
+                            <p class="ani-name">-----</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">Proposer Aadhaar</p>
+                            <p class="ani-name">-----</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">Proposer PAN</p>
+                            <p class="ani-name">-----</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">EMIs Outstanding</p>
+                            <p class="ani-name">----</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">EMIs Paid</p>
+                            <p class="ani-name">----</p>
+                        </div>
+                        <div>
+                            <hr>
+                        </div>
+                        <div>
+                            <p class="prpsl-dtls">INSURER DETAILS</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">Insurer</p>
+                            <p class="ani-name">------</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">Phone Number</p>
+                            <p class="ani-name">+91 ------</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">Address</p>
+                            <p class="address-name">-----</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">Date</p>
+                            <p class="ani-name">-------</p>
+                        </div>
+                        <div>
+                            <hr>
+                        </div>
+                        <div>
+                            <p class="prpsl-dtls">POLICY DETAILS</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">Policy Product Name</p>
+                            <p class="ani-name">-----</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">Premium Amount (₹)</p>
+                            <p class="ani-name">₹xxxxxx</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">Policy Tenure</p>
+                            <p class="ani-name">-----</p>
+                        </div>
+                        <div>
+                            <hr>
+                        </div>
+                        <div>
+                            <p  class="prpsl-dtls">PROPOSAL STATUS</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">Proposal Status</p>
+                            <p class="ani-name loan-successfully">------</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">Documenation</p>
+                            <div class="pdf-error">
+                                <mat-icon class="error-outline">error_outline</mat-icon>
+                                <p class="ani-name pdf">Policy PDF not uploaded</p>
+                                <p class="upload-now">Upload Now</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div> -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

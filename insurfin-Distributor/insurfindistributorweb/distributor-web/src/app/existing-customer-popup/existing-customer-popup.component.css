@@ -1,0 +1,74 @@
+.confirm-dialog {
+    width: 329px;
+}
+.flex {
+    display: flex;
+    margin-top: 20px;
+}
+
+.error-outline {
+    color: #C42728;
+    margin-left: 10px;
+}
+.add-new {
+    margin-top: 1px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 23px;
+    color: #041427;
+}
+.cross-icon{
+    margin-left: 42%;
+    color: #0358A8;
+    margin-top: 1px;
+}
+
+.are-you {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #7D848D;
+    width: 276px;
+    margin-left: 30px;
+    margin-top: 15px;
+}
+.cancel-btn{
+    width: 134px;
+    margin-left: 13px;
+    color: #005AAA;
+    border-radius: 12px;
+    box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+    background-color: #ffffff !important;
+    border: 1px solid #005AAA;
+    height: 52px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+}
+.yes-btn {
+    width: 134px;
+    margin-left: 13px;
+    background: #005AAA;
+    box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+    border-radius: 12px;
+    height: 52px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.call-btn {
+    width: 281px;
+    margin-left: 13px;
+    color: #005AAA;
+    border-radius: 12px;
+    box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+    background-color: #ffffff !important;
+    border: 1px solid #005AAA;
+    height: 52px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+}

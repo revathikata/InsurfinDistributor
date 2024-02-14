@@ -1,0 +1,914 @@
+.main {
+  overflow: hidden;
+}
+
+.customer-welcome {
+  margin: auto;
+  border: 1px solid grey;
+  border-radius: 10px;
+  width: 393px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  background-color: #ffffff;
+
+}
+.scroll{
+  height: 250px;
+  overflow-y: scroll;
+}
+.scrolling{
+  height: 629px;
+  overflow-y: scroll;
+}
+.scroll-not-accepeted{
+  height: 90vh;
+  overflow-y: scroll;
+}
+.proposal-scrolling{
+  height: 400px;
+  overflow-y: scroll;
+}
+.proposal-scroll{
+  height: 629px;
+  overflow-y: scroll;
+}
+/* .col-lg-6 {
+  overflow: hidden;
+} */
+
+.rightColoumn {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
+  background: linear-gradient(270deg, #EEF5FC 0%, #C3D9ED 100%);
+}
+
+.toolbar {
+  background-color: #005AAA;
+  width: 393px;
+  height: 261px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  /* display: flex; */
+  /* align-items: center; */
+}
+
+.home {
+  display: flex;
+}
+
+.backspace {
+  margin-top: 50px;
+  color: #FFFFFF;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.my-home {
+  margin-top: 52px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #FFFFFF;
+  margin-left: 5px;
+}
+
+.d-applications {
+  font-weight: 700;
+  font-size: 24px;
+  color: #FFFFFF;
+  width: 101px;
+  line-height: 31px;
+  margin-left: 20px;
+  margin-top: 15px;
+}
+
+.policy-dtls {
+  font-size: 14px;
+  font-weight: 500;
+  /* margin-left: 18px;
+  margin-top: 12px; */
+  color: #7D848D;
+  /* width: 100px; */
+}
+
+
+/* .total-loans {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-left: -41px;
+} */
+
+.card {
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  box-shadow: 0px 0px 8px rgba(77, 127, 174, 0.2);
+  border-radius: 16px;
+  width: 345px;
+  /* height: 186px; */
+  margin-top: -70px;
+
+}
+
+.cards {
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  box-shadow: 0px 0px 8px rgba(77, 127, 174, 0.2);
+  border-radius: 16px;
+  width: 345px;
+  /* height: 186px; */
+
+}
+.customer-cards{
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  box-shadow: 0px 0px 8px rgba(77, 127, 174, 0.2);
+  border-radius: 16px;
+  width: 345px;
+  margin-left: -10px;
+}
+.cards-section{
+  margin-top: -55px;
+  padding-left: 10px;
+}
+
+.cards-flex{
+  width: 165px;
+  margin-left: 5px;
+  /* margin-top: -55px; */
+  padding: 10px;
+}
+
+.cards-flexs {
+  width: 165px;
+  height: 103px;
+  margin-right: -28px;
+  cursor: pointer;
+  margin-top: -57px;
+}
+.cards-flexss {
+  width: 165px;
+  height: 103px;
+  margin-right: 126px;
+  cursor: pointer;
+  margin-top: 9px;
+  margin-left: 30px;
+}
+
+.arrow-flex {
+  display: flex;
+}
+
+.arrow-flexs {
+  display: flex;
+}
+
+
+.policydtls-num {
+  font-size: 24px;
+  font-weight: 700;
+  /* margin-left: 18px; */
+  margin-top: 4px;
+}
+
+.right-arrow {
+  margin-bottom: 8px;
+  cursor: pointer;
+  display: flex;
+  margin-top: 3rem;
+}
+
+.all-app {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 21px;
+  color: #7D848D;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.customer-flexs {
+  display: flex;
+  margin-left: -85px;
+  margin-top: 15px;
+  width: 140%;
+}
+
+.customer-img {
+  margin-left: -15px;
+}
+
+.section {
+  margin-left: 10px;
+  margin-bottom: 25px;
+  width: 200px;
+}
+
+.customer-name {
+  color: #041427;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.gold-policy {
+  margin-top: -10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7D848D;
+}
+
+.loan-success {
+  color: #E59510;
+  margin-top: -10px;
+}
+
+.double-emi {
+  font-size: 14px;
+  font-weight: 500;
+  color: #E59510;
+  margin-top: -10px;
+}
+
+.cust-details {
+  font-size: 14px;
+  font-weight: 500;
+  color: #E59510;
+  width: 205px;
+  margin-top: -10px;
+}
+
+.document-pending {
+  color: #041427;
+  font-size: 24px;
+  font-weight: 700;
+  width: 224px;
+}
+
+.loans-flex {
+  display: flex;
+  margin-left: 17px;
+  margin-top: -8px;
+}
+.loans {
+  border: 1px solid #E5E5E5;
+  border-radius: 16px;
+  width: 97px;
+  height: 22px;
+  margin-left: 36px;
+  margin-top: -19px;
+  text-align: center;
+  padding-top: 0px;
+}
+
+.loanss {
+  border: 1px solid #E5E5E5;
+  border-radius: 16px;
+  width: 100px;
+  margin-left: -67px;
+  margin-top: -20px;
+  text-align: center;
+  padding-top: 2px;
+}
+
+
+.loan-span {
+  font-size: 12px;
+  font-weight: 400;
+  color: #7D848D;
+}
+
+.ten-lacs {
+  font-size: 12px;
+  font-weight: 700;
+  color: #041427;
+  margin-left: 6px;
+}
+/* .mat-mdc-dialog-container .mdc-dialog__surface {
+  margin-left: 1% !important;
+  margin-top: 129px;
+} */
+.emi-flex {
+  border: 1px solid #E5E5E5;
+  width: 124px;
+  height: 22px;
+  margin-left: 5px;
+  margin-top: -19px;
+  border-radius: 16px;
+  text-align: center;
+}
+.days-remain {
+  border: 1px solid #E5E5E5;
+  width: 124px;
+  height: 22px;
+  margin-left: 5px;
+  margin-top: -19px;
+  border-radius: 16px;
+  text-align: center;
+  background-color: rgba(197, 39, 39, 0.07);
+
+}
+
+.emis-outstnd {
+  font-size: 12px;
+  font-weight: 400;
+  color: #7D848D;
+}
+
+.five-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: #041427;
+  margin-left: 3px;
+}
+
+.emi-paid-flex {
+  border: 1px solid #E5E5E5;
+  width: 85px;
+  height: 22px;
+  border-radius: 16px;
+  text-align: center;
+  margin-top: 3px;
+  margin-left: 37px;
+}
+
+.emis-paid {
+  font-size: 12px;
+  font-weight: 400;
+  color: #7D848D;
+}
+
+.three-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: #041427;
+}
+
+.mat-expansion-panel-header:not([aria-disabled=true]) {
+  cursor: pointer;
+  height: 150px;
+}
+
+.mat-accordion .mat-expansion-panel:last-of-type {
+  width: 345px;
+  margin: auto;
+  border-radius: 16px;
+  margin-top: 20px;
+}
+
+::ng-deep.mat-expansion-indicator {
+  margin-top: -98px;
+}
+
+.cust-props {
+  color: #7D848D;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 1px;
+}
+
+.date {
+  color: #041427;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.call-customer {
+  display: flex;
+}
+
+.call-cust {
+  width: 148px;
+  height: 52px;
+  background-color: #005AAA;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-left: -7px;
+}
+
+.view-dtls {
+  width: 148px;
+  height: 52px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  background: #FFFFFF !important;
+  margin-left: 15px;
+  color: #005AAA;
+}
+.customer-drop-out{
+  color: #041427;
+  font-size: 24px;
+  font-weight: 700;
+  width: 256px;
+}
+.vert {
+  margin-left:71px;
+  color: #0358A8;
+  cursor: pointer;
+  margin-top: -16px;
+}
+.proposal-not-accept{
+  color: #041427;
+  font-size: 24px;
+  font-weight: 700;
+  width: 254px;
+}
+
+.horizontal-line {
+  margin-top: 1px;
+}
+.hrzontal-line{
+  margin-left: -12px;
+  margin-top: 10px;
+}
+
+.more-flex {
+  display: flex;
+}
+::ng-deep .mat-expansion-indicator::after {
+  color: #0358A8;
+}
+
+/* loans process css */
+.mat-icon {
+  -webkit-user-select: none;
+  user-select: none;
+  background-repeat: no-repeat;
+  display: inline-block;
+  fill: currentColor;
+  height: 24px;
+  width: 24px;
+  overflow: hidden;
+}
+
+/* .material-icons {
+    margin-left: 84px;
+    color:#0358A8;
+} */
+.loansprocess {
+  display: flex;
+}
+
+.loansprocess p {
+  margin-top: 20px;
+  margin-left: 10px;
+  color: #041427;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+
+.keybackspace {
+  margin-top: 18px;
+  margin-left: 13px;
+  cursor: pointer;
+}
+
+.documents {
+  margin-left: 25px;
+  margin-top: 15px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 31px;
+  letter-spacing: -0.02em;
+  color: #041427;
+  width: 100px;
+
+
+}
+
+.showingresult {
+  font-size: 16px;
+  font-weight: 700;
+  color: #7D848D;
+  margin-left: 27px;
+}
+
+.imgeincmplt {
+  display: flex;
+  margin-left: -1px;
+}
+
+.imgeincmplt img {
+  margin-bottom: 9px;
+  margin-right: 5px;
+}
+
+.vert-icon {
+  margin-left: 92px;
+  color: #0358A8;
+  cursor: pointer;
+}
+
+
+
+/* customerflex css */
+
+
+.customer-flex {
+  display: flex;
+  margin-top: 14px;
+  margin-left: 10px;
+}
+
+.paninfo-content {
+  line-height: 0.6;
+  margin-left: 10px;
+  font-weight: 700;
+  font-size: 20px;
+  color: #041427;
+  margin-top: 12px;
+}
+
+.stars {
+  font-weight: 400;
+  font-size: 12px;
+  color: #041427;
+}
+
+.documentaion-flex {
+  margin-top: 40px;
+  margin-left: 25px;
+}
+
+.pdfjpg {
+  font-weight: 400;
+  font-size: 14px;
+  color: #7D848D;
+}
+
+.documentation {
+  font-weight: 700;
+  font-size: 16px;
+  color: #7D848D;
+}
+
+.box-shadow {
+  border: 1px solid #FFFFFF;
+  width: 392px;
+  margin-left: -12px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 10px rgba(77, 127, 174, 0.2);
+  border-radius: 24px 24px 10px 10px;
+  margin-top: 34px;
+}
+
+
+.adharinfo {
+  font-weight: 700;
+  margin-top: 15px;
+  margin-left: 25px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #041427;
+}
+
+.adhar-label {
+  color: #041427 !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+
+.uploadimg {
+  display: none;
+}
+
+.imguploadText {
+  width: 85%;
+  color: #041427;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.afteruploaded {
+  width: 85%;
+  font-size: 12px;
+  padding: 1px
+}
+
+.imgcls {
+  margin-bottom: 10px;
+  margin-right: 15px;
+}
+
+.fileupload {
+  border: 2px dotted #0358A8;
+  border-radius: 5px;
+  height: 46px;
+  width: 345px;
+  border-radius: 10px;
+  padding-left: 10px;
+  margin-top: 16px;
+  margin-left: 25px;
+}
+
+.uploadlabel-Added {
+  width: 100%;
+}
+
+.d-flex {
+  display: flex !important;
+  margin-top: 10px;
+}
+
+.uploaded {
+  border: 2px dotted green;
+  overflow: hidden;
+}
+
+.notupload {
+  border: 2px dotted red;
+
+}
+
+.done-btn {
+  background: #005AAA;
+  box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+  border-radius: 12px;
+  width: 345px;
+  height: 48px;
+  margin-left: 26px;
+  margin-top: -12px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+
+
+.loans-rejected-flex{
+  display: flex;
+}
+
+.ng-select.loansinprocess::ng-deep .ng-arrow {
+  display: none;
+  
+}
+
+.ng-select.loansinprocess::ng-deep .ng-arrow-wrapper {
+  width: 27px;
+  background-image: url('/assets/CaretDownarrow.svg');
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  margin-top: -5px;
+  
+}
+
+
+.ng-select-opened.loansinprocess ::ng-deep .ng-arrow-wrapper {
+  background-image: url('/assets/Caretuparrow.svg');
+  color: 
+  #005AAA !important;
+  
+}
+
+::ng-deep.loansinprocess.ng-select.loansinprocess .ng-has-value .ng-placeholder {
+  display: none;
+}
+
+::ng-deep.loansinprocess.ng-select {
+  border: #C6C6C6 1.5px solid;
+  height: 36px !important;
+  padding: 10px;
+  background: white;
+  margin-left: 195px !important;
+  margin-top: -60px !important;
+  width: 46% !important;
+  border-radius: 24px;
+  background-color: #FFFFFF;
+  color: #005AAA;
+ 
+}
+ ::ng-deep.ng-select div, .ng-select input, .ng-select span {
+  box-sizing: border-box;
+  padding-left: 6px;
+}
+.calenderimg{
+  width: 0;
+  left: 55%;
+  top: -26px;
+  position: relative;
+   
+}
+::ng-deep.loansinprocess .ng-dropdown-panel{
+  margin-top: 10px;
+  background: white;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
+border-radius: 8px;
+  width: 163px;
+  margin-left: -24px;
+
+}
+::ng-deep.loansinprocess .ng-dropdown-panel .ng-dropdown-panel-items .ng-option{
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-bottom: 1px solid rgb(236, 228, 228);
+  padding: 6px;
+  color: black;
+}
+::ng-deep.loansinprocess .ng-dropdown-panel .ng-dropdown-panel-items .ng-option:hover{
+color: #005AAA;
+}
+::ng-deep.loansinprocess .ng-dropdown-panel .scroll-host{
+padding: 0;
+}
+
+
+
+.card-details {
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  box-shadow: 0px 0px 8px rgba(77, 127, 174, 0.2);
+  border-radius: 16px;
+  width: 345px;
+  /* height: 186px; */
+  margin-top: 15px;
+}
+
+.daterangec {
+    margin-left: -193px;
+    width: 174px;
+     font-size: 13px;
+  color: white;
+  }
+
+
+
+
+.date {
+    color: #041427;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+
+.display-cards{
+  display: flex;
+}
+
+ .cust-props {
+    color: #7D848D;
+    font-size: 14px;
+    font-weight: 400;
+    width: 184px;
+    margin-bottom: 1px;
+  }
+  ::ng-deep.mat-date-range-input-container {
+    display: flex;
+    align-items: center; 
+    content-visibility: hidden;
+    display: none !important;
+}
+
+.datetag-flex{
+  display: flex;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+    /* margin-left: 20px; */
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+.daterangec{
+margin-left: 73px;
+    margin-top: 14px;
+    position: absolute;
+}
+.mat-datepicker-toggle {
+  pointer-events: auto;
+  display: none;
+}
+.mat-datepicker-toggle p[_ngcontent-rxw-c204] {
+ margin-left: 30px;
+}
+.datetag{
+  color: #FFFFFF;
+  margin-top: -16px;
+  margin-left: 30%;
+}
+.selected-option::after{
+  content:'\2713;'
+}
+.checkmark{
+  margin-left: 39px;
+}
+.maticonclass{
+  padding-top: 2px;
+  margin-left: -12px;
+}
+.relayicon{
+  margin-right: 100px;
+  color:#255AAB;
+}
+.relayicon :hover{
+  color:gray;
+}
+.apply{
+  margin-top: -20px;
+  border: none;
+    background-color: white;
+    color: #2791E0;
+    cursor: pointer;
+}
+.cancel{
+  margin-top: -20px;
+}
+.amounttext{
+  color: white;
+  margin-left: 20px;
+}
+
+.fileupload {
+  border: 2px dotted #0358A8;
+  border-radius: 5px;
+  height: 46px;
+  width: 345px;
+  border-radius: 10px;
+  padding-left: 10px;
+  margin-top: 16px;
+}
+.uploadimg {
+  display: none;
+}
+.uploadlabel-Added {
+  width: 100%;
+}
+.imguploadText {
+  width: 85%;
+  color: #0358A8;
+  font-weight: 400;
+  font-size: 16px;
+}
+.afteruploaded {
+  width: 85%;
+  font-size: 12px;
+  padding: 1px;
+  content-visibility: auto;
+}
+.imgcls {
+  margin-bottom: 10px;
+  margin-left:4px;
+  margin-right: -3px;
+}
+
+.kyc-Btn {
+  background: #005AAA;
+  box-shadow: inset 0px 0px 10px 6px rgba(0, 90, 170, 0.02);
+  border-radius: 12px;
+  width: 345px;
+  margin-left: 28px;
+  height: 52px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+button.btn[disabled] {
+  background: #C8DCEE;
+  border: 1px solid #C8DCEE;
+}
+.uploaded {
+  border: 2px dotted green;
+  overflow: hidden;
+}
+.notupload {
+  border: 2px dotted red;
+
+}
+.call-custs{
+  width: 313px;
+  height: 52px;
+  background-color: #005AAA;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-left: -2px;
+}
+.view-dtlss{
+  width: 313px;
+  height: 52px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  background: #FFFFFF !important;
+  margin-left: -2px;
+  color: #005AAA;
+  margin-top: 10px;
+}
+.distributor-profile{
+  width: 52px;
+  height: 51px;
+  border-radius: 50%;
+  margin-left: -15px;
+
+
+}

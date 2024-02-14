@@ -1,0 +1,232 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+            <div class="col-lg-6 rightColoumn">
+                <div class="distrbtr-welcome">
+                    <div class="morevert-flex">
+                        <mat-icon class="back-arrw" (click)="back()">keyboard_backspace</mat-icon>
+                        <!-- <p class="pol-dtls">Uploaded Policy Details</p> -->
+                        <span [ngSwitch]="proposalStatus">
+                            <p *ngSwitchCase="'LOAN_REJECTED'" class="pol-dtls">
+                                Loan rejected
+                            </p>
+                            <p *ngSwitchCase="'LOAN_DISPURSED'" class="pol-dtls">
+                                Uploaded Policy Details
+                            </p>
+                            <p *ngSwitchCase="'POLICY_UPLOADED'" class="pol-dtls">
+                                Uploaded Policy Details
+                            </p>
+                            <p *ngSwitchCase="'PROPOSAL_NOT_ACCEPTED'" class="pol-dtls">
+                                Loans In Process
+                            </p>
+                            <p *ngSwitchCase="'DOCUMENT_PENDING'" class="pol-dtls">
+                                Loans In Process
+                            </p>
+                            <p *ngSwitchCase="'ACCEPTED'" class="pol-dtls">
+                                Loans In Process
+                            </p>
+                            <p *ngSwitchCase="'DROP_OUT'" class="pol-dtls">
+                                Proposal dropped out
+                            </p>
+                            <p *ngSwitchCase="'LOAN_INITIATED'" class="pol-dtls">
+                                Loan Initiated
+                            </p>
+                            <!-- <p *ngSwitchDefault class="PROPOSAL_NOT_ACCEPTED ">
+                                Uploaded Policy Details
+                            </p> -->
+                        </span>
+                        <!-- <mat-icon class="vert" (click)="openFileExplorer()">more_vert</mat-icon> -->
+                        <img src="../../../assets/three-dots.svg" class="three-dots"
+                            *ngIf="proposalStatus == 'LOAN_DISPURSED' && 'POLICY_UPLOADED'">
+                        <input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)">
+                    </div>
+                    <div class="container">
+                        <div class="edit-customer-flex">
+                            <div>
+                                <img src="../../assets/profile pic -img.png" class="distributor-profile">
+                            </div>
+                            <div class="anitha-flex">
+                                <p class="anitha-name">{{customerDetails?.proposer?.proposerName}}</p>
+                                <p class="policy-gold">{{customerDetails?.policy?.productName}}</p>
+                                <p class="policy-gold">{{allDetails?.proposalDetailsDto?.displayStatus}}</p>
+                                <span [ngSwitch]="proposalStatus">
+                                    <p *ngSwitchCase="'LOAN_REJECTED'" class="loan-rejected">
+                                        Loan rejected
+                                    </p>
+                                    <p *ngSwitchCase="'LOAN_DISPURSED'" class="loan-disbursed">
+                                        Loan disbursed successfully
+                                    </p>
+                                    <p *ngSwitchCase="'DOCUMENT_PENDING'" class="documents-pending">
+                                        Documentation Pending
+                                    </p>
+                                    <p *ngSwitchCase="'POLICY_UPLOADED'" class="loan-disbursed">
+                                        Uploaded Policy Details
+                                    </p>
+                                    <p *ngSwitchCase="'PROPOSAL_NOT_ACCEPTED'" class="documents-pending">
+                                        Proposal Not Accepted
+                                    </p>
+                                    <p *ngSwitchCase="'ACCEPTED'" class="loan-success">
+                                        Proposal Accepted
+                                    </p>
+                                    <p *ngSwitchCase="'DROP_OUT'" class="documents-pending">
+                                        Proposal dropped out
+                                    </p>
+                                </span>
+                            </div>
+                            <!-- <div>
+                                <img (click)="showCustomerPhNumber()" class="phone-imgs"
+                                    src="../../assets/phone-img.svg">                                           commented phone icon symbol
+                                <p *ngIf="showData" class="displayNumber">{{displayNumber}}</p>
+                            </div> -->
+                        </div>
+                        <hr>
+                        <div class="Proposal_details" >
+                            <div>
+                                <p class="prpsl-dtls">PROPOSAL DETAILS</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Insurer</p>
+                                <p class="ani-name">{{allDetails?.insurerDetailsDto.insurerName}}</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Proposer Name</p>
+                                <p class="ani-name">{{allDetails?.proposalDetailsDto.customerName|titlecase}}</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Product Category</p>
+                                <p class="ani-name">{{allDetails?.proposalDetailsDto.productCategory}}</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Product Type</p>
+                                <p class="ani-name">{{allDetails?.proposalDetailsDto.productTypeName}}</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Product Name</p>
+                                <p class="ani-name">{{allDetails?.proposalDetailsDto.productName}}</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Proposal Number</p>
+                                <p class="ani-name">{{allDetails?.proposalDetailsDto.proposalNumber}}</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Date of Proposal</p>
+                                <p class="ani-name">{{ allDetails?.proposalDetailsDto.dateOfProposal }}</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Policy Tenure</p>
+                                <p class="ani-name">{{allDetails?.proposalDetailsDto.policyTenure}}</p>
+                            </div>
+                            <!-- <div class="proposal-name">
+                                                        <p class="Proposer-name">Product Category</p>
+                                                        <p class="ani-name">{{allDetails?.proposalDetailsDto.productCategory}}</p>
+                                                    </div> -->
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Policy Premium Amount (₹)</p>
+                                <p class="ani-name">{{allDetails?.proposalDetailsDto.premiumAmount | number}}</p>
+                            </div>
+                            <div class="proposal-name">
+                                <p class="Proposer-name">Loan Amount (₹)</p>
+                                <p class="ani-name">{{allDetails?.proposalDetailsDto.policyAmount | number}}</p>
+                            </div>
+                        </div>
+                      <hr>
+                        <!-- INSURER BANK ACCOUNT DETAILS -->
+                        <P class="insurerHead">INSURER BANK ACCOUNT DETAILS</P>
+                        <div class="proposal-name mt-3">
+                            <p class="Proposer-name">Account Name</p>
+                            <p class="ani-name">{{allDetails?.proposalDetailsDto?.bankAccountDetails?.companyName}}</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">Bank Name</p>
+                            <p class="ani-name">{{allDetails?.proposalDetailsDto?.bankAccountDetails?.bankName}}</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">Account Number</p>
+                            <p class="ani-name">{{allDetails?.proposalDetailsDto?.bankAccountDetails?.accountNumber}}</p>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">IFSC</p>
+                            <p class="ani-name">{{allDetails?.proposalDetailsDto?.bankAccountDetails?.ifscCode}}</p>
+                        </div>
+                       
+                          <hr>
+                             <!-- PROPOSAL STATUS -->
+
+                       <div class="proposalStatus">
+                        <div class="proposal-name">
+                            <p class="Proposer-namee">Proposal Status</p>
+                            <!-- <p class="ani-name loan-successfully">{{customerDetails?.displayStatus}}</p> -->
+                            <span [ngSwitch]="proposalStatus">
+                                <p *ngSwitchCase="'LOAN_REJECTED'" class="loan-rejected">
+                                    Loan rejected
+                                </p>
+                                <p *ngSwitchCase="'LOAN_DISPURSED'" class="loan-disbursed">
+                                    Loan disbursed successfully
+                                </p>
+                                <p *ngSwitchCase="'DOCUMENT_PENDING'" class="documents-pending">
+                                    Documentation Pending
+                                </p>
+                                <p *ngSwitchCase="'PROPOSAL_NOT_ACCEPTED'" class="documents-pending">
+                                    Proposal Not Accepted
+                                </p>
+                                <p *ngSwitchCase="'DROP_OUT'" class="documents-pending">
+                                    Proposal Dropped Out
+                                </p>
+                                <p *ngSwitchCase="'POLICY_UPLOADED'" class="loan-disbursed">
+                                    Policy Uploaded
+                                </p>
+                                <p *ngSwitchCase="'ACCEPTED'" class="loan-disbursed">
+                                    proposal Accepted
+                                </p>
+                                <p *ngSwitchDefault class="loan-disbursed">
+                                    <!-- {{customerDetails?.displayStatus}} -->
+                                </p>
+                            </span>
+                        </div>
+                        <div class="proposal-name">
+                            <p class="Proposer-name">Policy upload status</p>
+                            <p class="ani-name" *ngIf="customerDetails?.policy.policyDocument !== null">
+                                {{customerDetails?.proposalStatus?.documentation}}</p>
+                            <div class="pdf-complete-download" *ngIf="customerDetails?.policy?.policyDocument !== null">
+                                <div class="row mb-3">
+                                    <div class="col-2">
+                                        <img src="../../../assets/FilePdf.img.svg" class="pdf-file">
+                                    </div>
+                                    <div class="col-7">
+                                        <span class="policy-complete-pdf">Policycompleted.PDF</span>
+                                        <img src="../../../assets/CheckCircle.svg">
+                                    </div>
+                                    <div class="col-3">
+                                        <p class="pdf-download" (click)="downloadPdf(policyDocument)">Download
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="policy-not-upload mb-5" *ngIf="customerDetails?.policy?.policyDocument === null">
+                            <div class="proposal-name">
+                                <div class="row">
+                                    <div class="col-1">
+                                        <mat-icon class="error">error_outline</mat-icon>
+                                    </div>
+                                    <div class="col-7">
+                                        <span class="policy-pdf-not-upload">Policy PDF not uploaded</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="upload-document-now">Upload Now</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container mb-3 mt-5" *ngIf="proposalStatus === 'DROP_OUT'">
+                            <button class="btn btn-primary dashboard-btn" (click)="navigateToDashboard()">Back to
+                                Dashboard</button>
+                        </div>
+                   
+                       </div>
+                </div>
+            </div>
+        </div>

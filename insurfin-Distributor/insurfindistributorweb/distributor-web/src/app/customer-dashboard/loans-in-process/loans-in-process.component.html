@@ -1,0 +1,617 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+
+            <div class="col-lg-6 rightColoumn">
+                <div class="customer-welcome">
+                    <div *ngIf="sharedService.loansInProcess">
+                        <div class="toolbar container">
+                            <div class="home">
+                                <mat-icon class="backspace"
+                                    routerLink="/distributor-dashboard">keyboard_backspace</mat-icon>
+                                <p class="my-home">Home</p>
+                            </div>
+                            <div>
+                                <p class="d-applications">Loans in Process </p>
+                            </div>
+                            <div>
+                                <ng-select class="loansinprocess" [items]="dropdown" [clearable]="false"
+                                    [searchable]="false" placeholder="This week" (change)="onDropdownChange()"
+                                    [(ngModel)]="selectedOption" bindLabel="" bindValue="">
+                                    <ng-template ng-option-tmp let-item="item">{{item}}
+                                        <span *ngIf="selectedOption === item" class="checkmark"><mat-icon
+                                                class="maticonclass">check_circle</mat-icon></span>
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                            <div *ngIf="selectedOption === 'Custom'" class="daterangec">
+                                <!-- at-label>Enter a date range</mat-label> -->
+                                <p class="datetag">{{ getFormattedDateRange() }}</p>
+                                <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                                    <input matStartDate formControlName="start" placeholder="Start date"
+                                        (dateInput)="formatDateEvent($event.target.value, 'start')" />
+
+                                    <input matEndDate formControlName="end" placeholder="End date"
+                                        (dateInput)="formatDateEvent($event.target.value, 'end')" />
+
+                                </mat-date-range-input>
+
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+
+                                <!-- <p class="datetag">{{ getFormattedDateRange() }}</p> -->
+                                <mat-date-range-picker #picker>
+
+                                    <mat-date-range-picker-actions>
+                                        <span matDateRangePickerApply><mat-icon class="relayicon"
+                                                (click)="reset()">replay</mat-icon></span>
+                                        <button mat-button matDateRangePickerCancel class="cancel"
+                                            (click)="reset()">Cancel</button>
+                                        <button class="apply" matDateRangePickerApply>Apply</button>
+                                    </mat-date-range-picker-actions>
+
+                                </mat-date-range-picker>
+
+                                <!-- Custom date picker component -->
+
+                            </div>
+
+                            <div class="calenderimg">
+                                <img src="../../assets/calender.svg">
+                            </div>
+                            <div class="datetag-flex">
+                                <p class="amounttext">Amount: ₹ {{ loanInProcessTotal.toLocaleString('en-IN') }} /-</p>
+                                <p class="datetag">{{ getFormattedDateRange() }}</p>
+                            </div>
+                        </div>
+                        <div class="cards-section">
+                            <div class="row ">
+                                <div class="total-loans col-6" (click)="proposalNotAccept()">
+                                    <div class="row cards cards-flex">
+                                        <div class="col-9">
+                                            <p class="policy-dtls">Proposal not accepted</p>
+                                            <p class="policydtls-num">{{getCountByFeild('PROPOSAL_NOT_ACCEPTED')}}</p>
+                                        </div>
+                                        <div class="col-3">
+                                            <img src="../../assets/CaretRight.svg" class="right-arrow">
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="total-loans col-6" (click)="customerdrop()">
+                                    <div class="row customer-cards cards-flex">
+                                        <div class="col-9">
+                                            <p class="policy-dtls">Proposal dropped out</p>
+                                            <p class="policydtls-num">{{getCountByFeild('PROPOSAL_DROP_OUT')}}</p>
+                                        </div>
+                                        <div class="col-3">
+                                            <img src="../../assets/CaretRight.svg" class="right-arrow">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="total-loans col-6" (click)="loansProposalAccepted()">
+                                    <div class="row cards cards-flex">
+                                        <div class="col-9">
+                                            <p class="policy-dtls">Proposal accepted</p>
+                                            <p class="policydtls-num">{{getCountByFeild('PROPOSAL_ACCEPTED')}}</p>
+                                        </div>
+                                        <div class="col-3">
+                                            <img src="../../assets/CaretRight.svg" class="right-arrow">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="total-loans col-6" (click)="loanInitiated()">
+                                    <div class="row cards cards-flex">
+                                        <div class="col-9">
+                                            <p class="policy-dtls">Loan Initiated</p>
+                                            <p class="policydtls-num">{{getCountByFeild('LOAN_INITIATED')}}</p>
+                                        </div>
+                                        <div class="col-3">
+                                            <img src="../../assets/CaretRight.svg" class="right-arrow">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="container">
+                            <p class="all-app">All {{loansINProcessTotalcount()}} loans in process</p>
+                        </div>
+                        <div class="scroll">
+                            <div class="mb-3">
+                                <mat-accordion *ngFor="let proposal of filteredCustomerList; let i=index">
+                                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                        (closed)="panelOpenState = false">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                <!-- <img src="../../assets/profile pic -img.png" class="distributor-profile"> -->
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                                <div>
+                                                    <div class="customer-flex">
+                                                        <div>
+                                                            <img src="../../assets/profile pic -img.png"
+                                                                class="distributor-profile">
+                                                        </div>
+                                                        <div class="section">
+                                                            <p class="customer-name">{{proposal.customerName}}</p>
+                                                            <p class="gold-policy">{{proposal.policyProductName}}</p>
+                                                            <p class="double-emi">{{proposal.displayStatus}} </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="loans-flex">
+                                                        <div class="loans">
+                                                            <span class="loan-span">Loan</span><span
+                                                                class="ten-lacs">₹{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</span>
+                                                        </div>
+                                                        <!-- <div class="emi-flex">
+                                                            <span class="emis-outstnd">Days remaining</span><span
+                                                                class="five-num"> ---</span>
+                                                        </div> -->
+                                                    </div>
+                                                    <!-- <div class="emi-paid-flex">
+                                                        <span class="emis-paid">EMIs Paid</span><span class="three-num">
+                                                            3</span>
+                                                    </div> -->
+                                                </div>
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <div>
+                                            <div>
+                                                <hr class="horizontal-line">
+                                            </div>
+                                            <div class="more-flex">
+                                                <div>
+                                                    <p class="cust-props">Customer Proposal Number</p>
+                                                    <p class="date">{{proposal?.proposalNumber}}</p>
+                                                </div>
+                                                <img src="../../assets/three-dots.svg" mat-raised-button
+                                                    (click)="openBottomSheet(proposal)" class="vert-icon"
+                                                    *ngIf="proposal.proposalStatus == 'PROPOSAL_NOT_ACCEPTED' && 'DOCUMENT_PENDING'">
+                                            </div>
+                                            <div>
+                                                <p class="cust-props">Policy Date</p>
+                                                <p class="date">{{proposal?.displayDate}}</p>
+                                            </div>
+                                            <div>
+                                                <p class="cust-props">Premium Amount (₹)</p>
+                                                <p class="date">₹{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                            </div>
+                                            <div>
+                                                <p class="cust-props">Loan Amount (₹)</p>
+                                                <p class="date">₹{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="call-customer" *ngIf="proposal.proposalStatus == 'PROPOSAL_ACCEPTED'">
+                                            <div>
+                                                <button class="btn btn-primary call-cust">Call Customer</button>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-outline-primary view-dtls"
+                                                    (click)="viewProposalDetails(proposal)">View Details</button>
+                                            </div>
+                                        </div>
+                                        <div class="call-customer" *ngIf="proposal.proposalStatus == 'PROPOSAL_DROP_OUT'">
+                                            <div>
+                                                <button class="btn btn-primary call-cust">Call Customer</button>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-outline-primary view-dtls"
+                                                    (click)="viewProposalDetails(proposal)">View Details</button>
+                                            </div>
+                                        </div>
+                                        <div class="call-customer" *ngIf="proposal.proposalStatus == 'LOAN_INITIATED'">
+                                            <div>
+                                                <button class="btn btn-primary call-cust">Call Customer</button>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-outline-primary view-dtls"
+                                                    (click)="viewProposalDetails(proposal)">View Details</button>
+                                            </div>
+                                        </div>
+                                        <div class="call-customers" *ngIf="proposal.proposalStatus == 'PROPOSAL_NOT_ACCEPTED' && 'DOCUMENT_PENDING'">
+                                            <!-- <div>
+                                                <button class="btn btn-primary call-custs"
+                                                    (click)="reminderForDocuments(proposal)"
+                                                    [disabled]="!(proposal.innerDisplayStatus == 'Documents Pending')">Remind
+                                                    now for documentation</button>
+                                            </div> -->
+                                            <div>
+                                                <button class="btn btn-outline-primary view-dtlss"
+                                                    (click)="resendpopup(proposal)"
+                                                    >Resend
+                                                    proposal link</button>
+                                            </div>
+                                        </div>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div *ngIf="sharedService.proposalAccepted" class="proposal-scroll">
+                        <div class="loansprocess">
+                            <mat-icon class="keybackspace" (click)="backspace()">keyboard_backspace</mat-icon>
+                            <p>Loans in process</p>
+                        </div>
+                        <div class="documents">
+                            <p class="document-pending">Proposal Accepted</p>
+                        </div>
+                        <div>
+                            <p class="showingresult">Showing {{getCountByFeild('PROPOSAL_ACCEPTED')}} results</p>
+                        </div>
+                        <div class="mb-3 proposal-scrolling">
+                            <mat-accordion *ngFor="let proposal of proposalAccept; let i=index">
+                                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                            <!-- <img src="../../assets/profile pic -img.png" class="distributor-profile"> -->
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            <div class="customer-profile">
+                                                <div class="customer-flex">
+                                                    <div>
+                                                        <img src="../../assets/profile pic -img.png"
+                                                            class="distributor-profile">
+                                                    </div>
+                                                    <div class="section">
+                                                        <p class="customer-name">{{proposal.customerName}}</p>
+                                                        <p class="gold-policy">{{proposal.policyProductName}}</p>
+                                                        <p class="loan-success">{{proposal.displayStatus}} </p>
+                                                    </div>
+                                                </div>
+                                                <div class="loans-flex">
+                                                    <div class="loans">
+                                                        <span class="loan-span">Loan</span><span
+                                                            class="ten-lacs">{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</span>
+                                                    </div>
+                                                    <!-- <div class="emi-flex">
+                                                        <span class="emis-outstnd">Days remaining</span><span
+                                                            class="five-num">----</span>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                        </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                    <div>
+                                        <div>
+                                            <hr class="horizontal-line">
+                                        </div>
+                                        <div class="more-flex">
+                                            <div>
+                                                <p class="cust-props">Customer Proposal Number</p>
+                                                <p class="date">{{proposal?.proposalNumber}}</p>
+                                            </div>
+                                            <!-- <img src="../../assets/three-dots.svg" mat-raised-button
+                                                (click)="openBottomSheet(proposal)" class="vert-icon"> -->
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">Policy Date</p>
+                                            <p class="date">{{proposal?.displayDate}}</p>
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">Premium Amount (₹)</p>
+                                            <p class="date">₹{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                        </div>
+                                        <!-- <div>
+                                            <p class="cust-props">Documentation</p>
+                                        </div> -->
+                                        <!-- <div class="imgeincmplt">
+                                            <img src="../../../assets/red alert img.svg">
+                                            <p class="date">Incomplete</p>
+                                        </div> -->
+                                    </div>
+                                    <div class="call-customer">
+                                        <div>
+                                            <button class="btn btn-primary call-cust">Call Customer
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-outline-primary view-dtls"
+                                                (click)="viewProposalDetails(proposal)">View Details</button>
+                                        </div>
+                                    </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </div>
+
+                    </div>
+
+
+                    <div *ngIf="sharedService.loanInitiate" class="scrolling">
+
+                        <div class="loansprocess">
+                            <mat-icon class="keybackspace" (click)="loanInitiatePage()">keyboard_backspace</mat-icon>
+                            <p>Loans in process</p>
+                        </div>
+                        <div class="documents">
+                            <p class="customer-drop-out">Loan Initiated</p>
+                        </div>
+                        <div>
+                            <p class="showingresult">Showing {{getCountByFeild('LOAN_INITIATED')}} results</p>
+                        </div>
+                        <div class="mb-3">
+                            <mat-accordion *ngFor="let proposal of loanInitiation; let i=index">
+                                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                            <!-- <img src="../../assets/profile pic -img.png" class="distributor-profile"> -->
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            <div>
+                                                <div class="customer-flex">
+                                                    <div>
+                                                        <img src="../../assets/profile pic -img.png"
+                                                            class="distributor-profile">
+                                                    </div>
+                                                    <div class="section">
+                                                        <p class="customer-name">{{proposal.customerName}}</p>
+                                                        <p class="gold-policy">{{proposal.policyProductName}}</p>
+                                                        <p class="double-emi">{{proposal.displayStatus}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="loans-flex">
+                                                    <div class="loans">
+                                                        <span class="loan-span">Loan</span><span
+                                                            class="ten-lacs">{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</span>
+                                                    </div>
+                                                    <!-- <div class="emi-flex">
+                                                        <span class="emis-outstnd">Days remaining</span><span
+                                                            class="five-num"> ---</span>
+                                                    </div> -->
+                                                </div>
+                                                <!-- <div class="emi-paid-flex">
+                                                    <span class="emis-paid">EMIs Paid</span><span class="three-num">
+                                                        3</span>
+                                                </div> -->
+                                            </div>
+                                        </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                    <div>
+                                        <div>
+                                            <hr class="horizontal-line">
+                                        </div>
+                                        <div class="more-flex">
+                                            <div>
+                                                <p class="cust-props">Customer Proposal Number</p>
+                                                <p class="date">{{proposal?.proposalNumber}}</p>
+                                            </div>
+                                            <!-- <img class="vert" src="../../assets/three-dots.svg"> -->
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">Policy Date</p>
+                                            <p class="date">{{proposal?.displayDate}}</p>
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">Premium Amount (₹)</p>
+                                            <p class="date">₹{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">Loan Amount (₹)</p>
+                                            <p class="date">₹{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="call-customer">
+                                        <div>
+                                            <button class="btn btn-primary call-cust">Call Customer</button>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-outline-primary view-dtls"
+                                                (click)="viewProposalDetails(proposal)">View Details</button>
+                                        </div>
+                                    </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+
+
+
+                        </div>
+                    </div>
+
+
+                    <div *ngIf="sharedService.customerdropout" class="scrolling">
+
+                        <div class="loansprocess">
+                            <mat-icon class="keybackspace" (click)="customerdropouts()">keyboard_backspace</mat-icon>
+                            <p>Loans in process</p>
+                        </div>
+                        <div class="documents">
+                            <p class="customer-drop-out">Proposal dropped out</p>
+                        </div>
+                        <div>
+                            <p class="showingresult">Showing {{getCountByFeild('PROPOSAL_DROP_OUT')}} results</p>
+                        </div>
+                        <div class="mb-3">
+                            <mat-accordion *ngFor="let proposal of customerDropout; let i=index">
+                                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                            <!-- <img src="../../assets/profile pic -img.png" class="distributor-profile"> -->
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            <div>
+                                                <div class="customer-flex">
+                                                    <div>
+                                                        <img src="../../assets/profile pic -img.png"
+                                                            class="distributor-profile">
+                                                    </div>
+                                                    <div class="section">
+                                                        <p class="customer-name">{{proposal.customerName}}</p>
+                                                        <p class="gold-policy">{{proposal.policyProductName}}</p>
+                                                        <p class="double-emi">{{proposal.displayStatus}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="loans-flex">
+                                                    <div class="loans">
+                                                        <span class="loan-span">Loan</span><span
+                                                            class="ten-lacs">{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</span>
+                                                    </div>
+                                                    <!-- <div class="emi-flex">
+                                                        <span class="emis-outstnd">Days remaining</span><span
+                                                            class="five-num"> ---</span>
+                                                    </div> -->
+                                                </div>
+                                                <!-- <div class="emi-paid-flex">
+                                                    <span class="emis-paid">EMIs Paid</span><span class="three-num">
+                                                        3</span>
+                                                </div> -->
+                                            </div>
+                                        </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                    <div>
+                                        <div>
+                                            <hr class="horizontal-line">
+                                        </div>
+                                        <div class="more-flex">
+                                            <div>
+                                                <p class="cust-props">Customer Proposal Number</p>
+                                                <p class="date">{{proposal?.proposalNumber}}</p>
+                                            </div>
+                                            <!-- <img class="vert" src="../../assets/three-dots.svg"> -->
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">Policy Date</p>
+                                            <p class="date">{{proposal?.displayDate}}</p>
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">Premium Amount (₹)</p>
+                                            <p class="date">₹{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                        </div>
+                                        <div>
+                                            <p class="cust-props">Loan Amount (₹)</p>
+                                            <p class="date">₹{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="call-customer">
+                                        <div>
+                                            <button class="btn btn-primary call-cust">Call Customer</button>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-outline-primary view-dtls"
+                                                (click)="viewProposalDetails(proposal)">View Details</button>
+                                        </div>
+                                    </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+
+
+
+                        </div>
+                    </div>
+
+
+                    <div *ngIf="sharedService.proposalNotAccepted">
+
+                        <div class="loansprocess">
+                            <mat-icon class="keybackspace" (click)="proposalbackspace()">keyboard_backspace</mat-icon>
+                            <p>Loans in process</p>
+                        </div>
+                        <div class="documents">
+                            <p class="proposal-not-accept">Proposal not accepted</p>
+                        </div>
+                        <div>
+                            <p class="showingresult">Showing {{getCountByFeild('PROPOSAL_NOT_ACCEPTED')}} results</p>
+                        </div>
+                        <div class="scroll-not-accepeted">
+                            <div class="mb-3">
+                                <mat-accordion *ngFor="let proposal of proposalNotAccepted; let i=index"
+                                    [multi]="false">
+                                    <mat-expansion-panel (opened)="panelOpenedState(i)" (closed)="panelClosedState(i)"
+                                        [expanded]="currentlyOpenedPanel === i">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                <!-- <img src="../../assets/profile pic -img.png" class="distributor-profile"> -->
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                                <div>
+                                                    <div class="customer-flexs">
+                                                        <div>
+                                                            <img src="../../assets/profile pic -img.png"
+                                                                class="distributor-profile">
+                                                        </div>
+                                                        <div class="section">
+                                                            <p class="customer-name">{{proposal.customerName}}</p>
+                                                            <p class="gold-policy">{{proposal.policyProductName}}</p>
+                                                            <p class="double-emi">{{proposal.displayStatus}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="loans-flex">
+                                                        <div class="loanss">
+                                                            <span class="loan-span">Loan</span><span
+                                                                class="ten-lacs">₹{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="emi-paid-flex">
+                                                    <span class="emis-paid">EMIs Paid</span><span class="three-num">
+                                                        3</span>
+                                                </div> -->
+                                                </div>
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <div>
+                                            <div>
+                                                <hr class="horizontal-line">
+                                            </div>
+                                            <div class="more-flex">
+                                                <div>
+                                                    <p class="cust-props">Customer Proposal Number</p>
+                                                    <p class="date">{{proposal?.proposalNumber}}</p>
+                                                </div>
+                                                <img src="../../assets/three-dots.svg" mat-raised-button
+                                                    (click)="openBottomSheet(proposal)" class="vert-icon">
+                                            </div>
+                                            <div>
+                                                <p class="cust-props">Policy Date</p>
+                                                <p class="date">{{proposal?.displayDate}}</p>
+                                            </div>
+                                            <div>
+                                                <p class="cust-props">Premium Amount (₹)</p>
+                                                <p class="date">₹{{(+proposal?.premiumAmount||0).toLocaleString('en-IN')}}</p>
+                                            </div>
+                                            <!-- <div>
+                                                <p class="cust-props">Documentation</p>
+                                            </div>
+                                            <div class="imgeincmplt"
+                                                *ngIf="proposal.innerDisplayStatus == 'Proposal not accepted'">
+                                                <p class="date">completed</p>
+                                            </div>
+                                            <div class="imgeincmplt"
+                                                *ngIf="proposal.innerDisplayStatus == 'Documents Pending'">
+                                                <img src="../../../assets/red alert img.svg">
+                                                <p class="date">Incomplete</p>
+                                            </div> -->
+                                        </div>
+                                        <div class="call-customers">
+                                            <!-- <div>
+                                                <button class="btn btn-primary call-custs"
+                                                    (click)="reminderForDocuments(proposal)"
+                                                    [disabled]="!(proposal.innerDisplayStatus == 'Documents Pending')">Remind
+                                                    now for documentation</button>
+                                            </div> -->
+                                            <div>
+                                                <button class="btn btn-outline-primary view-dtlss"
+                                                    (click)="resendpopup(proposal)">Resend
+                                                    proposal link</button>
+                                            </div>
+                                        </div>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

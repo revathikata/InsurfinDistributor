@@ -1,0 +1,71 @@
+.propsl-success {
+  margin-top: 7%;
+  color: #005aaa;
+  font-weight: 700;
+  font-size: 32px;
+  margin-left: 20px;
+  line-height: 1;
+}
+.proposal-status {
+  color: #7d848d;
+  font-size: 16px;
+  font-weight: 400;
+  margin-left: 22px;
+}
+
+.leftArrw {
+  padding: 20px;
+  cursor: pointer;
+}
+
+.propose-dtls {
+  font-size: 16px;
+  font-weight: 700;
+  margin-left: 10px;
+  color: #041427;
+  cursor: pointer;
+}
+
+.view-status-btn {
+  background: #005aaa;
+  box-shadow: inset 0px 0px 10px 6px rgb(0 90 170 / 2%);
+  border-radius: 14px;
+  width: 345px;
+  margin-top: 25%;
+  height: 48px;
+}
+
+.rightColoumn {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
+  background: linear-gradient(270deg, #eef5fc 0%, #c3d9ed 100%);
+}
+.small {
+  border: 1px solid #e8e8e8;
+  background-color: #e8e8e8;
+  width: 224px;
+  height: 224px;
+  margin: auto;
+  margin-top: 13%;
+  border-radius: 12px;
+}
+
+.distrbtr-welcome {
+  margin: auto;
+  border: 1px solid grey;
+  border-radius: 10px;
+  width: 393px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  background-color: #ffffff;
+}
+
+.main {
+  overflow: hidden;
+}
+.proposal-img{
+  width: 200px;
+    height: 250px;
+    margin-left: 26%;
+}

@@ -1,0 +1,583 @@
+.main {
+  overflow-x: hidden;
+}
+
+.customer-welcome {
+  margin: auto;
+  border: 1px solid grey;
+  border-radius: 10px;
+  width: 393px;
+  height: 692px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  background-color: #ffffff;
+}
+
+
+/* .col-lg-6 {
+  overflow: hidden;
+} */
+
+.rightColoumn {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
+  background: linear-gradient(270deg, #EEF5FC 0%, #C3D9ED 100%);
+}
+
+.toolbar {
+  background-color: #005AAA;
+  width: 393px;
+  height: 215px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.home {
+  display: flex;
+}
+.scroll{
+  height: 120vh;
+  overflow: scroll;
+}
+
+.backspace {
+  margin-top: 50px;
+  color: #FFFFFF;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.my-home {
+  margin-top: 52px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #FFFFFF;
+  margin-left: 5px;
+}
+
+.d-applications {
+  font-weight: 700;
+  font-size: 24px;
+  color: #FFFFFF;
+  width: 0px;
+  line-height: 31px;
+  margin-left: 20px;
+  margin-top: 15px;
+}
+
+.customer-flex {
+  display: flex;
+}
+
+.customer-img {
+  margin-left: -95px;
+}
+
+.section {
+  margin-left: -39px;
+  margin-bottom: 30px;
+}
+
+.customer-name {
+  color: #041427;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.gold-policy {
+  margin-top: -10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7D848D;
+}
+
+.double-emi {
+  font-size: 14px;
+  font-weight: 500;
+  color: #C52727;
+  margin-top: -10px;
+}
+
+.loans-flex {
+  display: flex;
+  margin-left: 17px;
+  margin-top: -8px;
+}
+
+.due-date {
+  background-color: rgba(197, 39, 39, 0.07);
+}
+
+.loans {
+  border: 1px solid #E5E5E5;
+  border-radius: 16px;
+  width: 100px;
+  margin-left: -63px;
+  margin-top: -20px;
+  text-align: center;
+  padding-top: 2px;
+}
+
+.loan-span {
+  font-size: 12px;
+  font-weight: 400;
+  color: #7D848D;
+}
+
+.ten-lacs {
+  font-size: 12px;
+  font-weight: 700;
+  color: #041427;
+  margin-left: 6px;
+}
+
+.emi-flex {
+  border: 1px solid #E5E5E5;
+  width: 135px;
+  margin-left: 5px;
+  margin-top: -19px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.emis-outstnd {
+  font-size: 12px;
+  font-weight: 400;
+  color: #7D848D;
+}
+
+.five-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: #041427;
+}
+
+.emi-paid-flex {
+  border: 1px solid #E5E5E5;
+  width: 85px;
+  height: 22px;
+  border-radius: 16px;
+  text-align: center;
+  margin-top: 3px;
+  margin-left: 37px;
+}
+
+.emis-paid {
+  font-size: 12px;
+  font-weight: 400;
+  color: #7D848D;
+}
+
+.three-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: #041427;
+}
+
+.mat-expansion-panel-header:not([aria-disabled=true]) {
+  cursor: pointer;
+  height: 150px;
+}
+
+.mat-accordion .mat-expansion-panel:last-of-type {
+  width: 345px;
+  margin: auto;
+  border-radius: 16px;
+  margin-top: 20px;
+}
+
+::ng-deep.mat-expansion-indicator {
+  margin-top: -98px;
+}
+
+.cust-props {
+  color: #7D848D;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 1px;
+}
+
+.date {
+  color: #041427;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.call-customer {
+  display: flex;
+}
+
+.call-cust {
+  width: 148px;
+  height: 52px;
+  background-color: #005AAA;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-left: -7px;
+}
+
+.view-dtls {
+  width: 148px;
+  height: 52px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  background: #FFFFFF !important;
+  margin-left: 15px;
+  color: #005AAA;
+}
+
+.horizontal-line {
+  margin-top: 1px;
+}
+
+.all-reject {
+  margin-left: 25px;
+  color: #7D848D;
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 25px;
+}
+
+::ng-deep.mat-expansion-indicator::after {
+  color: #0358A8;
+}
+
+
+
+/* ----------------------------------- */
+.morevert-flex {
+  display: flex;
+}
+
+.back-arrw {
+  cursor: pointer;
+  color: #041427;
+  margin-left: 25px;
+  margin-top: 12px;
+}
+
+.pol-dtls {
+  margin-left: 16px;
+  margin-top: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #041427;
+}
+
+.vert {
+  margin-left: 93px;
+  color: #0358A8;
+  cursor: pointer;
+  margin-top: 14px;
+}
+
+.edit-customer-flex {
+  display: flex;
+}
+
+.edit-customer {
+  margin-left: 18px;
+  margin-top: 18px;
+}
+
+.anitha-flex {
+  margin-left: 18px;
+  margin-top: 22px;
+}
+
+.anitha-name {
+  color: #041427;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.policy-gold {
+  font-size: 14px;
+  font-weight: 500;
+  color: #7D848D;
+  margin-top: -10px;
+}
+
+.loan-disbursed {
+  color: #C52727;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: -10px;
+}
+
+.phone-img {
+  margin-left: 129px;
+  margin-top: 19px;
+}
+
+.edit-proposal {
+  border: 1px solid #FFFFFF;
+  width: 392px;
+  margin-left: -12px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 10px rgba(77, 127, 174, 0.2);
+  border-radius: 24px 24px 0px 0px;
+  margin-top: 15px;
+  margin-bottom: 7px;
+}
+
+.prpsl-dtls {
+  margin-top: 29px;
+  margin-left: 32px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #7D848D;
+}
+
+.proposal-name {
+  margin-top: 15px;
+  margin-left: 32px;
+}
+
+.Proposer-name {
+  font-size: 14px;
+  font-weight: 400;
+  color: #7D848D;
+}
+
+.ani-name {
+  margin-top: -13px;
+  color: #041427;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.loan-successfully {
+  color: #C52727;
+}
+
+.pdf-error {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.error-outline {
+  color: #C52727;
+  margin-top: -15px;
+  margin-left: -3px;
+}
+
+.pdf {
+  margin-left: 5px;
+}
+
+.upload-now {
+  color: #2791E0;
+  margin-top: -13px;
+  margin-left: 15%;
+  font-size: 14px;
+  font-weight: 700;
+
+}
+
+.loans-rejected-flex {
+  display: flex;
+}
+
+.ng-select.loansdata::ng-deep .ng-arrow {
+  display: none;
+
+}
+
+.ng-select.loansdata::ng-deep .ng-arrow-wrapper {
+  width: 27px;
+  background-image: url('/assets/CaretDownarrow.svg');
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  margin-top: -5px;
+
+}
+
+.ng-select-opened.loansdata ::ng-deep .ng-arrow-wrapper {
+  background-image: url('/assets/Caretuparrow.svg');
+  color:
+    #005AAA !important;
+
+}
+
+::ng-deep.loansdata.ng-select.selectDate .ng-has-value .ng-placeholder {
+  display: none;
+}
+
+::ng-deep.loansdata.ng-select {
+  border: #C6C6C6 1.5px solid;
+  height: 36px !important;
+  border-radius: 12px;
+  padding: 10px;
+  background: white;
+  margin-left: 172px !important;
+  margin-top: 25px;
+  width: 51% !important;
+  border-radius: 24px;
+  background-color: #FFFFFF;
+  color: #005AAA;
+
+}
+
+::ng-deep.ng-select div,
+.ng-select input,
+.ng-select span {
+  box-sizing: border-box;
+  padding-left: 6px;
+}
+
+.calenderimg1 {
+  width: 0px;
+  top: -53px;
+  left: 56%;
+  position: relative;
+
+}
+
+::ng-deep.loansdata .ng-dropdown-panel {
+  margin-top: 10px;
+  background: white;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  width: 163px;
+  margin-left: -24px;
+
+}
+
+::ng-deep.loansdata .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-bottom: 1px solid rgb(236, 228, 228);
+  padding: 6px;
+  color: black;
+}
+
+::ng-deep.loansdata .ng-dropdown-panel .ng-dropdown-panel-items .ng-option:hover {
+  color: #005AAA;
+}
+
+::ng-deep.loansdata .ng-dropdown-panel .scroll-host {
+  padding: 0;
+}
+
+.checkmark {
+  margin-left: 39px;
+}
+
+.amounttext1 {
+  margin-top: -15px;
+    color: white;
+    margin-left: 18px;
+    width: 50%;
+}
+
+.maticonclass {
+  padding-top: 2px;
+  margin-left: -12px;
+}
+
+.relayicon {
+  margin-right: 100px;
+  color: #255AAB;
+}
+
+.relayicon :hover {
+  color: gray;
+}
+
+.apply {
+  margin-top: -20px;
+  border: none;
+  background-color: white;
+  color: #2791E0;
+  cursor: pointer;
+}
+
+.cancel {
+  margin-top: -20px;
+}
+
+.input-wrapper {
+  position: relative;
+  margin-top: 25px;
+}
+
+.input-wrapper input[type="search"] {
+  padding-left: 2rem;
+  /* adjust the padding to make room for the icon */
+}
+
+.input-wrapper i {
+  position: absolute;
+  top: 50%;
+  left: 2rem;
+  transform: translateY(-50%);
+  color: #C6C6C6;
+  font-size: 20px;
+}
+
+.selected-option::after {
+  content: '\2713;'
+}
+
+.datetags {
+  margin-top: -40px;
+  margin-left: 55px;
+  color: white;
+  width: 50%;
+}
+
+.datetag-flex {
+  display: flex;
+}
+
+::ng-deep.mat-date-range-input-container {
+  display: flex;
+  align-items: center;
+  display: none !important;
+}
+
+.mat-datepicker-toggle {
+  pointer-events: auto;
+  display: none;
+}
+
+/*  */
+
+/* ::ng-deep.selectDate .ng-dropdown-panel .ng-dropdown-panel-items :hover{
+  color:
+  #005AAA;
+} */
+
+
+.result {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: -15px;
+  color: #FFFFFF;
+}
+
+.calender-icon {
+  bottom: 26px;
+  position: relative;
+  left: 9px;
+}
+
+.customCalender {
+  margin-left: 50%;
+}
+.distributor-profile{
+  width: 52px;
+  height: 51px;
+  border-radius: 50%;
+  margin-left: -100px;
+}

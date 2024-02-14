@@ -1,0 +1,67 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+
+            <div class="col-lg-6 rightcoloumn">
+                <div class="distrbtr-welcome">
+                    <div class="container">
+
+                        <p class="login">Hey there! {{fullName}}</p>
+                        <p class="welcome-to">Welcome to Insurfin!
+                            Enter your email and password to login.</p>
+<!-- <button (click)="kl()">kl</button> -->
+                        <form [formGroup]="loginForm">
+                            <div class="section-email">
+                                <label>Email</label>
+                                <input type="text" class="form-control" placeholder="Enter Email"
+                                    formControlName="email">
+                                <small
+                                    *ngIf="(loginForm.controls['email'].touched  && loginForm.get('email')?.hasError('required'))"
+                                    style="color: red;">email ID is Required</small>
+                                <small
+                                    *ngIf="(loginForm.controls['email'].touched  && loginForm.get('email')?.hasError('pattern'))"
+                                    style="color: red;">Enter  valid email ID</small>
+                            </div>
+                            <p class="emailError" *ngIf="errorMessage === 'This email is not registered. Please sign up and try again.'">{{errorMessage}}</p>
+
+                            <div class="section-password">
+                                <label>Password</label>
+                                <div class="password-input-wrapper">
+                                    <input type="{{ showPassword ? 'password' : 'text' }}" class="form-control"
+                                        placeholder="Enter password" formControlName="password" minlength="6"
+                                        maxlength="15">
+                                    <button class="password-toggle-btn" (click)="PasswordVisibility()">
+                                        <i class="{{ showPassword ? 'fa fa-eye-slash' : 'fa fa-eye' }}"></i>
+                                    </button>
+                                </div>
+                                <small
+                                    *ngIf="(loginForm.controls['password'].touched  && loginForm.get('password')?.hasError('required'))"
+                                    class="length">Password is Required</small>
+                                <p *ngIf="(loginForm.controls['password'].touched  && loginForm.get('password')?.hasError('pattern'))"
+                                    class="length"></p>
+                                <p class="emailError" *ngIf="errorMessage==='Incorrect password'">{{errorMessage}}</p>
+                            </div>
+                        </form>
+                        <p class="forgot" (click)="forgetPasswords()">Forgot Password?</p>
+                        <div class="mt-5">
+                            <p class="sign-up">New user? <span (click)="signup()">Sign up here</span></p>
+                            <p class="login-with-mobile"  (click)="navigateToMobile()">Login with mobile instead</p>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-primary loginBtn" [disabled]="!loginForm.valid || BtnDisable"
+                                (click)="Login()">Login</button>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

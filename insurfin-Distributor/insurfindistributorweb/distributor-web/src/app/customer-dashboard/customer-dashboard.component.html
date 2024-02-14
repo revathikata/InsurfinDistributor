@@ -1,0 +1,453 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+
+            <div class="col-lg-6 p-0 ">
+                <app-side-nav-section />
+            </div>
+
+            <div class="col-lg-6 rightColoumn">
+
+                <div class="customer-welcome">
+                    <!-- we have : menu, home , notifications, Summary -->
+                    <div *ngIf="mainDashboard">
+                        <div class="toolbar">
+                            <div class="row home-flex">
+                                <div class="col-2">
+                                    <mat-icon class="menu" (click)="sidebar()">menu</mat-icon>
+                                </div>
+                                <div class="col-8">
+                                    <p class="my-home">Home</p>
+                                </div>
+                                <!-- <div class="col-2">
+                                    <mat-icon class="notifications" (click)="notificationpage()">notifications_none</mat-icon>
+                                    <div matBadge="0" matBadgeOverlap="false"  matBadgeColor="warn" class="demo-section"></div>
+                                </div> -->
+                            </div>
+                            <div class="summary">
+                                <p class="p-summary">Summary</p>
+                                <div>
+                                    <ng-select class="selectDate" [items]="dropdown" [clearable]="false"
+                                        [searchable]="false" placeholder="This week" (change)="onDropdownChange()"
+                                        [(ngModel)]="selectedOption" bindLabel="" bindValue="">
+                                        <ng-template ng-option-tmp let-item="item" class="option">{{item}}
+                                            <span *ngIf="selectedOption === item" class="checkmark"><mat-icon
+                                                    class="maticonclass">check_circle</mat-icon></span>
+                                        </ng-template>
+                                    </ng-select>
+                                </div>
+                                <div *ngIf="selectedOption === 'Custom'" class="daterangec">
+                                    <p class="datetag">{{ getFormattedDateRange() }}</p>
+                                    <!-- at-label>Enter a date range</mat-label> -->
+
+                                    <mat-date-range-input [formGroup]="range" [rangePicker]="picker" class="no-touch">
+                                        <input matStartDate formControlName="start" required placeholder="Start date"
+                                            (dateInput)="formatDateEvent($event.target.value, 'start')" />
+
+                                        <input matEndDate formControlName="end" required placeholder="End date"
+                                            (dateInput)="formatDateEvent($event.target.value, 'end')" />
+
+                                    </mat-date-range-input>
+
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+
+                                    <!-- <p class="datetag">{{ getFormattedDateRange() }}</p> -->
+                                    <mat-date-range-picker #picker>
+
+                                        <mat-date-range-picker-actions>
+                                            <span matDateRangePickerApply><mat-icon class="relayicon"
+                                                    (click)="cancel()">replay</mat-icon></span>
+                                            <button mat-button matDateRangePickerCancel class="cancel"
+                                                (click)="cancel()">Cancel</button>
+                                            <button class="apply" matDateRangePickerApply>Apply</button>
+                                        </mat-date-range-picker-actions>
+
+                                    </mat-date-range-picker>
+
+                                    <!-- Custom date picker component -->
+
+                                </div>
+
+
+
+
+                                <!-- <div *ngIf="selectedOption !== 'Custom'" class="result">
+
+                                    {{ startDate + ' - ' + endDate }}
+
+                                </div> -->
+                            </div>
+                            <div class="calenderimg">
+                                <img src="../../assets/calender.svg">
+                            </div>
+                            <p class="amounttext">Amount: ₹ {{dashboardData?.amount ? (dashboardData?.amount | number) :
+                                0}} /-</p>
+                        </div>
+
+                        <div class="card container">
+                            <div class="card-flex">
+                                <div class="center">
+                                    <p>{{getTotalcount()}}</p>
+                                </div>
+                                <p class="t-loans">Total Loans Disbursed</p>
+                                <p class="view" (click)="viewAllTotalLoans()">View All</p>
+                            </div>
+                            <hr>
+                            <div class="card-flex">
+                                <p class="p-details">Policy details uploaded</p>
+                                <p class="number">{{getCountByFeild('POLICY_UPLOADED')}}</p>
+                                <img src="../../assets/CaretRight.svg" class="caret-right"
+                                    (click)="policyDetailsUploaded()">
+                            </div>
+                            <div class="card-flex">
+                                <p class="p-details">Policy detail not uploaded</p>
+                                <p class="number">{{getCountByFeild('POLICY_NOT_UPLOADED')}}</p>
+                                <img src="../../assets/CaretRight.svg" class="caret-right"
+                                    (click)="policyDetailsNotUploaded()">
+                            </div>
+                        </div>
+
+                        <div class="container card-details">
+                            <div class="card-flex">
+                                <div class="loans-in">
+                                    <p>{{loansINProcessTotalcount()}}</p>
+                                </div>
+                                <p class="t-loans">Loans in Process</p>
+                                <p class="view" (click)="viewAllLoansInProcess()">View All</p>
+                            </div>
+                            <hr>
+                            <!-- <div class="card-flex">
+                                <p class="p-details">Documents pending</p>
+                                <p class="number">{{getCountByFeild('')}}</p>
+                                <img src="../../assets/CaretRight.svg" class="caret-right">
+                            </div> -->
+                            <div class="card-flex">
+                                <p class="p-details">Proposal dropped out</p>
+                                <p class="number">{{getCountByFeild('PROPOSAL_DROP_OUT')}}</p>
+                                <img src="../../assets/CaretRight.svg" class="caret-right" (click)="customerDropOut()">
+                            </div>
+                            <div class="card-flex">
+                                <p class="p-details">Proposal not accepted</p>
+                                <p class="number">{{getCountByFeild('PROPOSAL_NOT_ACCEPTED')}}</p>
+                                <img src="../../assets/CaretRight.svg" class="caret-right"
+                                    (click)="proposalNotAccepted()">
+                            </div>
+                            <div class="card-flex">
+                                <p class="p-details">Proposal accepted</p>
+                                <p class="number">{{getCountByFeild('PROPOSAL_ACCEPTED')}}</p>
+                                <img src="../../assets/CaretRight.svg" class="caret-right" (click)="proposalAccepted()">
+                            </div>
+                            <div class="card-flex">
+                                <p class="p-details">Loan Initiated</p>
+                                <p class="number">{{getCountByFeild('LOAN_INITIATED')}}</p>
+                                <img src="../../assets/CaretRight.svg" class="caret-right" (click)="loanInitiate()">
+                            </div>
+                        </div>
+
+                        <div class="container card-details">
+                            <div class="card-flex">
+                                <div class="loans-in">
+                                    <p>{{DelinquentTotalCount()}}</p>
+                                </div>
+                                <p class="t-loans">Delinquent Applications</p>
+                                <p class="view" routerLink="/delinquent-applications">View All</p>
+                            </div>
+                            <hr>
+                            <div class="card-flex">
+                                <p class="p-details">Single EMI outstanding</p>
+                                <p class="number">{{getCountByFeild('SINGLE_EMI')}}</p>
+                                <img src="../../assets/CaretRight.svg" class="caret-right"
+                                    (click)=arrowClickDilinquent()>
+                            </div>
+                            <div class="card-flex">
+                                <p class="p-details">2 EMI outstanding</p>
+                                <p class="number">{{getCountByFeild('DOUBLE_EMI')}}</p>
+                                <img src="../../assets/CaretRight.svg" class="caret-right"
+                                    (click)=arrowClickDilinquent()>
+                            </div>
+                            <div class="card-flex">
+                                <p class="p-details">Policy cancellation initiated</p>
+                                <p class="number">{{getCountByFeild('POLICY_CANCELLATION_INITIATED')}}</p>
+                                <img src="../../assets/CaretRight.svg" class="caret-right"
+                                    (click)=arrowClickDilinquent()>
+                            </div>
+                            <div class="card-flex">
+                                <p class="p-details">Policy cancelled by insurer</p>
+                                <p class="number">{{getCountByFeild('POLICY_CANCELLED_BY_INSURER')}}</p>
+                                <img src="../../assets/CaretRight.svg" class="caret-right"
+                                    (click)=arrowClickDilinquent()>
+                            </div>
+                        </div>
+
+                        <div class="container card-details">
+                            <div class="card-flex">
+                                <div class="loans-rejected">
+                                    <p>{{getCountByFeild('LOAN_REJECTED')}}</p>
+                                </div>
+                                <p class="t-loans">Loans Rejected</p>
+                                <p class="view" routerLink="/loans-rejected">View All</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="customer container">
+                        <p class="customers">All proposals</p>
+                        <img src="../../assets/arrow-down.svg" class="sort-img" (click)="openBottomSheet('sort',dashboardData)">
+                        <span class="sort">Sort</span>
+                        <img src="../../assets/Sliders.svg" class="slider-img" (click)="openBottomSheet('filter',dashboardData)">
+                        <span class="sort">Filter</span>
+                    </div> -->
+
+                    <div class="row customer container">
+                        <div class="col-6">
+                            <p class="customers">All Proposals</p>
+                        </div>
+                        <div class="col-3">
+                            <img src="../../assets/arrow-down.svg" class="sort-img"
+                                (click)="openBottomSheet('sorting',dashboardData)">
+                            <span class="sort">Sort</span>
+                        </div>
+                        <div class="col-3 filter-flex">
+                            <img src="../../assets/Sliders.svg" class="slider-img"
+                                (click)="openBottomSheet('filtering',dashboardData)">
+                            <span class="sort">Filter</span>
+                        </div>
+
+                        <div class="input-wrapper container">
+                            <!-- <input type="search" placeholder="Search by customer name" [(ngModel)]="searchText" class="form-control search"> -->
+                            <input type="search" placeholder="Search by customer name" [(ngModel)]="searchText"
+                                class="form-control search">
+                            <i class="fas fa-search"></i>
+                        </div>
+
+                        <!-- <div class="customer-list mb-3" *ngFor="let customers of filteredCustomers | filter:searchText ; let i=index"> -->
+                        <div class="proposal-list">
+                            <div class="customer-list mb-3" *ngFor="let customers of filteredCustomers; let i=index">
+                                <mat-accordion>
+                                    <mat-expansion-panel>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title></mat-panel-title>
+                                            <mat-panel-description>
+                                                <div>
+                                                    <div class="customer-flex">
+                                                        <div>
+                                                            <img src="../../assets/profile pic -img.png"
+                                                                class="distributor-profile"
+                                                                *ngIf="customers?.customerPhotoUrl == ''">
+                                                            <img [src]="customers?.customerPhotoUrl"
+                                                                class="distributor-profile"
+                                                                *ngIf="customers?.customerPhotoUrl !== ''">
+                                                        </div>
+                                                        <div class="section">
+                                                            <p class="customer-name">{{customers?.customerName}}</p>
+                                                            <p class="gold-policy">{{customers?.policyProductName}}</p>
+                                                            <p class="gold-policy"
+                                                                [ngStyle]="{'color':customers?.proposalStatus ==='LOAN_REJECTED'? '#C52727':'' || customers?.proposalStatus ==='POLICY_NOT_UPLOADED'? 'green':''
+                                                        || customers?.proposalStatus ==='PROPOSAL_NOT_ACCEPTED'? '#E59510':''|| customers?.proposalStatus ==='PROPOSAL_DROP_OUT'? '#E59510':''
+                                                        || customers?.proposalStatus ==='PROPOSAL_ACCEPTED'? 'green':''|| customers?.proposalStatus ==='POLICY_UPLOADED'? 'green':''
+                                                        || customers?.proposalStatus ==='POLICY_NOT_UPLOADED'? 'green':'' || customers?.displayStatus ==='Single EMI outstanding' ? '#E59510':''
+                                                        || customers?.displayStatus ==='Double EMI outstanding' ? '#C52727':'' || customers?.displayStatus ==='Policy cancellation initiated' ? '#E59510':''
+                                                        || customers?.displayStatus ==='Policy cancelled' ? '#E59510':''}">
+                                                                {{customers?.displayStatus}}</p>
+                                                            <!-- <span [ngSwitch]="customers?.proposalStatus">
+                                                            <p *ngSwitchCase="'LOAN_REJECTED'" class="loan-rejected">
+                                                                Loan rejected
+                                                            </p>
+                                                            <p *ngSwitchCase="'LOAN_DISPURSED'" class="loan-disbursed">
+                                                                Loan disbursed successfully
+                                                            </p>
+                                                            <p *ngSwitchCase="'DOCUMENT_PENDING'" class="documents-pending">
+                                                                Documentation Pending
+                                                            </p>
+                                                            <p *ngSwitchCase="'PROPOSAL_NOT_ACCEPTED'" class="documents-pending">
+                                                                Proposal Not Accepted
+                                                            </p>
+                                                            <p *ngSwitchCase="'DROP_OUT'" class="documents-pending">
+                                                                Proposal dropped out
+                                                            </p>
+                                                            <p *ngSwitchCase="'POLICY_UPLOADED'" class="loan-disbursed">
+                                                                Policy Uploaded
+                                                            </p>
+                                                            <p *ngSwitchCase="'ACCEPTED'" class="loan-disbursed">
+                                                                Proposal Accepted
+                                                            </p>
+                                                            <p *ngSwitchDefault class="loan-disbursed" class="documents-pending">
+                                                                Documentation Pending 
+                                                            </p>
+                                                        </span> -->
+                                                            <div class="loanLabels d-flex">
+                                                                <div class="loans-flex ">
+                                                                    <span class="loan">Loan</span> <span class="lac"> ₹
+                                                                        {{customers.premiumAmount === null?'0' :
+                                                                        customers.premiumAmount.toLocaleString('en-IN')}}</span>
+                                                                </div>
+                                                                <div class="loans-flex align"
+                                                                    *ngIf="customers.innerDisplayStatus === 'Policy details not uploaded'">
+                                                                    <span class="loan">Upload due in</span>
+                                                                    <span class="lac">{{customers.policyUploadDate ===
+                                                                        null?'0' : customers.policyUploadDate}}</span>
+                                                                </div>
+                                                                <div class="loans-flex align"
+                                                                    *ngIf="customers.displayStatus === 'Double EMI outstanding'|| customers.displayStatus === 'Single EMI outstanding'">
+                                                                    <span class="loan">due on</span>&nbsp;
+                                                                    <span class="lac">{{customers.displayDate ===
+                                                                        null?'0' : customers.displayDate}}</span>
+                                                                </div>
+
+                                                                <div class="loans-flex align"
+                                                                    *ngIf="customers.innerDisplayStatus === 'Policy uploaded'">
+                                                                    <span class="loan">EMIs Outstanding</span>&nbsp;
+                                                                    <span class="lac">{{customers.emisOutstanding ===
+                                                                        null?'0' : customers.emisOutstanding}}</span>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="loanLabels d-flex mt-2"
+                                                                *ngIf="customers?.proposalStatus ==='POLICY_UPLOADED' || customers?.proposalStatus ==='POLICY_NOT_UPLOADED'">
+                                                                <div class="loans-flex">
+                                                                    <span class="loan">EMIs Paid</span> <span
+                                                                        class="lac"> {{ customers.emisPaid === null ?
+                                                                        '0' : customers.emisPaid }}</span>
+                                                                </div>
+
+
+                                                                <div class="loans-flex align"
+                                                                    *ngIf="customers.innerDisplayStatus === 'Policy details not uploaded'">
+                                                                    <span class="loan">EMIs Outstanding</span>&nbsp;
+                                                                    <span class="lac">{{ customers.emisOutstanding ===
+                                                                        null ? '0' : customers.emisOutstanding }}</span>
+
+                                                                </div>
+                                                                <div class="loans-flex align"
+                                                                    *ngIf="customers.innerDisplayStatus === 'Policy uploaded'">
+                                                                    <span class="loan">Policy Uploaded</span>&nbsp;
+
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="loanLabels d-flex mt-2">
+                                                                <div class="loans-flex"
+                                                                    *ngIf="customers.displayStatus === 'Double EMI outstanding'|| customers.displayStatus === 'Single EMI outstanding'">
+                                                                    <span class="loan">EMIs Paid</span>
+                                                                    <span class="lac"> {{customers.emisPaid === null?'0'
+                                                                        : customers.emisPaid}}</span>
+                                                                </div>
+                                                                <div class="loans-flex align"
+                                                                    *ngIf="customers.displayStatus === 'Double EMI outstanding'|| customers.displayStatus === 'Single EMI outstanding'">
+                                                                    <span class="loan">EMIs Outstanding</span>
+                                                                    <span class="lac"> {{customers.emisOutstanding ===
+                                                                        null?'0' : customers.emisOutstanding}}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- <div class="emi-flex">
+                                                        <span class="loan">EMIs Outstanding</span> <span class="lac">
+                                                            2</span>
+                                                    </div> -->
+                                                    <!-- </div> -->
+                                                </div>
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <div>
+                                            <div>
+                                                <hr class="horizontal-line">
+                                            </div>
+                                            <div class="more-flex">
+                                                <div>
+                                                    <p class="cust-props">Customer Proposal Number</p>
+                                                    <p class="date">{{customers?.proposalNumber}}</p>
+                                                </div>
+                                                <!-- <img src="../../assets/three-dots.svg" mat-raised-button
+                                                 class="vert-icon" *ngIf="customers?.proposalStatus == 'DOCUMENT_PENDING'"> -->
+                                                <img src="../../assets/three-dots.svg" mat-raised-button
+                                                    (click)="openBottomSheetNotAccept(customers)" class="vert-icon"
+                                                    *ngIf="customers.proposalStatus == 'PROPOSAL_NOT_ACCEPTED' && 'DOCUMENT_PENDING'">
+                                            </div>
+                                            <div>
+                                                <p class="cust-props">Policy Date</p>
+                                                <p class="date">{{customers?.displayDate}}</p>
+                                            </div>
+                                            <div>
+                                                <p class="cust-props">Premium Amount (₹)</p>
+                                                <p class="date">₹{{customers?.premiumAmount.toLocaleString('en-IN')}}</p>
+                                            </div>
+                                            <div>
+                                                <p class="cust-props">Loan Amount (₹)</p>
+                                                <p class="date">₹{{customers?.premiumAmount.toLocaleString('en-IN')}}</p>
+                                            </div>
+                                            <div *ngIf="customers?.proposalStatus == 'DOCUMENT_PENDING'">
+                                                <p class="cust-props">Documentation</p>
+                                            </div>
+                                            <div *ngIf="customers?.proposalStatus == 'DOCUMENT_PENDING'"
+                                                class="imgeincmplt">
+                                                <img src="../../../assets/red alert img.svg">
+                                                <p class="date">Incomplete</p>
+                                            </div>
+                                        </div>
+                                        <div class="call-customer">
+                                            <div
+                                                *ngIf="!(customers.proposalStatus == 'POLICY_NOT_UPLOADED' || customers.proposalStatus == 'PROPOSAL_NOT_ACCEPTED'
+                                                 && 'DOCUMENT_PENDING' || customers.displayStatus === 'Double EMI outstanding' || customers.displayStatus === 'Single EMI outstanding')">
+                                                <button class="btn btn-primary call-cust">Call Customer</button>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-primary call-cust"
+                                                    *ngIf="customers.displayStatus == 'Double EMI outstanding' || customers.displayStatus == 'Single EMI outstanding'"
+                                                    (click)="remindNow( 'dashboardDeliquentRemainder',customers)">Remind
+                                                    now</button>
+                                            </div>
+
+                                            <!-- <div *ngIf="customers?.proposalStatus == 'DOCUMENT_PENDING'">
+                                            <button class="btn btn-primary call-cust" (click)="resendpopup()">Remind Now</button>
+                                        </div> -->
+                                            <div
+                                                *ngIf="!(customers.proposalStatus == 'PROPOSAL_NOT_ACCEPTED' || customers.proposalStatus == 'DOCUMENT_PENDING' || customers.proposalStatus == 'POLICY_NOT_UPLOADED')">
+                                                <button class="btn btn-outline-primary view-dtls"
+                                                    (click)="viewCustomerDetails(customers)">View Details</button>
+                                            </div>
+                                        </div>
+                                        <div class="call-customer" *ngIf="customers.proposalStatus == 'POLICY_NOT_UPLOADED'">
+                                            <div>
+                                                <button class="btn btn-primary call-cust"
+                                                    (click)="openFileExplorer(customers)">Upload Policy</button>
+                                                <input type="file" #fileInput style="display: none;"
+                                                    (change)="onFileSelected($event)">
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-outline-primary view-dtls"
+                                                    (click)="viewCustomerDetails(customers)">View Details</button>
+                                            </div>
+                                        </div>
+                                        <div class="call-customers"
+                                            *ngIf="customers.proposalStatus == 'PROPOSAL_NOT_ACCEPTED' && 'DOCUMENT_PENDING'">
+                                            <div>
+                                                <!-- <button class="btn btn-primary call-custs"
+                                                (click)="reminderForDocuments(customers)"
+                                                [disabled]="!(customers.innerDisplayStatus == 'Documents Pending')">Remind
+                                                now for documentation</button> -->
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-outline-primary view-dtlss"
+                                                    (click)="resendpopup(customers)">Resend
+                                                    proposal link</button>
+                                            </div>
+                                        </div>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                            </div>
+                        </div>
+
+                        <div class="add-proposal container mt-3 mb-3" routerLink="/new-customer">
+                            <img src="../../assets/Plus.svg" class="plus-img">
+                            <p class="add-new">Add New Proposal</p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

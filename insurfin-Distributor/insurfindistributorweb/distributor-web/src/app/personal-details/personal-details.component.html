@@ -1,0 +1,332 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row viewh">
+
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+
+
+            <div class="col-lg-6 rightColoumn">
+                <div class="distrbtr-welcome">
+                    <mat-icon (click)="openDialog()" class="leftArrw">keyboard_backspace</mat-icon><span
+                        class="cust-dtls">Customer
+                        Details</span>
+                    <P class="new-prosl">Create New Proposal</P>
+
+
+                    <mat-tab-group [(selectedIndex)]="selectedIndex" (selectedTabChange)="tabChanged($event)">
+
+
+                        <mat-tab label="Proposal Details">
+                            <div class="container">
+                                <form [formGroup]="details">
+                                    <div>
+                                        <!-- <p class="john">John Doe</p> -->
+                                        <p class="pers-dtls mt-3">Proposal Details</p>
+                                    </div>
+
+                                    <div class="section">
+                                        <label class="choose">Choose product category</label>
+                                        <ng-select #products class="custom-ngselect statedropdown"
+                                            formControlName="chooseproduct" placeholder="Select product Category"
+                                            (change)="selectedProduct()">
+                                            <ng-option *ngFor="let product of productArray"
+                                                [value]="product.insuranceTypeId">
+                                                {{ product.insuranceTypeName }}
+                                            </ng-option>
+                                        </ng-select>
+                                    </div>
+
+                                    <div class="section">
+                                        <label class="choose">Choose your Insurer</label>
+                                        <ng-select #insurer class="custom-ngselect statedropdown"
+                                            formControlName="chooseinsurer" placeholder="Select Insurer"
+                                            (change)="selectedInsurer($event)">
+                                            <ng-option *ngFor="let insurers of InsurerArray"
+                                                [value]="insurers.insurerId">
+                                                {{ insurers.insurer }}
+                                            </ng-option>
+                                        </ng-select>
+                                    </div>
+
+                                    <div class="section">
+                                        <label class="choose">Choose product type</label>
+                                        <ng-select #productType class="custom-ngselect statedropdown"
+                                            formControlName="chooseptype" (change)="selectedProductType()"
+                                            placeholder="Select Product">
+                                            <ng-option *ngFor="let productType of ProductTypeArray"
+                                                [value]="productType.productTypeId">
+                                                {{ productType.productTypeName }}
+                                            </ng-option>
+                                        </ng-select>
+                                    </div>
+
+                                    <div class="section">
+                                        <label class="choose">Choose product</label>
+                                        <ng-select class="custom-ngselect statedropdown" formControlName="product"
+                                            placeholder="Select Product" (change)="selectedProductOther()">
+                                            <ng-option *ngFor="let allProducts of allProductsArray"
+                                                [value]="allProducts.productId">
+                                                {{ allProducts.productName }}
+                                            </ng-option>
+                                            <ng-option [value]="'others'">Others</ng-option>
+                                        </ng-select>
+                                    </div>
+
+                                    <div class="section" *ngIf="isOthersSelected()">
+                                        <input class="form-control product-name" type="text"
+                                            placeholder="Or Enter Product Name" formControlName="productName" [required]="isOthers">
+                                        <small
+                                            *ngIf="details.controls['productName'].touched && details.get('productName')?.hasError('pattern')"
+                                            class="red-class">Enter a Valid Product Name</small>
+                                    </div>
+
+                                    <div class="section">
+                                        <label class="choose">Proposal Number</label>
+                                        <input class="form-control product-name" type="text" (input)="onInputChange()"
+                                            placeholder="Enter proposal Number" formControlName="proposalnumber" maxlength="16" [ngClass]="{
+                                                'red-border': details.controls['proposalnumber'].hasError('minlength')
+                                              }">
+                                        <small *ngIf="details.controls['proposalnumber'].touched && details.get('proposalnumber')?.hasError('pattern')"
+                                            class="red-class">Enter a Valid proposal number
+                                        </small>
+                                        <small *ngIf="details.controls['proposalnumber'].touched && details.get('proposalnumber')?.hasError('minlength')"
+                                            class="red-class">Proposal number should be 8 to 16 digits
+                                        </small>
+                                        <small *ngIf="details.controls['proposalnumber'].touched && details.get('proposalnumber')?.hasError('maxlength')"
+                                            class="red-class">Proposal number should be 8 to 16 digits
+                                        </small>
+                                       <small  class="red-class" *ngIf="proposalNumberError">{{proposalNumberError}}</small>
+                                        
+                                    </div>
+
+                                    <div class="section" *ngIf="isLifeProductSelected()">
+                                        <label class="choose">Premium Paying Term</label>
+                                        <input class="form-control product-name" type="text" maxlength="2"
+                                            placeholder="Enter Premium Paying Term" formControlName="premium"  (input)="restrictToNumbers($event)" [required]="isPremium">
+                                        <small
+                                            *ngIf="details.controls['premium'].touched && details.get('premium')?.hasError('pattern')"
+                                            class="red-class">Please enter between 5-25 years</small>
+                                        <p class="years">Please ensure the term is between 5-25 years</p>
+                                    </div>
+
+                                    <div class="mt-5 mb-3">
+                                        <button class="btn btn-primary cont-btn" (click)="continueToPolicyInformation()"
+                                            [disabled]="!details.valid || proposalNumberError">
+                                            Continue
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </mat-tab>
+
+
+                        <mat-tab label="Policy Information">
+                 
+                                <form [formGroup]="Policydetails">
+                                    <h1 class="policy-Info">Policy Information</h1>
+                                    <div class="section">
+                                        <label class="policy-tensure">Policy tenure (in years)</label>
+                                        <input type="text" class="form-control tensure" formControlName="policyTensure"
+                                            placeholder="Enter policy tensure" maxlength="2"
+                                            (input)="restrictToNumbers($event)">
+                                        <small
+                                            *ngIf="Policydetails.controls['policyTensure'].touched && Policydetails.get('policyTensure')?.hasError('pattern')"
+                                            class="red-class">Please enter between 1-99 years</small>
+
+                                    </div>
+                                    <div class="slider">
+                                        <label class="premium-amt">Policy premium amount</label>
+                                        <mat-slider (change)="onSlideChange($event)" min="20000" max="100000" step="50"
+                                            discrete>
+                                            <span class="premiumamountstartvalue">₹{{"20,000"}}</span>
+                                            <input matSliderThumb [(ngModel)]="premiumAmountValue"
+                                                [ngModelOptions]="{standalone: true}" />
+                                        </mat-slider>
+
+                                        <span class="premiumamountendvalue">₹{{"1,00,000"}}</span>
+                                    </div>
+                                    <div class="section">
+                                    <div class="input-wrapper inp-section">
+                                        <input type="text" class="form-control rupee" (input)="checkLimit($event)" 
+                                            formControlName="PremiumAmount"  appCurrencyFormat maxlength="8" minlength="5" #input>
+                                        <i class="fa-solid fa-indian-rupee-sign ind-rupee" [ngStyle]="{'color': input.value ? '#041427' : ''}"></i>
+                                    </div>
+                                       
+                                    <small *ngIf="limitReached && premiumAmountValue > 100000" class="error-message">Premium amount cannot exceed
+                                        ₹1,00,000</small>
+                                    </div>
+
+
+                                    <div class="section">
+                                        <label class="premium-amt">Loan amount</label>
+                                        <div class="input-wrapper inp-section">
+                                            <input type="text" class="form-control rupee" [value]="premiumAmountValue" (keydown)="false" (input)="checkLimit($event)"
+                                            formControlName="PremiumAmount"  appCurrencyFormat maxlength="8" minlength="5" #input>
+                                            <i class="fa-solid fa-indian-rupee-sign ind-rupee" [ngStyle]="{'color': input.value ? '#041427' : ''}"></i>
+                                        </div>
+                                        </div>
+                                       
+                                    <div>
+                                        <button [disabled]="!Policydetails.valid || premiumAmountValue > 100000 ||premiumAmountValue < 20000|| proposalNumberError" (click)="AddProposal()"
+                                            class="btn btn-primary add-propsl"> Continue</button>
+                                    </div>
+                                </form>
+                       
+                        </mat-tab>
+
+
+                        <mat-tab label="Bank Details">
+                            <div class="container" *ngIf="verify">
+                                <form [formGroup]="bankdetails">
+                                    <h1 class="bank-Info">Insurer Bank Account Details</h1>
+                                    <div class="section">
+                                        <label class="bank-tensure">Company name</label>
+                                        <input type="text" class="form-control" formControlName="prefeildCompanyName"
+                                            placeholder="Aditya Birla Life Insurance">
+                                        <small
+                                            *ngIf="(bankdetails.controls['prefeildCompanyName'].touched && bankdetails.get('prefeildCompanyName')?.hasError('required'))"
+                                            class="red-class">Enter a Valid company name</small>
+                                    </div>
+                                    <div class="section">
+                                        <label class="bank-tensure">Choose bank</label>
+                                        <!-- <ng-select class="statedropdown" [items]="bank" placeholder="Select Bank" formControlName="bank"  [searchable]="true" [clearable]="true">
+                                        </ng-select> -->
+                                        <ng-select class="statedropdown custom-ngselect" (click)="bankdropdwns($event)"
+                                            formControlName="bank" [clearable]="true" [searchable]="true"
+                                            placeholder="select bank" (change)="onBankChange($event)">
+                                            <ng-option *ngFor="let bankname of InsurerBankNames"
+                                                [value]="bankname">{{bankname}}</ng-option>
+                                        </ng-select>
+                                    </div>
+                                    <div class="section">
+                                        <label class="bank-tensure">IFSC</label>
+                                        <input type="text" class="form-control" formControlName="getIfscCode"
+                                            placeholder="HDFC0000009" maxlength="11">
+                                        <small
+                                            *ngIf="(bankdetails.controls['getIfscCode'].touched && bankdetails.get('getIfscCode')?.hasError('required'))"
+                                            class="red-class">Ifsc Code is required</small>
+                                        <small
+                                            *ngIf="(bankdetails.controls['getIfscCode'].touched && bankdetails.get('getIfscCode')?.hasError('pattern'))"
+                                            class="red-class">Enter a Valid Ifsc code</small>
+                                    </div>
+                                    <div class="section">
+                                        <label class="bank-tensure">Choose account number</label>
+                                        <ng-select (change)="selectBankAccountNum($event)" class="statedropdown"
+                                            placeholder="Select account number" formControlName="account"
+                                            (click)="bankdropdwns($event)">
+                                            <ng-option *ngFor="let accountnum of accountNumber"
+                                                [value]="accountnum.accountNumber">{{accountnum.accountNumber}}</ng-option>
+                                        </ng-select>
+                                    </div>
+                                    <small *ngIf="proposalError" class="red-class">{{proposalError}}</small>
+                                    <p class="permentAdres" *ngIf="continuebtn">Have a different bank account?
+                                        <span class="permentcolor" (click)="addBankDetails()"><br>Add bank
+                                            details</span>
+                                    </p>
+                                    <div class="mt-5 mb-3">
+                                        <button class="btn btn-primary praposal" *ngIf="continuebtn"
+                                            [disabled]="!bankdetails.valid || BtnDisable || proposalNumberError" (click)="SaveData()">Create Proposal</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="container" *ngIf="insurerBank">
+                                <form [formGroup]="addetails">
+                                    <h1 class="bank-Info">Insurer Bank Account Details</h1>
+                                    <div class="section">
+                                        <label class="bank-tensure">Company name</label>
+                                        <input type="text" class="form-control" formControlName="companyname"
+                                            placeholder="HDFC ERGO Insurance">
+                                        <small
+                                            *ngIf="(addetails.controls['companyname'].touched && addetails.get('companyname')?.hasError('required'))"
+                                            class="red-class">Enter a valid company name</small>
+                                            <small
+                                            *ngIf="(addetails.controls['companyname'].touched && addetails.get('companyname')?.hasError('pattern'))"
+                                            class="red-class">Enter a valid company name</small>
+                                    </div>
+                                    <div class="section">
+                                        <label class="bank-tensure">Bank name</label>
+                                        <input type="text" class="form-control" formControlName="bankname"
+                                            placeholder="Enter Bank Name">
+
+                                        <small
+                                            *ngIf="(addetails.controls['bankname'].touched && addetails.get('bankname')?.hasError('required'))"
+                                            class="red-class">Enter a valid bank name</small>
+                                            <small
+                                            *ngIf="(addetails.controls['bankname'].touched && addetails.get('bankname')?.hasError('pattern'))"
+                                            class="red-class">Enter a valid bank name</small>
+                                    </div>
+                                    <div class="section">
+                                        <label class="bank-tensure">IFSC</label>
+                                        <input type="text" class="form-control" formControlName="ifsc"
+                                            placeholder="Enter IFSC" maxlength="11">
+                                        <small
+                                            *ngIf="(addetails.controls['ifsc'].touched && addetails.get('ifsc')?.hasError('required'))"
+                                            class="red-class">Enter a valid ifsc</small>
+                                        <small
+                                            *ngIf="(addetails.controls['ifsc'].touched && addetails.get('ifsc')?.hasError('pattern'))"
+                                            class="red-class">Enter a valid ifsc</small>
+
+                                    </div>
+                                    <div class="section">
+                                        <label class="bank-tensure">Account Number</label>
+                                        <input type="text" class="form-control" formControlName="accountnumber"
+                                            placeholder="Enter Account Number" minlength="9" maxlength="18">
+                                        <small
+                                            *ngIf="(addetails.controls['accountnumber'].touched && addetails.get('accountnumber')?.hasError('required'))"
+                                            class="red-class">Enter a valid account number</small>
+                                        <small *ngIf="proposalError" class="red-class">{{proposalError}}</small>
+                                        <small
+                                            *ngIf="(addetails.controls['accountnumber'].touched && addetails.get('accountnumber')?.hasError('pattern'))"
+                                            class="red-class">Enter a valid account number</small>
+                                            
+
+                                    </div>
+                                    <p class="permentAdres" *ngIf="continuebtn">Don’t have a virtual account number?
+
+                                        <span class="permentcolor" (click)="enterPayment()"><br>Enter payment customer
+                                            link</span>
+                                    </p>
+                                    <!-- <p *ngIf="proposalError">{{proposalError}}</p> -->
+                                    <div class="mt-5 mb-3">
+
+                                        <button class="btn btn-primary praposal" *ngIf="continuebtn"
+                                            [disabled]="!addetails.valid || proposalNumberError" (click)="BankContinue()">Create Proposal</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="container" *ngIf="payVia">
+                                <form [formGroup]="paydeatils">
+                                    <h1 class="bank-Info">Pay Via Link</h1>
+                                    <div class="section">
+                                        <label class="bank-tensure">Payment gateway link</label>
+                                        <input type="text" class="form-control" formControlName="paylink"
+                                            placeholder="Enter Payment Gateway Link">
+                                        <small
+                                            *ngIf="(paydeatils.controls['paylink'].touched && paydeatils.get('paylink')?.hasError('required'))"
+                                            class="red-class">Enter a Valid gateaway link</small>
+                                        <small *ngIf="proposalError" class="red-class">{{proposalError}}</small>
+                                    </div>
+                                    <p class="permentAdress" *ngIf="continuebtn">Have a bank account?
+
+                                        <span class="permentcolor" (click)=addBankDetails()><br>Add bank details</span>
+                                    </p>
+                                    <div class="mt-5 mb-3">
+                                        <button class="btn btn-primary praposal" *ngIf="continuebtn"
+                                            [disabled]="!paydeatils.valid || proposalNumberError">Create Proposal</button>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                        </mat-tab>
+
+
+                    </mat-tab-group>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

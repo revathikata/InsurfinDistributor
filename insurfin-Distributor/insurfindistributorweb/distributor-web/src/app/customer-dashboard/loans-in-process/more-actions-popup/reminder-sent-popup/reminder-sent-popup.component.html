@@ -1,0 +1,42 @@
+<div *ngIf="type==='dialogData.proposalKycStatusRemainder'">
+    <h1 mat-dialog-title class="reminder-popup" mat-dialog-close="true"><mat-icon class="greentick-img"><img
+                src="../../../../../assets/CheckCircle.svg"></mat-icon>Reminder sent!</h1>
+    <mat-icon class="close">close</mat-icon>
+    <div mat-dialog-content class="upload-documents">A reminder to upload documents has been sent to
+        <b>{{dialogData.customerName}}.</b> You will be notified of any updates.</div>
+    <div mat-dialog-actions>
+    </div>
+</div>
+
+
+<div *ngIf="dialogData.type ==='proposalRegisterSuccessfulRemainder'">
+    <h1 mat-dialog-title class="reminder-popup" mat-dialog-close="true"><mat-icon class="greentick-img"><img
+                src="../../../../../assets/CheckCircle.svg"></mat-icon>Success!</h1>
+    <mat-icon class="close">close</mat-icon>
+    <div mat-dialog-content class="upload-documents">A reminder notification has been sent to
+        <b>{{dialogData.name}}</b> to complete their registration.</div>
+    <div mat-dialog-actions>
+    </div>
+</div>
+
+
+<div *ngIf="dialogData.type==='proposalAcceptanceRemainder'">
+    <h1 mat-dialog-title class="reminder-popup" mat-dialog-close="true"><mat-icon class="greentick-img"><img
+                src="../../../../../assets/CheckCircle.svg"></mat-icon>Success!</h1>
+    <mat-icon class="close">close</mat-icon>
+    <div mat-dialog-content class="upload-documents">A reminder notification has been sent to
+        <b>{{dialogData.name}}</b> accept the proposal.</div>
+    <div mat-dialog-actions>
+    </div>
+</div>
+
+
+<div *ngIf="type==='dashboardDeliquentRemainder'">
+    <h1 mat-dialog-title class="reminder-popup" mat-dialog-close="true"><mat-icon class="greentick-img"><img
+                src="../../../../../assets/CheckCircle.svg"></mat-icon>Reminder sent!</h1>
+    <mat-icon class="close">close</mat-icon>
+    <div mat-dialog-content class="upload-documents">A reminder for EMI payment has been sent to
+        <b>{{dialogData.customerName}}</b>. You will be notified of any updates.</div>
+    <div mat-dialog-actions>
+    </div>
+</div>

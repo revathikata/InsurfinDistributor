@@ -1,0 +1,196 @@
+input.ng-touched.ng-invalid {
+    border: 1.5px solid red;
+    margin-bottom: 8px;
+}
+
+input.ng-untouched {
+    border: 1.5px solid #C6C6C6;
+}
+
+input.ng-valid {
+    border: 1.5px solid #C6C6C6
+}
+
+
+.distrbtr-welcome {
+    margin: auto;
+    border: 1px solid grey;
+    border-radius: 10px;
+    width: 393px;
+    height: 652px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding: 10px;
+    background-color: #ffffff;
+}
+
+.main {
+    overflow: hidden;
+}
+
+.rightcoloumn {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100vh;
+    background: linear-gradient(270deg, #EEF5FC 0%, #C3D9ED 100%);
+}
+
+button.btn[disabled] {
+    background: #C8DCEE;
+    border: 1px solid #C8DCEE;
+}
+
+/* 
+small {
+    margin-left: 5px;
+} */
+
+.section-email {
+    margin-top: 25px;
+}
+
+.section-password {
+    margin-top: 20px;
+}
+
+.login {
+    color: #005AAA;
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 30%;
+    line-height: 40px;
+}
+
+.welcome-to {
+    color: #7D848D;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 20px;
+
+}
+
+.distrbtr-welcome label {
+    /* color: rgba(125, 132, 141, 0.91); */
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 7px;
+    color: #7D848D;
+}
+
+input::placeholder {
+    color: #C6C6C6;
+    font-size: 16px;
+    font-weight: 400;
+
+
+}
+
+.distrbtr-welcome input {
+    width: 345px;
+    height: 42px;
+    border-radius: 12px;
+    outline: none;
+    box-shadow: none !important;
+    border: 1px solid #C6C6C6;
+    margin-bottom: 0px;
+    margin-top: 3px;
+
+}
+
+.distrbtr-welcome::placeholder {
+    font-size: 16px;
+    font-weight: 400;
+    color: #C6C6C6;
+}
+
+.forgot {
+    color: #2791E0;
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 10px;
+    margin-left: 200px;
+    cursor: pointer;
+}
+
+.loginBtn {
+    width: 345px;
+    height: 45px;
+    background-color: #005AAA;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.length {
+    margin-top: 3px;
+    font-size: 12px;
+    margin-left: 5px;
+    font-weight: 400;
+    line-height: 16px;
+    color: red;
+}
+
+.password-input-wrapper {
+    position: relative;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    top: 11px;
+    right: 13px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.password-toggle-btn:focus {
+    outline: none;
+}
+
+.password-toggle-btn i {
+    font-size: 16px;
+    color: #C6C6C6;
+}
+
+.side-nav-section[_ngcontent-xrq-c37] {
+    background: linear-gradient(155.57deg, #437397 1.87%, #0C477B 99.53%, #044178 99.54%);
+    display: flex;
+    align-items: center;
+    /* height: 100%; */
+    position: relative;
+}
+
+input.ng-touched.ng-invalid {
+    border: 1.5px solid red;
+    margin-bottom: 8px;
+}
+
+input.ng-touched.ng-valid {
+    border: 1.5px solid #C8DCEE;
+    margin-bottom: 8px;
+}
+
+.sign-up {
+    color: #2791E0;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+}
+
+.login-with-mobile {
+    color: #2791E0;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.emailError {
+    color: #C52727;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

@@ -1,0 +1,26 @@
+.side-nav-section {
+    height: 100vh;
+    background: linear-gradient(155.57deg, #437397 1.87%, #0C477B 99.53%, #044178 99.54%);
+    display: flex;
+    align-items: center;
+    /* height: 100%; */
+    position: relative;
+}
+
+.vector3 {
+    position: relative;
+    top: -20%;
+    left: -5%;
+}
+
+.vector4 {
+    position: absolute;
+    z-index: 999;
+    bottom: 0;
+    right: 0;
+}
+@media screen and (max-width: 971px) {
+    .side-nav-section  {
+     display: none;
+    }
+  }

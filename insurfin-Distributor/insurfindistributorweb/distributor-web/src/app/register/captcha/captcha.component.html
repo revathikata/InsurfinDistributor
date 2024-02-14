@@ -1,0 +1,66 @@
+<div class="main">
+  <div class="welcome">
+    <div class="row">
+      <div class="col-lg-6 p-0">
+        <app-side-nav-section />
+      </div>
+
+
+      <div class="col-lg-6 rightColoumn">         
+         
+         <div class="distrbtr-welcome">
+            <mat-icon class="leftArrw" (click)="goToPreviousTab()">close</mat-icon>
+  
+            <div class="completeScreen" *ngIf="aadhaarVerify">
+              <div class="topText">
+                <h4 class="captchaText">Captcha Verification</h4>
+                <p class="texttt">Before you can move ahead with the Aadhaar<br>
+                  OTP, please verify the CAPTCHA below</p><br><br>
+                <P class="texttt">Please enter the text as seen below:</P>
+              </div>
+              <div class="capchaBox">
+                <!-- <input type="text" onkeypress=' return false' class="captcha" name="captcha"><br> -->
+                <div class="captchaImage captcha" >
+                 <img src="data:image/jpeg;base64,{{data.captcha}}" alt="captchaImage" class="captchaimg m-3">
+                </div>
+                <span class="texttt  nrml" style="margin-top:5px">Can’t read the captcha above? <span
+                    class="reload nrml" (click)="reloadCaptcha()">Reload</span></span><br>
+                <label class="cBox">CAPTCHA</label><br>
+                <input type="text" class="captchaA" placeholder="Enter the text as seen above" [(ngModel)]="captchaText">
+              </div>
+              <small *ngIf="!data.captcha" class="captchaErrorMessage">Captcha Mismatched</small>
+              <p *ngIf="errorCaptcha" class="text-danger">{{errorCaptcha}}</p>
+              <div>
+                <button class="btn btn-primary buttonn" [disabled]="!captchaText" (click)="onContinue()">Continue</button>
+              </div>
+            </div>
+            <!-- captchaa -->
+            <div class="completeScreen" *ngIf="!aadhaarVerify">
+              <div class="topText">
+                <h4 class="captchaText">Verify Aadhaar </h4>
+              </div>
+              <div class="texttt">
+                <p>Please enter the OTP received on your phone<br> from UIDAI</p>
+              </div>
+              <div class="texttt">
+                <p>If you didn’t receive the OTP, please check <br>your Aadhar number  <b>{{userAadhaarNumber}}</b> 
+                   and <br>try again.
+                  Also check if the correct mobile<br> number linked with UIDAI has been used.</p>
+              </div>
+  
+              <div class="otpclss mt-5">
+                <ngx-otp-input [config]="otpInputConfig" (otpChange)="handleOtp($event)" (fill)="handleFill($event)">
+                </ngx-otp-input>
+              </div>
+              <p *ngIf="errorMsg && !validOtp" class="text-danger">{{errorMsg}}</p>
+              <div>
+                <button class="btn btn-primary buttonn" (click)="AadharValidation()" [disabled]="!otpfill">Continue</button>
+              </div>
+            </div>
+          </div>
+       </div>
+     </div>
+    </div>
+  </div>     
+        
+      

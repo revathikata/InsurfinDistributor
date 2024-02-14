@@ -1,0 +1,8 @@
+
+<mat-card class="demo-inline-calendar-card">
+   <mat-calendar [(selected)]="selected" [maxDate]="maxDate" [minDate]="minDate"></mat-calendar>
+   <div class="calenderbtn mt-1">
+    <button  class="whitebtn" (click)="cancel()">Cancel</button>
+    <button class="bluebtn" (click)="add()">Apply</button>
+   </div>
+ </mat-card>

@@ -1,0 +1,8 @@
+
+<h1  class="confirm-popup"><mat-icon class="error-img">error_outline</mat-icon>Please Confirm</h1>
+<mat-icon class="close"  (click)="closePopUp()">close</mat-icon>
+<div class="changes-documents">Are you sure you want go back? You still have documents to be uploaded.</div>
+<div>
+  <button  mat-dialog-close class="btn btn-outline-primary cancel">Cancel</button>
+  <button mat-button mat-dialog-close class="btn btn-primary yes" (click)="navigateToLoansInProcess()">Yes</button>
+</div>

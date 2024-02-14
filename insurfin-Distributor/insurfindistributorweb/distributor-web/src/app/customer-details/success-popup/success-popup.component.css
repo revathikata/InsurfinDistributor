@@ -1,0 +1,42 @@
+.emailaddress {
+    /* height: 239px; */
+    width: 329px;
+    padding: 10px;
+  }
+  
+  .main-flex {
+    display: flex;
+  }
+  
+  .verify {
+    font-weight: 700;
+    font-size: 18px;
+    color: #041427;
+    margin-left: -20px;
+  }
+  
+  
+  
+  .close {
+    color: #0358A8;
+  }
+  
+  .please-check {
+    margin-top: 14px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #7D848D;
+    margin-left: 5px;
+  }
+  .continue-btn{
+    width: 290px;
+  height: 52px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #FFFFFF;
+  background-color: #005AAA !important;
+  border-radius: 12px;
+  margin-top: 10%;
+  }
+  

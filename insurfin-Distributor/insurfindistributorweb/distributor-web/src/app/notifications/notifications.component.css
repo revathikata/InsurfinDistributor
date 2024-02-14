@@ -1,0 +1,332 @@
+.main {
+  overflow: hidden;
+}
+
+.rightColoumn {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
+  background: linear-gradient(270deg, #EEF5FC 0%, #C3D9ED 100%);
+}
+
+/* .col-lg-6 {
+    overflow: hidden;
+  } */
+
+.margin-dtls {
+  border: 1px solid #FFFFFF;
+  width: 391px;
+  margin-left: -12px;
+  padding: 21px;
+  margin-top: 30px;
+  border-radius: 10px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 10px rgba(77, 127, 174, 0.2);
+  border-radius: 24px 24px 0px 0px;
+}
+
+.distrbtr-welcome {
+  width: 393px;
+  margin: auto;
+  margin-top: 43px;
+}
+
+.customer-welcome {
+  margin: auto;
+  border: 1px solid grey;
+  border-radius: 10px;
+  width: 393px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  background-color: #ffffff;
+
+}
+
+
+/* notifications css */
+
+.display {
+  display: flex;
+  margin-left: 16px;
+}
+
+.icon {
+  margin-top: 15px;
+}
+
+.marks {
+  margin-top: 2px;
+  margin-left: 85px;
+  color: #2791E0;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.label h3 {
+  font-weight: 700;
+  color: #041427;
+}
+
+.notif {
+  margin-left: 20px;
+  color: #041427;
+  font-weight: 700;
+}
+
+.notification {
+  display: flex;
+}
+
+.b {
+  color:
+    #041427;
+  font-weight: 700;
+}
+
+.home {
+  font-weight: 700;
+  color: #041427;
+  margin-left: 14px;
+  margin-top: 10px;
+}
+
+.iconyarrow {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.hours {
+  margin-left: -300px;
+  color: #7D848D;
+  font-weight: 400;
+}
+
+.fa-chevron-right:before {
+  content: "\f054";
+  margin-right: 433px;
+}
+
+.fa-sharp fa-solid fa-chevron-right {
+  margin-left: -414px;
+}
+
+.flex-c {
+  display: flex;
+  max-width: 100%;
+  justify-content: space-evenly;
+  margin-left: 415px;
+  color:
+    #0358A8;
+  border-bottom: 1px solid gray;
+}
+
+.flex-c p {
+  color:
+    #7D848D;
+  font-weight: 400;
+  margin-left: 12px;
+}
+
+.iconsclass {
+  margin-left: 206px;
+  cursor: pointer;
+}
+
+.fa-chevron-right[_ngcontent-igo-c5]:before {
+  content: "\f054";
+  margin-right: 364px;
+}
+
+.ptag {
+  padding-left: 53px;
+  margin-top: -41px;
+  width: 260px;
+}
+
+.ptags {
+  color: #7D848D;
+  font-weight: 400;
+  margin-left: 55px;
+  width: 216px;
+  margin-top: -33px;
+
+}
+
+.display i {
+  margin-top: 15px;
+  margin-left: 21px;
+}
+
+.yarrow1container {
+  margin-left: 16px;
+}
+
+/* viewdetails css */
+
+
+.details {
+  display: flex;
+  margin-left: 18px;
+  color: #041427;
+  font-weight: 700;
+}
+
+.elipsis {
+  margin-left: 171px;
+  margin-top: 14px;
+}
+
+.flex {
+  display: flex;
+  margin-top: 20px;
+}
+
+.phone {
+  margin-left: 57px;
+  padding-top: 16px;
+
+}
+
+.content {
+  margin-left: 6px;
+}
+
+.img {
+  margin-left: 10px;
+}
+
+.greencolor {
+  margin-top: -8px;
+  color: #E59510;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.graycolor {
+  color: #7D848D;
+  font-weight: 500;
+  font-size: 14px;
+  width: 200px;
+}
+
+.fa-circle-pause:before,
+.fa-pause-circle:before {
+  content: "\f28b";
+  margin-left: -121px;
+}
+
+.group1 {
+  line-height: 2rem;
+}
+
+.bold {
+  margin-top: -20px;
+}
+
+.bolds {
+  margin-top: -20px;
+  width: 69%;
+}
+
+.group1 h6 {
+  margin-top: -10px;
+  /* color: 
+    #041427; */
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.group1 h5 {
+  color:
+    #7D848D;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.group1 span {
+  color: #7D848D;
+}
+
+.margin {
+  margin-left: 25px;
+  margin-top: 30px;
+  border-radius: 10px;
+  box-shadow: #C3D9ED;
+}
+
+.praposal h4 {
+  color:
+    #7D848D;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.endingstep {
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: -26px;
+}
+
+.not {
+  display: flex;
+  margin-left: 11px;
+}
+
+.not img {
+  margin-right: 4px;
+  margin-bottom: 10px;
+  padding-bottom: 45px;
+}
+
+.not h6 {
+  color: #041427;
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: -2px;
+}
+
+.remind h5 {
+  margin-left: 140px;
+  color: #2791E0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.tageclr {
+  color: #E59510;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.back-arrow {
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.dot {
+  top: 12px;
+  position: relative;
+  background: #C52727;
+  border-radius: 50%;
+  height: 12px;
+  width: 12px;
+  cursor: pointer;
+
+}
+
+.mat-icon {
+  margin-left: -5px;
+}
+
+.bellimg {
+  background-color: #DDDDDD;
+  color: white;
+  border-radius: 50px;
+  padding: 6px;
+}
+.distributor-profile{
+  width: 52px;
+  height: 51px;
+  border-radius: 50%;
+  margin-left: -4px;
+}

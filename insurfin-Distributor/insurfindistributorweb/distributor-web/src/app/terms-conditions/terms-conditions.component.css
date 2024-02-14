@@ -1,0 +1,146 @@
+.rightColoumn {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
+  background: linear-gradient(270deg, #EEF5FC 0%, #C3D9ED 100%);
+}
+.distrbtr-welcome {
+  margin: auto;
+  border: 1px solid grey;
+  border-radius: 10px;
+  /* height: 692px; */
+  width: 393px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  background-color: #ffffff;
+}
+
+.rich-text{
+  height: 402px;
+  overflow-y: scroll;
+  padding: 15px;
+}
+.main {
+  overflow: hidden;
+}
+
+.container {
+  width: 345px;
+  height: 450px;
+  overflow-y: scroll;
+
+}
+
+.lorem {
+  font-size: 16px;
+  font-weight: 400;
+  color: #041427;
+
+
+}
+.termsconditions{
+font-style: normal;
+font-weight: 400;
+color: #041427;
+text-transform: uppercase;
+}
+.secondterms
+{
+  font-style: normal;
+  font-weight: 400;
+  color: #041427;
+}
+
+.conditions {
+  color: #005AAA;
+  font-size: 32px;
+  margin-left: 25px;
+  font-weight: 700;
+}
+.conditions-terms{
+  color: #005AAA;
+  font-size: 19px;
+  margin-left: 10px;
+  font-weight: 700;
+}
+.example-margin{
+  margin-left: 20px;
+}
+
+.leftArrw {
+  margin-left: 25px;
+  margin-top: 7%;
+  cursor: pointer;
+}
+
+.check-box {
+  height: 180px;
+  width: 391px;
+  background-color: #ffffff;
+  position: relative;
+  /* margin-top: 13%; */
+
+  border-radius: 20px 20px 12px 12px;
+  box-shadow: 0px 0px 10px 0px #4d7fae33;
+}
+
+.check-continue {
+  height: 42px;
+  width: 345px;
+  border-radius: 12px;
+  margin-top: 20px;
+  margin-left: 20px;
+  background-color: #005AAA;
+
+}
+
+.agree {
+  font-size: 16px;
+  color: #8B8F9C;
+  font-weight: 700;
+  margin-top: 23px;
+  text-decoration: none;
+
+}
+.privacy-policy-terms{
+  font-size: 16px;
+  color: #8B8F9C;
+  font-weight: 700;
+}
+
+.check {
+  margin-left: 30px;
+  /* display: flex; */
+
+}
+
+button.btn[disabled] {
+  background: #C8DCEE;
+  border: 1px solid #C8DCEE;
+  margin-top: 30px;
+}
+
+.checkInp {
+  height: 16.5px;
+  width: 16.5px;
+  margin-top: 14px;
+
+}
+.link{
+  color: 
+  #2791E0;
+  margin-left: 10px;
+  margin-top: -11px;
+  font-size: 16px;
+font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+}
+.link1{
+  cursor:pointer;
+}
+.privacy-policy{
+  font-weight: 550;
+  color: #005AAA;
+  font-size: 30px;
+}

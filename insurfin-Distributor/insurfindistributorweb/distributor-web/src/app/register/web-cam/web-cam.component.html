@@ -1,0 +1,18 @@
+<div>
+    <webcam *ngIf="!error" [height]="300"
+            [width]="300"
+            [trigger]="imageTrigger"
+            (imageCapture)="captureImage($event)"
+            (initError)="handleInitError($event)">
+          </webcam>
+          <div class="err text-center" *ngIf="error">
+            Please allow camera access in your browser settings
+          </div>
+
+  </div>
+  <div class="mt-5">
+    <button mat-dialog-close>Cancel</button>
+    <button  color="primary" (click)="triggerSnapshot()" [disabled]="!!error">Capture</button>
+  </div>
+  <!-- <img  src="data:image/jpeg;base64;{{imageAsDataUrl}}" alt=""> -->
+  <img  [src]="webcamImage?.imageAsDataUrl" alt="">

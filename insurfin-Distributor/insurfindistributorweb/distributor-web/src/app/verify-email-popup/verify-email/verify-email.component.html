@@ -1,0 +1,33 @@
+<div class="main">
+    <div class="row">
+        <div class="col-lg-6 p-0">
+            <app-side-nav-section />
+        </div>
+        <div class="col-lg-6 rightColoumn">
+            <div class="distrbtr-welcome">
+
+                <!-- <mat-icon class="leftArrw">keyboard_backspace</mat-icon> -->
+
+                <div class="logo container">
+                    <img src="../../assets/insurfin-logo.svg">
+                </div>
+
+                <div class="circle" *ngIf="!notVerified">
+                    <div class="check-background" >
+                        <img src="../../assets/CheckCircle.svg" class="check-circle">
+                    </div>
+                    <div class="check-background" *ngIf="notVerified">
+                        <mat-icon class="not-valid">cancel</mat-icon>
+                    </div>
+                </div>
+                <p class="email-id" >{{emailVerifiedSuccess}}</p>
+                <p class="your-email">Your Email ID has been validated. Please continue on the app to complete your profile.</p>
+
+                <!-- <div class="container">
+                    <button class="btn btn-primary insurfin-btn">Go to Insurfin App</button>
+                </div> -->
+            </div>
+       
+        </div>
+    </div>
+</div> 

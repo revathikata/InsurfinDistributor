@@ -1,0 +1,40 @@
+<div class="main">
+    <div class="welcome">
+        <div class="row">
+            <div class="col-lg-6 p-0">
+                <app-side-nav-section />
+            </div>
+            
+
+            <div class="col-lg-6 rightColoumn" >
+                <div class="distrbtr-welcome">
+                    <mat-icon class="leftArrw" routerLink="/customer-details">keyboard_backspace</mat-icon>
+                    <p class="customer-dtls">Customer Details</p>
+                    <div class="container email-verify">
+                        <img src="../../assets/CircleWavy.svg" class="wavy-img">
+                        <p class="verify">Verify email</p>
+                        <p class= "verify-link">Please check and confirm, verification link  sent to 
+                            the customer’s email ID</p>
+                    </div>
+                    <div class="container section mt-4">
+                        <form [formGroup]="emailForm">
+                        <label class="primary-email">Primary email*</label>
+                        <input type="text" class="form-control email-input" formControlName="email">
+                        <small
+                        *ngIf="(emailForm.controls['email'].touched && emailForm.get('email')?.hasError('required'))"
+                        class="text-danger"> Email is required</small>
+                      <small
+                        *ngIf="(emailForm.controls['email'].touched && emailForm.get('email')?.hasError('pattern'))"
+                        class="text-danger"> Enter Valid Email</small>
+                    </form>
+                    </div>
+                    <div class="container btn-flex mb-3">
+                        <button class="btn btn-cancel" routerLink="/customer-details">Cancel</button>
+                        <button class="btn btn-confirm" routerLink="/customer-details" (click)="verifyEmail()">Confirm</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
